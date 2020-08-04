@@ -1,0 +1,1 @@
+Please run the download_models.ps1 script or visit https://github.com/TadasBaltrusaitis/OpenFace/wiki/Model-download for information of how to get the models required to run the executables.

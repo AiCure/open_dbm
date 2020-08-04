@@ -1,0 +1,25 @@
+cdx_face_config:
+    ACTION_UNITS: [[6, 12],[1, 4, 15],[1, 2, 5, 26],[1, 2, 4, 5, 7, 20, 26],[4, 5, 7, 23],[9, 15],[12, 14]]
+    NEG_ACTION_UNITS: [[1, 4, 15], [1, 2, 4, 5, 7, 20, 26], [4, 5, 7, 23], [9, 15], [12, 14]]
+    POS_ACTION_UNITS: [[6, 12]]
+    NET_ACTION_UNITS: [[1, 2, 5, 26]]
+    happiness: [[6, 12]]
+    sadness: [[1, 4, 15]]
+    surprise: [[1, 2, 5, 26]]
+    fear: [[1, 2, 4, 5, 7, 20, 26]]
+    anger: [[4, 5, 7, 23]]
+    disgust: [[9, 15]]
+    contempt: [[12, 14]]
+    CAI: [[6, 12],[1, 4, 15],[2, 5, 26],[7, 20, 26],[23],[9],[12, 14]]
+    SELECTED_FEATURES: AU,POSE
+    face_expr_dir: /video/face_expressivity
+    face_asym_dir: /video/face_asymmetry
+    AU_filters: ['frame', ' face_id', ' timestamp', ' confidence', ' success', ' AU01_r',' AU02_r',' AU04_r',' AU05_r', 
+              ' AU06_r', ' AU07_r', ' AU09_r', ' AU10_r', ' AU12_r', ' AU14_r', ' AU15_r', ' AU17_r', ' AU20_r',  
+              ' AU25_r', ' AU26_r', ' AU45_r', ' AU01_c', ' AU02_c', ' AU04_c', ' AU05_c', ' AU06_c', ' AU07_c', 
+              ' AU10_c', ' AU12_c', ' AU14_c', ' AU15_c', ' AU17_c', ' AU20_c', ' AU23_c', ' AU25_c', ' AU26_c',
+              ' AU28_c', ' AU45_c',' AU09_c',' AU23_r' ]
+    au_intensity: [' AU01_r',' AU02_r',' AU04_r',' AU05_r', ' AU06_r', ' AU07_r', ' AU09_r', ' AU10_r', ' AU12_r', 
+                ' AU14_r', ' AU15_r', ' AU17_r', ' AU20_r',' AU23_r', ' AU25_r', ' AU26_r', ' AU45_r']
+    au_presence: [' AU01_c', ' AU02_c', ' AU04_c', ' AU05_c', ' AU06_c', ' AU07_c', ' AU09_c', ' AU10_c', ' AU12_c', 
+               ' AU14_c', ' AU15_c', ' AU17_c', ' AU20_c', ' AU23_c', ' AU25_c', ' AU26_c', ' AU45_c']
