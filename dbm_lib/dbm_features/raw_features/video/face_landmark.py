@@ -92,27 +92,31 @@ def run_face_landmark(video_uri, out_dir, f_cfg):
         video_uri: video path;  f_cfg: raw variable config object
         out_dir: (str) Output directory for processed output
     """
-    #Baseline logic
-    cfr = ConfigFaceReader()
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    
-    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
-    if len(of_csv_path)>0:
+    try:
         
-        df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
-        df_lmk = df_of[extract_col_nm_lmk(df_of)]
-        df_lmk = df_lmk.copy()
-        
-        df_lmk['frame'] = df_of['frame']
-        df_lmk['face_id'] = df_of[' face_id']
-        df_lmk['timestamp'] = df_of[' timestamp']
-        df_lmk['confidence'] = df_of[' confidence']
-        df_lmk['success'] = df_of[' success']
+        #Baseline logic
+        cfr = ConfigFaceReader()
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-        df_lmk = lmk_col_nm_map(df_lmk)
-        df_lmk = add_disp_3D(df_lmk)
-        df_lmk['dbm_master_url'] = video_uri
-        
-        logger.info('Processing Output file {} '.format(join(out_loc, fl_name)))
-        ut.save_output(df_lmk, out_loc, fl_name, face_lmk_dir, csv_ext)
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        if len(of_csv_path)>0:
+
+            df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
+            df_lmk = df_of[extract_col_nm_lmk(df_of)]
+            df_lmk = df_lmk.copy()
+
+            df_lmk['frame'] = df_of['frame']
+            df_lmk['face_id'] = df_of[' face_id']
+            df_lmk['timestamp'] = df_of[' timestamp']
+            df_lmk['confidence'] = df_of[' confidence']
+            df_lmk['success'] = df_of[' success']
+
+            df_lmk = lmk_col_nm_map(df_lmk)
+            df_lmk = add_disp_3D(df_lmk)
+            df_lmk['dbm_master_url'] = video_uri
+
+            logger.info('Processing Output file {} '.format(join(out_loc, fl_name)))
+            ut.save_output(df_lmk, out_loc, fl_name, face_lmk_dir, csv_ext)
     
+    except Exception as e:
+        logger.error('Failed to process video file')

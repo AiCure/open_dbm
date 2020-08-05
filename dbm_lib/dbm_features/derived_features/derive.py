@@ -9,6 +9,7 @@ import numpy as np
 import glob
 import os
 import logging
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
@@ -34,7 +35,10 @@ def save_derive_output(df_list, feature, out_loc):
         df = pd.concat(df_list, ignore_index=True)
         feature_dir = 'derive_' + feature
         
-        out_dir = os.path.join(out_loc, feature)
+        now = datetime.now()
+        dt_string = now.strftime("%d_%m_%YT%H:%M:%S")
+        
+        out_dir = '{}_{}'.format(out_loc, dt_string)
         file_name = os.path.join(out_dir, feature_dir + '.csv')
         
         if not os.path.exists(out_dir):
@@ -147,5 +151,3 @@ def run_derive(input_file, input_dir, output_dir, r_config, d_config):
         except Exception as e:
             logger.error('Failed to process derived variables.')
         
-           
-            

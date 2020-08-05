@@ -145,12 +145,16 @@ def run_eye_blink(video_uri, out_dir, r_config, facial_landmarks):
         out_dir: (str) Output directory for processed output; r_config: raw variable config object;
         facial_landmarks: landmark model path
     """
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    vid_file_path = os.path.exists(video_uri)
-    if vid_file_path==True:
+    try:
         
-        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-        df_blink = blink_detection(video_uri, facial_landmarks, r_config)
-        ut.save_output(df_blink, out_loc, fl_name, movement_expr_dir, csv_ext)
-        
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+        vid_file_path = os.path.exists(video_uri)
+        if vid_file_path==True:
+
+            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+            df_blink = blink_detection(video_uri, facial_landmarks, r_config)
+            ut.save_output(df_blink, out_loc, fl_name, movement_expr_dir, csv_ext)
+            
+    except Exception as e:
+        logger.error('Failed to process video file')
         

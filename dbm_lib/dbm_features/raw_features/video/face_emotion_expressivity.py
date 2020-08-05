@@ -60,19 +60,24 @@ def run_face_expressivity(video_uri, out_dir, f_cfg):
         video_uri: video path; f_cfg: raw variable config object
         out_dir: (str) Output directory for processed output
     """
-    #Baseline logic
-    cfr = ConfigFaceReader()
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    
-    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
-    if len(of_csv_path)>0:
+    try:
         
-        df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
-        df_of = df_of[cfr.AU_fl]
-        expr_df_list = of_feature(df_of, cfr, f_cfg)
-        
-        exp_final_df = pd.concat(expr_df_list, ignore_index=True)
-        exp_final_df['dbm_master_url'] = video_uri
-        
-        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-        ut.save_output(exp_final_df, out_loc, fl_name, face_expr_dir, csv_ext)
+        #Baseline logic
+        cfr = ConfigFaceReader()
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        if len(of_csv_path)>0:
+
+            df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
+            df_of = df_of[cfr.AU_fl]
+            expr_df_list = of_feature(df_of, cfr, f_cfg)
+
+            exp_final_df = pd.concat(expr_df_list, ignore_index=True)
+            exp_final_df['dbm_master_url'] = video_uri
+
+            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+            ut.save_output(exp_final_df, out_loc, fl_name, face_expr_dir, csv_ext)
+            
+    except Exception as e:
+        logger.error('Failed to process video file')

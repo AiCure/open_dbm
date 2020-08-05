@@ -131,37 +131,42 @@ def run_pause_segment(video_uri, out_dir, r_config):
         video_uri: video path; r_config: raw variable config object
         out_dir: (str) Output directory for processed output
     """
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    aud_filter = glob.glob(join(input_loc, fl_name + '.wav'))
-    if len(aud_filter)>0:
-
-        audio_file = aud_filter[0]
-        aud_dur = librosa.get_duration(filename=audio_file)
-
-        if float(aud_dur) < 0.064:
-            logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
-            
-            error_txt = 'error: length less than 0.064'
-            empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt)
-            return
-
-        logger.info('Converting stereo sound to mono-lD')
-        sound_mono = AudioSegment.from_wav(audio_file)
-        sound_mono = sound_mono.set_channels(1)
-        sound_mono = sound_mono.set_frame_rate(48000)
-
-        mono_wav = os.path.join(input_loc, fl_name + '_mono.wav')
-        sound_mono.export(mono_wav, format="wav")
-
-        df_pause_seg = process_silence(mono_wav, r_config)
-        os.remove(mono_wav)#removing mono wav file
+    try:
         
-        if isinstance(df_pause_seg, pd.DataFrame) and len(df_pause_seg)>0:
-            logger.info('Processing Output file {} '.format(out_loc))
-            
-            df_pause_seg['dbm_master_url'] = video_uri
-            ut.save_output(df_pause_seg, out_loc, fl_name, pause_seg_dir, csv_ext)
-            
-        else:
-            error_txt = 'error: webrtcvad returns no segment'
-            empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt)
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+        aud_filter = glob.glob(join(input_loc, fl_name + '.wav'))
+        if len(aud_filter)>0:
+
+            audio_file = aud_filter[0]
+            aud_dur = librosa.get_duration(filename=audio_file)
+
+            if float(aud_dur) < 0.064:
+                logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
+
+                error_txt = 'error: length less than 0.064'
+                empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt)
+                return
+
+            logger.info('Converting stereo sound to mono-lD')
+            sound_mono = AudioSegment.from_wav(audio_file)
+            sound_mono = sound_mono.set_channels(1)
+            sound_mono = sound_mono.set_frame_rate(48000)
+
+            mono_wav = os.path.join(input_loc, fl_name + '_mono.wav')
+            sound_mono.export(mono_wav, format="wav")
+
+            df_pause_seg = process_silence(mono_wav, r_config)
+            os.remove(mono_wav)#removing mono wav file
+
+            if isinstance(df_pause_seg, pd.DataFrame) and len(df_pause_seg)>0:
+                logger.info('Processing Output file {} '.format(out_loc))
+
+                df_pause_seg['dbm_master_url'] = video_uri
+                ut.save_output(df_pause_seg, out_loc, fl_name, pause_seg_dir, csv_ext)
+
+            else:
+                error_txt = 'error: webrtcvad returns no segment'
+                empty_pause_segment(video_uri, out_loc, fl_name, r_config, error_txt)
+                
+    except Exception as e:
+        logger.error('Failed to process audio file')

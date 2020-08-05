@@ -60,8 +60,13 @@ def process_open_face(video_uri, input_dir, out_dir, of_path, dbm_group):
         out_dir: (str) Output directory for processed output; of_path: OpenFace source code path 
         
     """
-    if dbm_group != None and len(dbm_group) == 1 and 'acoustic' in dbm_group:
-        return
-    
-    filepaths = [video_uri]
-    csv_filepaths = batch_open_face(filepaths, video_uri, input_dir, out_dir, of_path)
+    try:
+        
+        if dbm_group != None and len(dbm_group) == 1 and 'acoustic' in dbm_group:
+            return
+
+        filepaths = [video_uri]
+        csv_filepaths = batch_open_face(filepaths, video_uri, input_dir, out_dir, of_path)
+        
+    except Exception as e:
+        logger.error('Failed to process video file')

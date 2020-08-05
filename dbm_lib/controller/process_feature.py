@@ -24,17 +24,22 @@ def audio_to_wav(input_filepath):
         input_filepath: (str)  
     Returns:
     """
-    fname, _ = splitext(input_filepath)
-    output_filepath = fname + '.wav'
-    
-    if not isfile(output_filepath):
-        call = ['ffmpeg', '-i', input_filepath, '-vn', '-acodec', 'pcm_s16le', '-ar', '44100', output_filepath]
+    try:
         
-        logger.info('Converting audio from {} to wav'.format(input_filepath))
-        subprocess.check_output(call)
-        logger.info('wav output saved in {}'.format(output_filepath))
-    else:
-        logger.info('Output file {} already exists'.format(output_filepath))
+        fname, _ = splitext(input_filepath)
+        output_filepath = fname + '.wav'
+
+        if not isfile(output_filepath):
+            call = ['ffmpeg', '-i', input_filepath, '-vn', '-acodec', 'pcm_s16le', '-ar', '44100', output_filepath]
+
+            logger.info('Converting audio from {} to wav'.format(input_filepath))
+            subprocess.check_output(call)
+            logger.info('wav output saved in {}'.format(output_filepath))
+        else:
+            logger.info('Output file {} already exists'.format(output_filepath))
+        
+    except Exception as e:
+        logger.error('Failed to extract audio from Video')
 
 def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     """

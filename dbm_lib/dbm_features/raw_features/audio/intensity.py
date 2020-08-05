@@ -72,17 +72,21 @@ def run_intensity(video_uri, out_dir, r_config):
         video_uri: video path; r_config: raw variable config object
         out_dir: (str) Output directory for processed output
     """
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    aud_filter = glob.glob(join(input_loc, fl_name + '.wav'))
-    if len(aud_filter)>0:
+    try:
+        
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+        aud_filter = glob.glob(join(input_loc, fl_name + '.wav'))
+        if len(aud_filter)>0:
 
-        audio_file = aud_filter[0]
-        aud_dur = librosa.get_duration(filename=audio_file)
+            audio_file = aud_filter[0]
+            aud_dur = librosa.get_duration(filename=audio_file)
 
-        if float(aud_dur) < 0.064:
-            logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
-            
-            empty_intensity(video_uri, out_loc, fl_name, r_config)
-            return
+            if float(aud_dur) < 0.064:
+                logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
 
-        calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config)
+                empty_intensity(video_uri, out_loc, fl_name, r_config)
+                return
+
+            calc_intensity(video_uri, audio_file, out_loc, fl_name, r_config)
+    except Exception as e:
+        logger.error('Failed to process audio file')

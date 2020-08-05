@@ -333,19 +333,23 @@ def run_face_asymmetry(video_uri, out_dir, f_cfg):
         video_uri: video path; f_cfg: face config object
         out_dir: (str) Output directory for processed output
     """
-    #Baseline logic
-    cfr = ConfigFaceReader()
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    
-    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
-    if len(of_csv_path)>0:
+    try:
         
-        of_csv = of_csv_path[0]
-        asym_df_list = calc_asym_feature(of_csv, f_cfg)
+        #Baseline logic
+        cfr = ConfigFaceReader()
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        if len(of_csv_path)>0:
+
+            of_csv = of_csv_path[0]
+            asym_df_list = calc_asym_feature(of_csv, f_cfg)
+
+            asym_final_df = pd.concat(asym_df_list, ignore_index=True)
+            asym_final_df['dbm_master_url'] = video_uri
+
+            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+            ut.save_output(asym_final_df, out_loc, fl_name, face_asym_dir, csv_ext)
         
-        asym_final_df = pd.concat(asym_df_list, ignore_index=True)
-        asym_final_df['dbm_master_url'] = video_uri
-        
-        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-        ut.save_output(asym_final_df, out_loc, fl_name, face_asym_dir, csv_ext)
-        
+    except Exception as e:
+        logger.error('Failed to process video file')

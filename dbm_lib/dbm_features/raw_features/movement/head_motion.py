@@ -178,16 +178,18 @@ def run_head_movement(video_uri, out_dir, r_config):
         video_uri: video path; input_dir : input directory for video's
         out_dir: (str) Output directory for processed output; r_config: raw variable config object
     """
+    try:
         
-    #filtering path to generate input & output path
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        #filtering path to generate input & output path
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
 
-    if len(of_csv_path)>0:
+        if len(of_csv_path)>0:
 
-        of_csv = of_csv_path[0]
-        df_of = pd.read_csv(of_csv, error_bad_lines=False)
-        
-        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-        calc_head_mov(video_uri, df_of, out_loc, fl_name, r_config)
-        
+            of_csv = of_csv_path[0]
+            df_of = pd.read_csv(of_csv, error_bad_lines=False)
+
+            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+            calc_head_mov(video_uri, df_of, out_loc, fl_name, r_config)
+    except Exception as e:
+        logger.error('Failed to process video file')

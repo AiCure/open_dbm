@@ -68,27 +68,31 @@ def run_face_au(video_uri, out_dir, f_cfg):
         video_uri: video path; f_cfg: face config object
         out_dir: (str) Output directory for processed output
     """
-    #Baseline logic
-    cfr = ConfigFaceReader()
-    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-    
-    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
-    if len(of_csv_path)>0:
+    try:
         
-        df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
-        df_au = df_of[extract_col_nm_au(df_of)]
-        df_au = df_au.copy()
-        
-        df_au['frame'] = df_of['frame']
-        df_au['face_id'] = df_of[' face_id']
-        df_au['timestamp'] = df_of[' timestamp']
-        df_au['confidence'] = df_of[' confidence']
-        df_au['success'] = df_of[' success']
+        #Baseline logic
+        cfr = ConfigFaceReader()
+        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-        df_au = au_col_nm_map(df_au)
-        df_au['dbm_master_url'] = video_uri
-        
-        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
-        ut.save_output(df_au, out_loc, fl_name, face_au_dir, csv_ext)
-    
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        if len(of_csv_path)>0:
+
+            df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)
+            df_au = df_of[extract_col_nm_au(df_of)]
+            df_au = df_au.copy()
+
+            df_au['frame'] = df_of['frame']
+            df_au['face_id'] = df_of[' face_id']
+            df_au['timestamp'] = df_of[' timestamp']
+            df_au['confidence'] = df_of[' confidence']
+            df_au['success'] = df_of[' success']
+
+            df_au = au_col_nm_map(df_au)
+            df_au['dbm_master_url'] = video_uri
+
+            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+            ut.save_output(df_au, out_loc, fl_name, face_au_dir, csv_ext)
+            
+    except Exception as e:
+        logger.error('Failed to process video file')
     
