@@ -1,0 +1,39 @@
+SOFTWARE LICENSE AGREEMENT
+
+WHEREAS, AiCure, LLC (the "Licensor"), a corporation organized and existing under the laws of the New York, with its head office located at: 19 West 24th Street. 11th Floor, New York, NY 10010, has developed certain computer programs and related documentation included in this downloadable software package (the "Software") and the user, system, and installation documentation for the Software (the “Documentation”) and desires to grant Licensee a license to use the Software and Documentation.
+
+WHEREAS, Licensee wishes to use the Software and Documentation under the conditions set forth in this Agreement,
+
+NOW, THEREFORE, in consideration of the mutual promises set forth herein, Licensee and Licensor hereby agree as follows:
+
+1 – SOFTWARE LICENSE
+
+Licensor grants Licensee a non-exclusive, non-transferable license to (1) the Software and Documentation solely for its internal operations. Except as explicitly provided herein, Licensee shall not: (1) make available nor distribute all or part of the Software or Documentation to any third party by assignment, sublicense, or by any other means; (2) copy, adapt, reverse engineer, decompile, disassemble, or modify, in whole or in part, any of the Software or Documentation; or (3) use the Software to operate in or as a time-sharing, outsourcing, or service bureau environment, or in any way allow third party access to the Software.
+
+2 – PROPRIETARY RIGHTS
+
+Licensee acknowledges and agrees that the copyright, patent, trade secret, and all other intellectual property rights of whatever nature in the Software and Documentation are and shall remain the property of Licensor, and nothing in this Agreement should be construed as transferring any aspects of such rights to Licensee or any third party.
+
+3 – CONFIDENTIALITY
+
+"Confidential Information", shall mean the Software, Documentation, and terms and conditions of this Agreement. Licensee acknowledges the confidential and proprietary nature of the Confidential Information and agrees that it shall not reveal or disclose any Confidential Information for any purpose to any other person, firm, corporation, or other entity, other than Licensee's employees with a need to know such Confidential Information to perform employment responsibilities consistent with Licensee's rights under this Agreement. Licensee shall safeguard and protect the Confidential Information from theft, piracy, or unauthorized access in a manner at least consistent with the protections Licensee uses to protect its own most confidential information. Licensee shall inform its employees of their obligations under this Agreement and shall take such steps as may be reasonable in the circumstances, or as may be reasonably requested by Licensor, to prevent any unauthorized disclosure, copying or use of the Confidential Information. Licensee acknowledges and agrees that in the event of the Licensee's breach of this Agreement, Licensor will suffer irreparable injuries not compensated by money damages and therefore shall not have an adequate remedy at law.
+
+Accordingly, Licensor shall be entitled to a preliminary and final injunction without the necessity of posting any bond or undertaking in connection therewith to prevent any further breach of these confidentiality obligations or further unauthorized use of Confidential Information. This remedy is separate and apart from any other remedy Licensor may have.
+
+Licensee shall notify Licensor immediately upon discovery of any prohibited use or disclosure of the Confidential Information, or any other breach of these confidentiality obligations by Licensee and shall fully cooperate with Licensor to help Licensor regain possession of the Confidential Information and prevent the further prohibited use or disclosure of the Confidential Information.
+
+4 – WARRANTY DISCLAIMER; LIMITATION OF LIABILITY
+
+THE SOFTWARE IS PROVIDED WITHOUT WARRANTY, ON AN “AS IS” BASIS. THE PARTIES AGREE THAT THE SOFTWARE'S FAILURE TO PERFORM IN ACCORDANCE WITH THE SPECIFICATIONS SHALL NOT BE CONSIDERED A FAILURE OF THE ESSENTIAL PURPOSE OF THE REMEDIES CONTAINED HEREIN. THE ENTIRE RISK OF THE SOFTWARE'S QUALITY AND PERFORMANCE IS WITH LICENSEE.
+
+LICENSOR SHALL HAVE NO LIABILITY WITH RESPECT TO ITS OBLIGATIONS UNDER THIS AGREEMENT OR OTHERWISE FOR CONSEQUENTIAL, EXEMPLARY, SPECIAL, INCIDENTAL OR PUNITIVE DAMAGES EVEN IF IT HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION APPLIES TO ALL CAUSES OF ACTION IN THE AGGREGATE, INCLUDING WITHOUT LIMITATION TO BREACH OF CONTRACT, BREACH OF WARRANTY, NEGLIGENCE, STRICT LIABILITY, MISREPRESENTATIONS, AND OTHER TORTS. BOTH PARTIES UNDERSTAND AND AGREE THAT THE REMEDIES AND LIMITATIONS HEREIN ALLOCATE THE RISKS OF PRODUCT AND SERVICE NONCONFORMITY BETWEEN THE PARTIES AS AUTHORIZED BY APPLICABLE LAWS.
+
+5 – INDEMNIFICATION
+
+Licensor hereby indemnifies Licensee against any claim that the Software, furnished and used within the scope of this Agreement, infringes any United States registered copyright or patent, provided that: (1) Licensor is given prompt notice of the claim; (2) Licensor is given immediate and complete control over the defense and/or settlement of the claim, and Licensee fully cooperates with Licensor in such defense and/or settlement; (3) Licensee does not prejudice in any manner Licensor's conduct of such claim; and (4) the alleged infringement is not based upon the use of the Software in a manner prohibited under this Agreement, in a manner for which the Software was not designed, or in a manner not in accordance with the Specifications.
+
+The foregoing states Licensor's entire obligation and liability with respect to the infringement of any property right.
+
+6 – TERM AND TERMINATION
+
+The License granted herein shall remain in effect perpetually until terminated by Licensor or Licensee for any reason. Upon termination of this Agreement, Licensee shall cease using the Software and Documentation and promptly return all copies of the Software, Documentation, and all other Confidential Information in its possession or control. Licensee shall delete all copies of such materials residing in- on- or off- line computer memory and destroy all copies of such materials which also incorporate Licensee's Confidential Information. Licensee shall confirm compliance with this section to Licensor.
