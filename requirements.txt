@@ -1,5 +1,5 @@
 #Python (3+)
-numpy==1.16.0
+numpy==1.17.3
 pandas==0.24.2
 praat-parselmouth
 moviepy
@@ -18,3 +18,5 @@ numba==0.48.0
 librosa
 more_itertools
 scipy==1.2.0
+pyyaml
+pydub
