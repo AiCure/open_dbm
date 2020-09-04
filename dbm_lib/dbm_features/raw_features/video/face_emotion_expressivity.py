@@ -41,6 +41,9 @@ def of_feature(df_of, cfr, f_cfg):
     if len(df_of[f_cfg.neg_exp])>0:
         df_of[f_cfg.neg_exp] = df_of[f_cfg.neg_exp]/5
         
+    if len(df_of[f_cfg.neg_exp_full])>0:
+        df_of[f_cfg.neg_exp_full] = df_of[f_cfg.neg_exp_full]/5
+        
     if len(df_of[f_cfg.com_exp])>0:
         df_of[f_cfg.com_exp] = df_of[f_cfg.com_exp]/7
         
