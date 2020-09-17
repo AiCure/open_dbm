@@ -19,8 +19,8 @@ logger=logging.getLogger()
 
 h_mov_dir = 'movement/head_movement'
 h_pose_dir = 'movement/head_pose'
-h_mov_ext = '_head_movement.csv'
-h_pose_ext = '_head_pose.csv'
+h_mov_ext = '_headmov.csv'
+h_pose_ext = '_headpose.csv'
 
 def head_pose_dist(of_results):
     """

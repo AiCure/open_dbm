@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 face_expr_dir = 'video/face_expressivity'
-csv_ext = '_face_expressivity.csv'
+csv_ext = '_facemo.csv'
 
 #Openface feature extraction
 def of_feature(df_of, cfr, f_cfg):

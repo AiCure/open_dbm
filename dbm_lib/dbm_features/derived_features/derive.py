@@ -21,29 +21,31 @@ def dict_to_df(feature_dict, file):
     final_dict = {k: v for d in feature_dict for k, v in d.items()}
 
     feature_df = pd.DataFrame([final_dict])
-    feature_df['dbm_master_url'] = file
+    feature_df['Filename'] = file
     
     return feature_df
 
-def save_derive_output(df_list, feature, out_loc):
+def save_derive_output(df_list, out_loc):
     """
     Saving derive variable output
     """
-    if len(df_list)>0:
-        logger.info("Saving derived variable output for {}".format(feature))
-        
-        df = pd.concat(df_list, ignore_index=True)
-        feature_dir = 'derive_' + feature
-        
-        now = datetime.now()
-        dt_string = now.strftime("%d_%m_%YT%H:%M:%S")
-        
-        out_dir = '{}_{}'.format(out_loc, dt_string)
-        file_name = os.path.join(out_dir, feature_dir + '.csv')
-        
-        if not os.path.exists(out_dir):
-            os.makedirs(out_dir)
-        df.to_csv(file_name, index=False)
+    try:
+        if len(df_list)>0:
+            df = df_list[0]
+            
+            feature_dir = 'derived_output'
+            now = datetime.now()
+            dt_string = now.strftime("%d_%m_%YT%H:%M:%S")
+
+            out_dir = '{}_{}'.format(out_loc, dt_string)
+            file_name = os.path.join(out_dir, feature_dir + '.csv')
+
+            if not os.path.exists(out_dir):
+                os.makedirs(out_dir)
+            df.to_csv(file_name, index=False)
+            
+    except Exception as e:
+        logger.error('Failed to save derived variable csv')
 
 def feature_output(df_fea, exp_var, cal_type):
     """
@@ -64,7 +66,7 @@ def feature_output(df_fea, exp_var, cal_type):
                 exp_val = df_.std(axis = 0, skipna = True)
 
             elif cal_type == 'count':#use case for eye blink
-                exp_var = 'blink_count'
+                exp_var = 'blink'
                 exp_val = (len(df_)/df_[0])*60
 
             elif cal_type == 'pct':
@@ -110,11 +112,12 @@ def compute_feature(raw_df, var_cols, d_cfg_Obj, r_cfg_Obj):
 
     return feature_dict
         
-def calc_derive(input_file, input_dir, output_dir, r_cfg_Obj, d_cfg_Obj, feature):
+def calc_derive(input_file, input_dir, r_cfg_Obj, d_cfg_Obj, feature):
     """
     Calculating derived variable
     """
     df_list = []
+    df = pd.DataFrame()
     for file in input_file:
         
         file_name, _ = os.path.splitext(os.path.basename(file))
@@ -133,7 +136,9 @@ def calc_derive(input_file, input_dir, output_dir, r_cfg_Obj, d_cfg_Obj, feature
                 feature_df = dict_to_df(feature_dict, file)
                 df_list.append(feature_df)
     
-    save_derive_output(df_list, feature, output_dir)
+    if len(df_list)>0:
+        df = pd.concat(df_list, ignore_index=True)
+    return df
 
 def run_derive(input_file, input_dir, output_dir, r_config, d_config):
     """
@@ -144,10 +149,21 @@ def run_derive(input_file, input_dir, output_dir, r_config, d_config):
     feature_group = d_cfg_Obj['FEATURE_GROUP']
     
     #Iterating over feature group
+    df_list = []
     for feature in feature_group:
         try:
             
-            calc_derive(input_file, input_dir, output_dir, r_cfg_Obj, d_cfg_Obj, feature)
+            df_fea = calc_derive(input_file, input_dir, r_cfg_Obj, d_cfg_Obj, feature)
+            if len(df_fea)>0:
+                
+                if len(df_list) == 0:
+                    df_list.append(df_fea)
+                else:
+                    result = pd.merge(df_list[0], df_fea, how='outer', on=['Filename'])
+                    df_list = [result]
+                    
         except Exception as e:
-            logger.error('Failed to process derived variables.')
-        
+            logger.error('Failed to process derived variables {}'.format(feature))
+    
+    logger.info("Saving derived variable output...")
+    save_derive_output(df_list, output_dir)

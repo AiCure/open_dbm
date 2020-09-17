@@ -26,7 +26,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 face_asym_dir = 'video/face_asymmetry'
-csv_ext = '_face_asymmetry.csv'
+csv_ext = '_facasym.csv'
 
 cv2_color_purple = (254,19,188)
 color_blue = (0,0,1.0)

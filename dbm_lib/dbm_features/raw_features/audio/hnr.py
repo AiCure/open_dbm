@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 hnr_dir = 'audio/harmonic_noise'
-csv_ext = '_hnr_frame.csv'
+csv_ext = '_hnr.csv'
 error_txt = 'error: length less than 0.064'
 
 def hnr_ratio(filepath):

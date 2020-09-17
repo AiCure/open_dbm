@@ -26,7 +26,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 movement_expr_dir = 'movement/eye_blink'
-csv_ext = '_eye_blink.csv'
+csv_ext = '_eyeblinks.csv'
 
 def eye_aspect_ratio(eye):
     """

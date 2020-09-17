@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 face_lmk_dir = 'video/face_landmark'
-csv_ext = '_face_landmark.csv'
+csv_ext = '_faclmk.csv'
 
 def extract_col_nm_lmk(cols):
     """

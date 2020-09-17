@@ -21,7 +21,7 @@ logger=logging.getLogger()
 
 gne_dir = 'audio/glottal_noise'
 ff_dir =  'audio/pitch'
-csv_ext = '_gne_frame.csv'
+csv_ext = '_gne.csv'
 
 def gne_ratio(sound):
     """

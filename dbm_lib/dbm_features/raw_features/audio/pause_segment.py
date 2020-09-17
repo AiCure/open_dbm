@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 pause_seg_dir = 'audio/pause_segment'
-csv_ext = '_pause_segment.csv'
+csv_ext = '_pausechar.csv'
 
 def get_timing_cues(seg_starts_sec, seg_ends_sec, r_config):
     """

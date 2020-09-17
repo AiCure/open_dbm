@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 face_au_dir = 'video/face_au'
-csv_ext = '_face_au.csv'
+csv_ext = '_facau.csv'
 
 
 def extract_col_nm_au(cols):

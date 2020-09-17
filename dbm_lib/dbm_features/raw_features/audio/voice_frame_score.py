@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 vfs_dir = 'audio/voice_frame_score'
-csv_ext = '_vfs.csv'
+csv_ext = '_voiceprev.csv'
 error_txt = 'error: length less than 0.064'
 
 def audio_pitch_frame(pitch):

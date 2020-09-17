@@ -30,4 +30,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN echo "Requirement txt done!"
 
-CMD [ "python", "./process_dir.py" ]
+CMD [ "python", "./process_data.py" ]

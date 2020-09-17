@@ -5,23 +5,23 @@ derive_feature:
     'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK']
     
     #Feature group output file extensions
-    FAC_ASYM_LOC: _face_asymmetry
-    FAC_AU_LOC: _face_au
-    FAC_EXP_LOC: _face_expressivity
-    FAC_LMK_LOC: _face_landmark
+    FAC_ASYM_LOC: _facasym
+    FAC_AU_LOC: _facau
+    FAC_EXP_LOC: _facemo
+    FAC_LMK_LOC: _faclmk
     ACO_INT_LOC: _intensity
     ACO_FF_LOC: _pitch
-    ACO_HNR_LOC: _hnr_frame
-    ACO_GNE_LOC: _gne_frame
+    ACO_HNR_LOC: _hnr
+    ACO_GNE_LOC: _gne
     ACO_FM_LOC: _formant
     ACO_JITTER_LOC: _jitter
     ACO_SHIMMER_LOC: _shimmer
-    ACO_PAUSE_LOC: _pause_segment
-    ACO_VFS_LOC: _vfs
+    ACO_PAUSE_LOC: _pausechar
+    ACO_VFS_LOC: _voiceprev
     ACO_MFCC_LOC: _mfcc
-    MOV_HM_LOC: _head_movement
-    MOV_HP_LOC: _head_pose
-    EYE_BLINK_LOC: _eye_blink
+    MOV_HM_LOC: _headmov
+    MOV_HP_LOC: _headpose
+    EYE_BLINK_LOC: _eyeblinks
     
     #Facial category feature group
     FAC_ASYM: ['fac_AsymMaskMouth', 'fac_AsymMaskEyebrow', 'fac_AsymMaskEye', 'fac_AsymMaskCom']

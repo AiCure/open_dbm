@@ -51,6 +51,7 @@ def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     if dbm_group != None and len(dbm_group)>0 and 'acoustic' not in dbm_group:
         return
     
+    logger.info('Processing acoustic variables from data in {}'.format(video_uri))
     logger.info('processing audio intensity....')
     intensity.run_intensity(video_uri, out_dir, r_config)
     
@@ -91,6 +92,7 @@ def process_facial(video_uri, out_dir, dbm_group, r_config):
     if dbm_group != None and len(dbm_group)>0 and 'facial' not in dbm_group:
         return
     
+    logger.info('Processing facial variables from data in {}'.format(video_uri))
     logger.info('processing facial asymmetry....')
     face_asymmetry.run_face_asymmetry(video_uri, out_dir, r_config)
     
@@ -114,6 +116,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     if dbm_group != None and len(dbm_group)>0 and 'movement' not in dbm_group:
         return
     
+    logger.info('Processing movement variables from data in {}'.format(video_uri))
     logger.info('processing head movement....')
     head_motion.run_head_movement(video_uri, out_dir, r_config)
     
