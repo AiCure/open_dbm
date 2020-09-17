@@ -33,15 +33,10 @@ def save_derive_output(df_list, out_loc):
         if len(df_list)>0:
             df = df_list[0]
             
-            feature_dir = 'derived_output'
-            now = datetime.now()
-            dt_string = now.strftime("%d_%m_%YT%H:%M:%S")
-
-            out_dir = '{}_{}'.format(out_loc, dt_string)
-            file_name = os.path.join(out_dir, feature_dir + '.csv')
-
-            if not os.path.exists(out_dir):
-                os.makedirs(out_dir)
+            file_name = os.path.join(out_loc, 'derived_output.csv')
+            if not os.path.exists(out_loc):
+                
+                os.makedirs(out_loc)
             df.to_csv(file_name, index=False)
             
     except Exception as e:
@@ -66,7 +61,7 @@ def feature_output(df_fea, exp_var, cal_type):
                 exp_val = df_.std(axis = 0, skipna = True)
 
             elif cal_type == 'count':#use case for eye blink
-                exp_var = 'blink'
+                exp_var = 'mov_blink'
                 exp_val = (len(df_)/df_[0])*60
 
             elif cal_type == 'pct':
