@@ -35,15 +35,11 @@ Please add documentation link here
 Example usage
 ---------------------------------------------
 
-- Process video/audio file
+- Process video/audio file or directory
 
-        python process_file.py --input_path abc.mp4 --output_raw_path data/output --output_derived_path output/derived --dbm_group acoustic facial movement
+        python process_data.py --input_path abc.mp4 --output_path data/output --dbm_group acoustic facial movement
         
     
-- Process multiple files in a directory
-
-        python process_dir.py --input_path abc/ --output_raw_path data/output --output_derived_path output/derived --dbm_group acoustic facial movement
-
 ```
 where,
 
@@ -60,3 +56,15 @@ where,
     If the input_path was a .wav file, then only acoustic variables can be calculated. If otherwise, a warning message will be printed.
     
 ```
+
+---------------------------------------------
+Installation - docker container mode
+---------------------------------------------
+
+- Build docker image
+
+        docker build --tag dbm .
+
+- Run container
+
+        bash process_dbm.sh --input_path=/Users/vijayyadev/Desktop/input_vid --output_path=/Users/vijayyadev/Desktop/out --dbm_group="facial acoustic movement"
