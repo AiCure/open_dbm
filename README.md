@@ -58,7 +58,7 @@ where,
 ```
 
 ---------------------------------------------
-Installation - docker container mode
+Installation - docker mode
 ---------------------------------------------
 
 - Build docker image
