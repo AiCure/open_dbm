@@ -1,13 +1,17 @@
 # DBM Open Source Lib
 
 ---------------------------------------------
-Installation - Dev Mode
+Clone open dbm repo
 ---------------------------------------------
 
 - Clone repo from github
 
         git clone https://github.com/AiCure/open_dbm.git
-        
+
+---------------------------------------------
+Installation - Dev Mode
+---------------------------------------------
+
 - Prepare a python 3 virtualenv
 
         pip install virtualenv (optional, only needed if it's not installed)
@@ -24,38 +28,11 @@ Installation - Dev Mode
         cd pkg/OpenFace
         bash download_models.sh
         bash install.sh
-        
----------------------------------------------       
-Documentation
----------------------------------------------
-   
-Please add documentation link here
-   
----------------------------------------------       
-Example usage
----------------------------------------------
 
-- Process video/audio file or directory
+- Run script to process data
 
         python process_data.py --input_path abc.mp4 --output_path data/output --dbm_group acoustic facial movement
         
-    
-```
-where,
-
-    input_path: Required – Path of the file being processed. This can be either an .mp4 file or a .wav file.
-    output_raw_path: Required – Path where the raw variable data will be stored.
-    output_derived_path: Optional - Path to store derived variable. If not specified, derived variables won't be calculated.
-    dbm_group: Optional – 
-    Type of variables to calculate. If not specified, all variables will be calculated. The following inputs are acceptable:
-    
-        - facial, in which case only facial variables are calculated
-        - acoustic, in which case only acoustic variables are calculated
-        - movement, in which case only movement variables are calculated
-    
-    If the input_path was a .wav file, then only acoustic variables can be calculated. If otherwise, a warning message will be printed.
-    
-```
 
 ---------------------------------------------
 Installation - docker mode
@@ -68,3 +45,26 @@ Installation - docker mode
 - Run container
 
         bash process_dbm.sh --input_path=/Users/vijayyadev/Desktop/input_vid --output_path=/Users/vijayyadev/Desktop/out --dbm_group="facial acoustic movement"
+
+
+```
+where,
+
+    input_path: Required – Path of the file being processed. This can be either an .mp4 file or a .wav file.
+    output_path: Required – Path where the raw & derived variable data will be stored.
+    dbm_group: Optional – 
+    Type of variables to calculate. If not specified, all variables will be calculated. The following inputs are acceptable:
+    
+        - facial, in which case only facial variables are calculated
+        - acoustic, in which case only acoustic variables are calculated
+        - movement, in which case only movement variables are calculated
+    
+    If the input_path was a .wav file, then only acoustic variables can be calculated. If otherwise, a warning message will be printed.
+    
+```
+
+---------------------------------------------       
+Documentation
+---------------------------------------------
+   
+Please add documentation link here
