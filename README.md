@@ -1,70 +1,23 @@
-# DBM Open Source Lib
+## OpenDBM 
 
----------------------------------------------
-Clone open dbm repo
----------------------------------------------
+OpenDBM is a software package that allows for calculation of digital 
+biomarkers of health and functioning from video or audio of an individual’s 
+behavior. It integrates existing tools for measurement of behavioral 
+characteristics such as facial activity, voice, and movement into a single 
+package for measurement of overall behavior.
 
-- Clone repo from github
+For installation and use instructions, see the GitHub wiki page.
 
-        git clone https://github.com/AiCure/open_dbm.git
+***
 
----------------------------------------------
-Installation - Dev Mode
----------------------------------------------
+Copyright (C) 2020 AiCure, LLC
 
-- Prepare a python 3 virtualenv
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
 
-        pip install virtualenv (optional, only needed if it's not installed)
-        virtualenv <your_env_name>
-        source <your_env_name>/bin/activate
-        
-- Install package
-
-        pip install -r requirements.txt
-        sudo apt-get -y install ffmpeg
-        
-- Install Openface 2.0.6 (follow below installation steps)
-
-        cd pkg/OpenFace
-        bash download_models.sh
-        bash install.sh
-
-- Run script to process data
-
-        python process_data.py --input_path abc.mp4 --output_path data/output --dbm_group acoustic facial movement
-        
-
----------------------------------------------
-Installation - docker mode
----------------------------------------------
-
-- Build docker image
-
-        docker build --tag dbm .
-
-- Run container
-
-        bash process_dbm.sh --input_path=/Users/vijayyadev/Desktop/input_vid --output_path=/Users/vijayyadev/Desktop/out --dbm_group="facial acoustic movement"
-
-
-```
-where,
-
-    input_path: Required – Path of the file being processed. This can be either an .mp4 file or a .wav file.
-    output_path: Required – Path where the raw & derived variable data will be stored.
-    dbm_group: Optional – 
-    Type of variables to calculate. If not specified, all variables will be calculated. The following inputs are acceptable:
-    
-        - facial, in which case only facial variables are calculated
-        - acoustic, in which case only acoustic variables are calculated
-        - movement, in which case only movement variables are calculated
-    
-    If the input_path was a .wav file, then only acoustic variables can be calculated. If otherwise, a warning message will be printed.
-    
-```
-
----------------------------------------------       
-Documentation
----------------------------------------------
-   
-Please add documentation link here
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
