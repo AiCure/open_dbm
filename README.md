@@ -8,5 +8,5 @@ of overall behavior.
 
 **For installation and use instructions, see the [wiki](https://github.com/AiCure/open_dbm/wiki).**
 
-Please use the [Issues](https://github.com/AiCure/open_dbm/issues) tab to report any problems with the software.
+Please use the [Issues](https://github.com/AiCure/open_dbm/issues) tab to report any problems with the software./n
 For all other communications, contact us at opendbm@aicure.com.
