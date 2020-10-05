@@ -12,7 +12,7 @@ Please use the [Issues](https://github.com/AiCure/open_dbm/issues) tab to report
 
 For all other communications, contact us at opendbm@aicure.com.
 
-### Processing command
+#### How to use
 From the open_dbm repo
 ```
 bash process_dbm.sh --input_path= --output_path= --dbm_group=
