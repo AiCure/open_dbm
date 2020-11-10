@@ -1,9 +1,9 @@
-# Code of Conduct
+# OpenDBM Code of Conduct
 
 v1.0.0, October 2020
 
 
-## OpenDBM Code of Conduct
+## Motive
 
 In adopting this Community Code of Conduct, we are committed to strengthen a welcoming surrounding for joint effort, innovation, and the free exchange of ideas for developing, maintaining, and using open source software. We pledge to certify all contributor to actively engage and help build an open source community in the field of Mental health.
 
@@ -34,4 +34,4 @@ Project maintainers have all the rights to remove offensive content that are not
 
 If OpenDBM team at AiCure receive any misconduct which voilates our values, then violations of this Code of Conduct may result in:
   * Disqualification from our upcoming Events and Conferences
-  * Being blocked from A [GitHub Organization](https://help.github.com/articles/blocking-a-user-from-your-organization/)
+  * Being blocked from a [GitHub Organization](https://help.github.com/articles/blocking-a-user-from-your-organization/)
