@@ -196,3 +196,6 @@ raw_feature:
     mov_Hpose_Yaw: mov_hposeyaw
     mov_Hpose_Roll: mov_hposeroll
     mov_Hpose_Dist: mov_hposedist
+
+    #NLP markers
+    nlp_transcribe: nlp_transcribe
