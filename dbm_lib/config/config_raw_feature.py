@@ -222,4 +222,7 @@ class ConfigRawReader(object):
             self.mov_Hpose_Yaw = config['raw_feature']['mov_Hpose_Yaw']
             self.mov_Hpose_Roll = config['raw_feature']['mov_Hpose_Roll']
             self.mov_Hpose_Dist = config['raw_feature']['mov_Hpose_Dist']
+
+            #NLP features
+            self.nlp_transcribe = config['raw_feature']['nlp_transcribe']
             
