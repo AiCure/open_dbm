@@ -225,4 +225,21 @@ class ConfigRawReader(object):
 
             #NLP features
             self.nlp_transcribe = config['raw_feature']['nlp_transcribe']
+            self.nlp_numSentences = config['raw_feature']['nlp_numSentences']
+            self.nlp_singPronPerAns = config['raw_feature']['nlp_singPronPerAns']
+            self.nlp_singPronPerSen = config['raw_feature']['nlp_singPronPerSen']
+            self.nlp_pastTensePerAns = config['raw_feature']['nlp_pastTensePerAns']
+            self.nlp_pastTensePerSen = config['raw_feature']['nlp_pastTensePerSen']
+            self.nlp_pronounsPerAns = config['raw_feature']['nlp_pronounsPerAns']
+            self.nlp_pronounsPerSen = config['raw_feature']['nlp_pronounsPerSen']
+            self.nlp_verbsPerAns = config['raw_feature']['nlp_verbsPerAns']
+            self.nlp_verbsPerSen = config['raw_feature']['nlp_verbsPerSen']
+            self.nlp_adjectivesPerAns = config['raw_feature']['nlp_adjectivesPerAns']
+            self.nlp_adjectivesPerSen = config['raw_feature']['nlp_adjectivesPerSen']
+            self.nlp_nounsPerAns = config['raw_feature']['nlp_nounsPerAns']
+            self.nlp_nounsPerSen = config['raw_feature']['nlp_nounsPerSen']
+            self.nlp_sentiment_mean = config['raw_feature']['nlp_sentiment_mean']
+            self.nlp_mattr = config['raw_feature']['nlp_mattr']
+            self.nlp_wordsPerMin = config['raw_feature']['nlp_wordsPerMin']
+            self.nlp_totalTime = config['raw_feature']['nlp_totalTime']
             

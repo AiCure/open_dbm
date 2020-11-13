@@ -21,7 +21,7 @@ formant_dir = 'nlp/transcribe'
 csv_ext = '_transcribe.csv'
 error_txt = 'error: length less than 0.1'
 
-def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path):
+def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur):
     """
     Preparing Formant freq matrix
     Args:
@@ -33,6 +33,7 @@ def calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path
     df_formant = pd.DataFrame([text], columns=[r_config.nlp_transcribe])
     
     df_formant.replace('', np.nan, regex=True,inplace=True)
+    df_formant[r_config.nlp_totalTime] = aud_dur
     df_formant[r_config.err_reason] = 'Pass'# will replace with threshold in future release
     df_formant['dbm_master_url'] = video_uri
     
@@ -44,8 +45,8 @@ def empty_transcribe(video_uri, out_loc, fl_name, r_config):
     """
     Preparing empty formant frequency matrix if something fails
     """
-    cols = [r_config.nlp_transcribe, r_config.err_reason]
-    out_val = [[np.nan, error_txt]]
+    cols = [r_config.nlp_transcribe, r_config.nlp_totalTime, r_config.err_reason]
+    out_val = [[np.nan, np.nan, error_txt]]
     df_fm = pd.DataFrame(out_val, columns = cols)
     df_fm['dbm_master_url'] = video_uri
     
@@ -77,6 +78,7 @@ def run_transcribe(video_uri, out_dir, r_config, deep_path):
                 empty_transcribe(video_uri, out_loc, fl_name, r_config)
                 return
 
-            calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path)
+            calc_transcribe(video_uri, audio_file, out_loc, fl_name, r_config, deep_path, aud_dur)
     except Exception as e:
         logger.error('Failed to process audio file')
+        

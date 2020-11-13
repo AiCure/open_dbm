@@ -8,7 +8,7 @@ from dbm_lib.dbm_features.raw_features.audio import intensity, pitch_freq, hnr, 
 from dbm_lib.dbm_features.raw_features.audio import pause_segment, jitter, shimmer, mfcc
 from dbm_lib.dbm_features.raw_features.video import face_asymmetry, face_au, face_emotion_expressivity, face_landmark
 from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink
-from dbm_lib.dbm_features.raw_features.nlp import transcribe
+from dbm_lib.dbm_features.raw_features.nlp import transcribe, speech_features
 
 import subprocess
 import logging
@@ -137,6 +137,7 @@ def process_nlp(video_uri, out_dir, dbm_group, r_config, deep_path):
     
     logger.info('Processing nlp variables from data in {}'.format(video_uri))
     transcribe.run_transcribe(video_uri, out_dir, r_config, deep_path)
+    speech_features.run_speech_feature(video_uri, out_dir, r_config)
     
 def remove_file(file_path):
     """

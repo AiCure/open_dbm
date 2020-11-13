@@ -199,3 +199,21 @@ raw_feature:
 
     #NLP markers
     nlp_transcribe: nlp_transcribe
+    nlp_numSentences: nlp_numSentences
+    nlp_singPronPerAns: nlp_singPronPerAns
+    nlp_singPronPerSen: nlp_singPronPerSen
+    nlp_pastTensePerAns: nlp_pastTensePerAns
+    nlp_pastTensePerSen: nlp_pastTensePerSen
+    nlp_pronounsPerAns: nlp_pronounsPerAns
+    nlp_pronounsPerSen: nlp_pronounsPerSen
+    nlp_verbsPerAns: nlp_verbsPerAns
+    nlp_verbsPerSen: nlp_verbsPerSen
+    nlp_adjectivesPerAns: nlp_adjectivesPerAns
+    nlp_adjectivesPerSen: nlp_adjectivesPerSen
+    nlp_nounsPerAns: nlp_nounsPerAns
+    nlp_nounsPerSen: nlp_nounsPerSen
+    nlp_sentiment_mean: nlp_sentiment_mean
+    nlp_mattr: nlp_mattr
+    nlp_wordsPerMin: nlp_wordsPerMin
+    nlp_totalTime: nlp_totalTime
+    
