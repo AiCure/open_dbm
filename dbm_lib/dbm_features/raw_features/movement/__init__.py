@@ -11,3 +11,5 @@ from __future__ import print_function
 import os
 
 DBMLIB_PATH = os.path.dirname(__file__)
+DBMLIB_VTREMOR_LIB = os.path.abspath(os.path.join(DBMLIB_PATH,
+                                                  '../../../../resources/libraries/voice_tremor.praat'))

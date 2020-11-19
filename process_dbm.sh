@@ -4,9 +4,9 @@ helpFunction()
 {
    echo ""
    echo "Usage: $0 --input_path parameterA --output_path parameterB --dbm_group parameterC"
-   echo -e "\t--input_path Description of what is parameterA"
-   echo -e "\t--output_path Description of what is parameterB"
-   echo -e "\t-dbm_group Description of what is parameterC"
+   echo -e "\t--input_path: path to the input files"
+   echo -e "\t--output_path: path to the raw and derived variable output"
+   echo -e "\t--dbm_group: list of feature groups"
    exit 1 # Exit script after printing help
 }
 
