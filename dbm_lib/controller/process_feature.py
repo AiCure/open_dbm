@@ -7,7 +7,7 @@ created: 2020-20-07
 from dbm_lib.dbm_features.raw_features.audio import intensity, pitch_freq, hnr, gne, voice_frame_score, formant_freq
 from dbm_lib.dbm_features.raw_features.audio import pause_segment, jitter, shimmer, mfcc
 from dbm_lib.dbm_features.raw_features.video import face_asymmetry, face_au, face_emotion_expressivity, face_landmark
-from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, voice_tremor
+from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, voice_tremor, facial_tremor
 
 import subprocess
 import logging
@@ -120,6 +120,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
         return
 
     logger.info('Processing movement variables from data in {}'.format(video_uri))
+
     logger.info('processing head movement....')
     head_motion.run_head_movement(video_uri, out_dir, r_config)
 
@@ -128,6 +129,9 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
 
     logger.info('processing voice tremor....')
     voice_tremor.run_vtremor(video_uri, out_dir, r_config)
+
+    logger.info('processing facial tremor....')
+    face_tremor.fac_tremor_process(video_uri, out_dir, r_config, model_output=True)
 
 def remove_file(file_path):
     """
