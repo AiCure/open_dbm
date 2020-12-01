@@ -15,6 +15,8 @@ import argparse
 import logging
 import glob
 import time
+import subprocess
+from os.path import splitext
 
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
@@ -187,7 +189,7 @@ if __name__=="__main__":
         #add check for mov and mp3 here
         input_type = 'file'
 
-        if file_ext.lower() in ['.mp4','mov']:
+        if file_ext.lower() in ['.mp4','.mov']:
             if file_ext.lower() == '.mov':
                 convert_file(args.input_path)
             process_raw_video_file(args, s_config, r_config)
