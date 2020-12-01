@@ -196,3 +196,32 @@ raw_feature:
     mov_Hpose_Yaw: mov_hposeyaw
     mov_Hpose_Roll: mov_hposeroll
     mov_Hpose_Dist: mov_hposedist
+    mov_leye_x: mov_lefteyex
+    mov_leye_y: mov_lefteyey
+    mov_leye_z: mov_lefteyez
+    mov_reye_x: mov_righteyex
+    mov_reye_y: mov_righteyey
+    mov_reye_z: mov_righteyez
+    mov_eleft_disp: mov_leyedisp
+    mov_eright_disp: mov_reyedisp
+
+    #NLP markers
+    nlp_transcribe: nlp_transcribe
+    nlp_numSentences: nlp_numSentences
+    nlp_singPronPerAns: nlp_singPronPerAns
+    nlp_singPronPerSen: nlp_singPronPerSen
+    nlp_pastTensePerAns: nlp_pastTensePerAns
+    nlp_pastTensePerSen: nlp_pastTensePerSen
+    nlp_pronounsPerAns: nlp_pronounsPerAns
+    nlp_pronounsPerSen: nlp_pronounsPerSen
+    nlp_verbsPerAns: nlp_verbsPerAns
+    nlp_verbsPerSen: nlp_verbsPerSen
+    nlp_adjectivesPerAns: nlp_adjectivesPerAns
+    nlp_adjectivesPerSen: nlp_adjectivesPerSen
+    nlp_nounsPerAns: nlp_nounsPerAns
+    nlp_nounsPerSen: nlp_nounsPerSen
+    nlp_sentiment_mean: nlp_sentiment_mean
+    nlp_mattr: nlp_mattr
+    nlp_wordsPerMin: nlp_wordsPerMin
+    nlp_totalTime: nlp_totalTime
+    
