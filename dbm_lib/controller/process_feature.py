@@ -7,7 +7,7 @@ created: 2020-20-07
 from dbm_lib.dbm_features.raw_features.audio import intensity, pitch_freq, hnr, gne, voice_frame_score, formant_freq
 from dbm_lib.dbm_features.raw_features.audio import pause_segment, jitter, shimmer, mfcc
 from dbm_lib.dbm_features.raw_features.video import face_asymmetry, face_au, face_emotion_expressivity, face_landmark
-from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink
+from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, eye_gaze
 from dbm_lib.dbm_features.raw_features.nlp import transcribe, speech_features
 
 import subprocess
@@ -123,6 +123,9 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     
     logger.info('processing eye blink....')
     eye_blink.run_eye_blink(video_uri, out_dir, r_config, dlib_model)
+
+    logger.info('processing eye gaze....')
+    eye_gaze.run_eye_gaze(video_uri, out_dir, r_config)
     
 def process_nlp(video_uri, out_dir, dbm_group, r_config, deep_path):
     """

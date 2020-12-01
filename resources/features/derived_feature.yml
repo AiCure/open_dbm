@@ -2,7 +2,8 @@ derive_feature:
     
     #DBM Feature Group
     FEATURE_GROUP: ['FAC_ASYM', 'FAC_AU', 'FAC_EXP', 'FAC_LMK', 'ACO_INT', 'ACO_FF', 'ACO_HNR', 'ACO_GNE', 'ACO_FM', 
-    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'NLP_SPEECH']
+    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'NLP_SPEECH',
+    'EYE_GAZE']
     
     #Feature group output file extensions
     FAC_ASYM_LOC: _facasym
@@ -23,6 +24,7 @@ derive_feature:
     MOV_HP_LOC: _headpose
     EYE_BLINK_LOC: _eyeblinks
     NLP_SPEECH_LOC: _nlp
+    EYE_GAZE_LOC: _eyegaze
     
     #Facial category feature group
     FAC_ASYM: ['fac_AsymMaskMouth', 'fac_AsymMaskEyebrow', 'fac_AsymMaskEye', 'fac_AsymMaskCom']
@@ -65,6 +67,8 @@ derive_feature:
     MOV_HM: ['head_vel']
     MOV_HP: ['mov_Hpose_Dist','mov_Hpose_Pitch','mov_Hpose_Yaw','mov_Hpose_Roll']
     EYE_BLINK: ['mov_blink_ear', 'vid_dur', 'mov_blinkdur']
+    EYE_GAZE: ['mov_leye_x', 'mov_leye_y', 'mov_leye_z', 'mov_reye_x', 'mov_reye_y', 'mov_reye_z', 'mov_eleft_disp',
+    'mov_eright_disp']
     
     #NLP category feature group
     NLP_SPEECH: ['nlp_numSentences', 'nlp_singPronPerAns', 'nlp_singPronPerSen', 'nlp_pastTensePerAns', 'nlp_pastTensePerSen',
@@ -255,6 +259,14 @@ derive_feature:
     mov_blink_ear: ['mean', 'std']
     vid_dur: ['count']
     mov_blinkdur: ['mean', 'std']
+    mov_leye_x: ['mean', 'std']
+    mov_leye_y: ['mean', 'std']
+    mov_leye_z: ['mean', 'std']
+    mov_reye_x: ['mean', 'std']
+    mov_reye_y: ['mean', 'std']
+    mov_reye_z: ['mean', 'std']
+    mov_eleft_disp: ['mean', 'std']
+    mov_eright_disp: ['mean', 'std']
     
     #NLP feature
     nlp_numSentences: ['mean']

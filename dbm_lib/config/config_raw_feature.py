@@ -222,6 +222,14 @@ class ConfigRawReader(object):
             self.mov_Hpose_Yaw = config['raw_feature']['mov_Hpose_Yaw']
             self.mov_Hpose_Roll = config['raw_feature']['mov_Hpose_Roll']
             self.mov_Hpose_Dist = config['raw_feature']['mov_Hpose_Dist']
+            self.mov_leye_x = config['raw_feature']['mov_leye_x']
+            self.mov_leye_y = config['raw_feature']['mov_leye_y']
+            self.mov_leye_z = config['raw_feature']['mov_leye_z']
+            self.mov_reye_x = config['raw_feature']['mov_reye_x']
+            self.mov_reye_y = config['raw_feature']['mov_reye_y']
+            self.mov_reye_z = config['raw_feature']['mov_reye_z']
+            self.mov_eleft_disp = config['raw_feature']['mov_eleft_disp']
+            self.mov_eright_disp = config['raw_feature']['mov_eright_disp']
 
             #NLP features
             self.nlp_transcribe = config['raw_feature']['nlp_transcribe']
