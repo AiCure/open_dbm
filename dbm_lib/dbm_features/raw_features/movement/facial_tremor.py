@@ -25,7 +25,7 @@ def compute_features(out_dir, df_of, r_config):
     Returns: features in vector format
     """
     config = json.loads(open(DBMLIB_FTREMOR_CONFIG,'r').read())
-    logger.info('json file read')
+
     pattern_x = re.compile("l\d+_x")
     pattern_y = re.compile("l\d+_y")
 
@@ -40,7 +40,7 @@ def compute_features(out_dir, df_of, r_config):
     df_of= df_of[(df_of[landmark_columns]!= 0).any(axis=1)]
     df_of.reset_index(inplace=True)
 
-    num_frames = len(df)
+    num_frames = len(df_of)
     logger.info("Number of frames to be processed: {}".format(str(num_frames)))
     landmarks = config['landmarks']
 
@@ -104,7 +104,7 @@ def compute_features(out_dir, df_of, r_config):
         for i, landmark in enumerate(landmarks):
             fac_features_dict['fac_features_mean_{}'.format(landmark)] = [fac_features2[i]]
             raw_variable_map = 'fac_tremor_median_{}'.format(landmark)
-            fac_features_dict[r_config.raw_feature[raw_variable_map]] = [fac_features1[i]]
+            fac_features_dict[r_config.base_raw['raw_feature'][raw_variable_map]] = [fac_features1[i]]
 
             fac_features_dict['fac_disp_median_{}'.format(landmark)] = [fac_disp_median[i]]
             fac_features_dict['fac_corr_{}'.format(landmark)] = [fac_corr[i]]
@@ -123,7 +123,7 @@ def empty_frame(landmarks, r_config, error_reason):
     fac_features_dict = {}
     for i, landmark in enumerate(landmarks):
         raw_variable_map = 'fac_tremor_median_{}'.format(landmark)
-        fac_features_dict[r_config.raw_feature[raw_variable_map]] = [np.nan]
+        fac_features_dict[r_config.base_raw['raw_feature'][raw_variable_map]] = [np.nan]
 
         fac_features_dict['fac_features_mean_{}'.format(landmark)] = [np.nan]
         fac_features_dict['fac_disp_median_{}'.format(landmark)] = [np.nan]
@@ -133,27 +133,32 @@ def empty_frame(landmarks, r_config, error_reason):
     empty_frame = pd.DataFrame.from_dict(fac_features_dict)
     return empty_frame
 
-def fac_tremor_process(video_uri,out_dir,r_config, model_output=False):
+def fac_tremor_process(video_uri, out_dir, r_config, model_output=False):
     """
     processing input videos
+    
+    
     """
-    try:
-        logger.info('filtering path: ',video_uri,out_dir)
-        input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_video_features/*.csv'))
+#     try:
+        
+    input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
+    of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_video_features/*.csv'))
 
-        if len(of_csv_path)>0:
-            of_csv = of_csv_path[0]
-            df_of = pd.read_csv(of_csv, error_bad_lines=False)
+    if len(of_csv_path)>0:
+        of_csv = of_csv_path[0]
+        df_of = pd.read_csv(of_csv, error_bad_lines=False)
 
-            logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
+        logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
 
-            feats = compute_features(of_csv_path , df_of, r_config)
-            if model_output:
-                result = score(feats, r_config)
-                feats = pd.concat([feats, result], axis=1)
+        feats = compute_features(of_csv_path , df_of, r_config)
+        
+#         if model_output:
+#             result = score(feats, r_config)
+#             feats = pd.concat([feats, result], axis=1)
+            
+        ut.save_output(feats, out_loc, fl_name, ft_dir, csv_ext)
 
-                ut.output_audio_feature(feats, new_out_base_dir, '/'+fac_dir, fac_ext)
 
-    except Exception as e:
+
+#     except Exception as e:
         logger.error('Failed to process video file')

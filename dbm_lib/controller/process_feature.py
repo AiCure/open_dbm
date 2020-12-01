@@ -120,7 +120,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
 
     logger.info('processing head movement....')
     head_motion.run_head_movement(video_uri, out_dir, r_config)
-
+   
     logger.info('processing eye blink....')
     eye_blink.run_eye_blink(video_uri, out_dir, r_config, dlib_model)
 
@@ -128,7 +128,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     voice_tremor.run_vtremor(video_uri, out_dir, r_config)
 
     logger.info('processing facial tremor....')
-    face_tremor.fac_tremor_process(video_uri, out_dir, r_config, model_output=True)
+    facial_tremor.fac_tremor_process(video_uri, out_dir, r_config, model_output=True)
 
 def remove_file(file_path):
     """

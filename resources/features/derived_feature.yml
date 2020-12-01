@@ -2,7 +2,7 @@ derive_feature:
 
     #DBM Feature Group
     FEATURE_GROUP: ['FAC_ASYM', 'FAC_AU', 'FAC_EXP', 'FAC_LMK', 'ACO_INT', 'ACO_FF', 'ACO_HNR', 'ACO_GNE', 'ACO_FM',
-    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'MOV_VT']
+    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'MOV_VT', 'MOV_FT']
 
     #Feature group output file extensions
     FAC_ASYM_LOC: _facasym
@@ -23,6 +23,7 @@ derive_feature:
     MOV_HP_LOC: _headpose
     EYE_BLINK_LOC: _eyeblinks
     MOV_VT_LOC: _vtremor
+    MOV_FT_LOC: _fac_tremor
 
 
     #Facial category feature group
@@ -68,6 +69,7 @@ derive_feature:
     EYE_BLINK: ['mov_blink_ear', 'vid_dur', 'mov_blinkdur']
     MOV_VT: ['mov_freq_trem_freq', 'mov_freq_trem_index', 'mov_freq_trem_pindex', 'mov_amp_trem_freq',
     'mov_amp_trem_index', 'mov_amp_trem_pindex']
+    MOV_FT: ['fac_tremor_median_5','fac_tremor_median_12','fac_tremor_median_8','fac_tremor_median_48','fac_tremor_median_54','fac_tremor_median_28','fac_tremor_median_51','fac_tremor_median_66','fac_tremor_median_57']
 
     #Calculation for variables
     # Facial Asymmetry
@@ -258,3 +260,12 @@ derive_feature:
     mov_amp_trem_freq: ['mean']
     mov_amp_trem_index: ['mean']
     mov_amp_trem_pindex: ['mean']
+    fac_tremor_median_5: ['mean']
+    fac_tremor_median_12: ['mean']
+    fac_tremor_median_8: ['mean']
+    fac_tremor_median_48: ['mean']
+    fac_tremor_median_54: ['mean']
+    fac_tremor_median_28: ['mean']
+    fac_tremor_median_51: ['mean']
+    fac_tremor_median_66: ['mean']
+    fac_tremor_median_57: ['mean']
