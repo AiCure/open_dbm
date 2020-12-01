@@ -62,9 +62,14 @@ def process_open_face(video_uri, input_dir, out_dir, of_path, dbm_group):
     """
     try:
         
-        if dbm_group != None and len(dbm_group) == 1 and 'acoustic' in dbm_group:
+        if dbm_group != None:
             return
-
+        
+        check_group = ['facial','movement']
+        check_val = bool(len({*check_group} & {*dbm_group}))
+        if not check_val:
+            return
+        
         filepaths = [video_uri]
         csv_filepaths = batch_open_face(filepaths, video_uri, input_dir, out_dir, of_path)
         
