@@ -37,7 +37,7 @@ def common_video(video_file, args, r_config):
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
     pf.process_nlp(video_file, out_path, args.dbm_group, r_config, DEEP_SPEECH)
-    pf.remove_file(video_file)
+    
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
     pf.remove_file(video_file)
 
