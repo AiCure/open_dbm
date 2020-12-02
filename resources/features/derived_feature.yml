@@ -271,7 +271,7 @@ derive_feature:
     mov_amp_trem_index: ['mean']
     mov_amp_trem_pindex: ['mean']
     
-       mov_leye_x: ['mean', 'std']
+    mov_leye_x: ['mean', 'std']
     mov_leye_y: ['mean', 'std']
     mov_leye_z: ['mean', 'std']
     mov_reye_x: ['mean', 'std']
