@@ -83,9 +83,6 @@ def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     logger.info('processing mfcc....')
     mfcc.run_mfcc(video_uri, out_dir, r_config)
 
-    logger.info('processing voice tremor....')
-    voice_tremor.run_vtremor(video_uri, out_dir, r_config)
-
 def process_facial(video_uri, out_dir, dbm_group, r_config):
     """
     processing facial features
