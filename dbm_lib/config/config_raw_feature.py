@@ -17,7 +17,7 @@ class ConfigRawReader(object):
         Args:
             feature_config_yml (None, optional): yml file defined service configuration
         """
-        
+
         if feature_config_yml is None:
             feature_config = DBMLIB_FEATURE_CONFIG
         else:
@@ -25,15 +25,15 @@ class ConfigRawReader(object):
 
         with open(feature_config, 'r') as ymlfile:
             config = yaml.load(ymlfile)
-            
+
             #Verbal features
             self.base_raw = config
             self.err_reason = config['raw_feature']['error_reason']
-            
+
             #Output range
             self.mov_headvel_start = config['raw_feature']['mov_headvel_start']
             self.mov_headvel_end = config['raw_feature']['mov_headvel_end']
-            
+
             #Acoustic variable
             self.aco_int = config['raw_feature']['aco_int']
             self.aco_ff = config['raw_feature']['aco_ff']
@@ -210,7 +210,7 @@ class ConfigRawReader(object):
             self.fac_AsymMaskEye = config['raw_feature']['fac_AsymMaskEye']
             self.fac_AsymMaskEyebrow = config['raw_feature']['fac_AsymMaskEyebrow']
             self.fac_AsymMaskCom = config['raw_feature']['fac_AsymMaskCom']
-            
+
             #Movement features
             self.head_vel = config['raw_feature']['head_vel']
             self.mov_blink_ear = config['raw_feature']['mov_blink_ear']
@@ -222,6 +222,14 @@ class ConfigRawReader(object):
             self.mov_Hpose_Yaw = config['raw_feature']['mov_Hpose_Yaw']
             self.mov_Hpose_Roll = config['raw_feature']['mov_Hpose_Roll']
             self.mov_Hpose_Dist = config['raw_feature']['mov_Hpose_Dist']
+            
+            self.mov_freq_trem_freq = config['raw_feature']['mov_freq_trem_freq']
+            self.mov_freq_trem_index = config['raw_feature']['mov_freq_trem_index']
+            self.mov_freq_trem_pindex = config['raw_feature']['mov_freq_trem_pindex']
+            self.mov_amp_trem_freq = config['raw_feature']['mov_amp_trem_freq']
+            self.mov_amp_trem_index = config['raw_feature']['mov_amp_trem_index']
+            self.mov_amp_trem_pindex = config['raw_feature']['mov_amp_trem_pindex']
+
             self.mov_leye_x = config['raw_feature']['mov_leye_x']
             self.mov_leye_y = config['raw_feature']['mov_leye_y']
             self.mov_leye_z = config['raw_feature']['mov_leye_z']
@@ -250,4 +258,4 @@ class ConfigRawReader(object):
             self.nlp_mattr = config['raw_feature']['nlp_mattr']
             self.nlp_wordsPerMin = config['raw_feature']['nlp_wordsPerMin']
             self.nlp_totalTime = config['raw_feature']['nlp_totalTime']
-            
+         
