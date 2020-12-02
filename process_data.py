@@ -20,6 +20,7 @@ logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
 OPENFACE_PATH = 'pkg/OpenFace/build/bin/FeatureExtraction'
+DEEP_SPEECH = 'pkg/DeepSpeech'
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
 
 def common_video(video_file, args, r_config):
@@ -35,6 +36,8 @@ def common_video(video_file, args, r_config):
     of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group)
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
+    pf.process_nlp(video_file, out_path, args.dbm_group, r_config, DEEP_SPEECH)
+    pf.remove_file(video_file)
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
     pf.remove_file(video_file)
 
@@ -78,7 +81,8 @@ def process_raw_audio_file(args, s_config, r_config):
 
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio_file[0], out_path, args.dbm_group, r_config)
-
+                pf.process_nlp(audio_file[0], out_path, args.dbm_group, r_config, DEEP_SPEECH)
+                
             else:
                 logger.info('Enter correct audio(*.wav) file path.')
     except Exception as e:
@@ -128,6 +132,8 @@ def process_raw_audio_dir(args, s_config, r_config):
 
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio, out_path, args.dbm_group, r_config)
+                pf.process_nlp(audio, out_path, args.dbm_group, r_config, DEEP_SPEECH)
+                
             except Exception as e:
                 logger.error('Failed to process wav file.')
 

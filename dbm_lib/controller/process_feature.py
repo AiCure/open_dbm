@@ -7,7 +7,8 @@ created: 2020-20-07
 from dbm_lib.dbm_features.raw_features.audio import intensity, pitch_freq, hnr, gne, voice_frame_score, formant_freq
 from dbm_lib.dbm_features.raw_features.audio import pause_segment, jitter, shimmer, mfcc
 from dbm_lib.dbm_features.raw_features.video import face_asymmetry, face_au, face_emotion_expressivity, face_landmark
-from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, voice_tremor, facial_tremor
+from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, eye_gaze, voice_tremor
+from dbm_lib.dbm_features.raw_features.nlp import transcribe, speech_features
 
 import subprocess
 import logging
@@ -127,12 +128,27 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     logger.info('processing eye blink....')
     eye_blink.run_eye_blink(video_uri, out_dir, r_config, dlib_model)
 
+    logger.info('processing eye gaze....')
+    eye_gaze.run_eye_gaze(video_uri, out_dir, r_config)
+    
     logger.info('processing voice tremor....')
     voice_tremor.run_vtremor(video_uri, out_dir, r_config)
-
-    logger.info('processing facial tremor....')
-    face_tremor.fac_tremor_process(video_uri, out_dir, r_config, model_output=True)
-
+    
+def process_nlp(video_uri, out_dir, dbm_group, r_config, deep_path):
+    """
+    processing nlp features
+    Args:
+        video_uri: video path; out_dir: raw variable output dir
+        dbm_group: list of features to process; r_config: raw feature config object
+        deep_path: deep speech build path
+    """
+    if dbm_group != None and len(dbm_group)>0 and 'nlp' not in dbm_group:
+        return
+    
+    logger.info('Processing nlp variables from data in {}'.format(video_uri))
+    transcribe.run_transcribe(video_uri, out_dir, r_config, deep_path)
+    speech_features.run_speech_feature(video_uri, out_dir, r_config)
+    
 def remove_file(file_path):
     """
     removing wav file

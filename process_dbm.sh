@@ -55,6 +55,9 @@ fi
 if [[ $dbm_group == *"movement"* ]]; then
     dbm_new="$dbm_new movement"
 fi
+if [[ $dbm_group == *"nlp"* ]]; then
+    dbm_new="$dbm_new nlp"
+fi
 
 #docker commands to run container
 docker create -ti --name dbm_container dbm bash

@@ -196,18 +196,42 @@ raw_feature:
     mov_Hpose_Yaw: mov_hposeyaw
     mov_Hpose_Roll: mov_hposeroll
     mov_Hpose_Dist: mov_hposedist
+
     mov_freq_trem_freq: mov_freqtremfreq
     mov_freq_trem_index: mov_freqtremindex
     mov_freq_trem_pindex: mov_freqtrempindex
     mov_amp_trem_freq: mov_amptremfreq
     mov_amp_trem_index: mov_amptremindex
     mov_amp_trem_pindex: mov_amptrempindex
-    fac_tremor_median_5: fac_tremor_median_5
-    fac_tremor_median_12: fac_tremor_median_12
-    fac_tremor_median_8: fac_tremor_median_8
-    fac_tremor_median_48: fac_tremor_median_48
-    fac_tremor_median_54: fac_tremor_median_54
-    fac_tremor_median_28: fac_tremor_median_28
-    fac_tremor_median_51: fac_tremor_median_51
-    fac_tremor_median_66: fac_tremor_median_66
-    fac_tremor_median_57: fac_tremor_median_57
+    
+    mov_leye_x: mov_lefteyex
+    mov_leye_y: mov_lefteyey
+    mov_leye_z: mov_lefteyez
+    mov_reye_x: mov_righteyex
+    mov_reye_y: mov_righteyey
+    mov_reye_z: mov_righteyez
+    mov_eleft_disp: mov_leyedisp
+    mov_eright_disp: mov_reyedisp
+
+    #NLP markers
+    nlp_transcribe: nlp_transcribe
+    nlp_numSentences: nlp_numSentences
+    nlp_singPronPerAns: nlp_singPronPerAns
+    nlp_singPronPerSen: nlp_singPronPerSen
+    nlp_pastTensePerAns: nlp_pastTensePerAns
+    nlp_pastTensePerSen: nlp_pastTensePerSen
+    nlp_pronounsPerAns: nlp_pronounsPerAns
+    nlp_pronounsPerSen: nlp_pronounsPerSen
+    nlp_verbsPerAns: nlp_verbsPerAns
+    nlp_verbsPerSen: nlp_verbsPerSen
+    nlp_adjectivesPerAns: nlp_adjectivesPerAns
+    nlp_adjectivesPerSen: nlp_adjectivesPerSen
+    nlp_nounsPerAns: nlp_nounsPerAns
+    nlp_nounsPerSen: nlp_nounsPerSen
+    nlp_sentiment_mean: nlp_sentiment_mean
+    nlp_mattr: nlp_mattr
+    nlp_wordsPerMin: nlp_wordsPerMin
+    nlp_totalTime: nlp_totalTime
+    
+
+
