@@ -1,11 +1,11 @@
 raw_feature:
     #error reason
     error_reason: error_reason
-    
+
     #Output range
     mov_headvel_start: 0
     mov_headvel_end: 200
-    
+
     #Facial markers
     hap_exp: fac_hapintsoft
     sad_exp: fac_sadintsoft
@@ -26,6 +26,8 @@ raw_feature:
     neu_exp: neu_exp
     cai_exp: cai_exp
     com_exp: fac_comintsoft
+    com_lower_exp: fac_comlowintsoft
+    com_upper_exp: fac_comuppintsoft
     hap_exp_full: fac_hapinthard
     sad_exp_full: fac_sadinthard
     sur_exp_full: fac_surinthard
@@ -38,13 +40,15 @@ raw_feature:
     neu_exp_full: neu_exp_full
     cai_exp_full: cai_exp_full
     com_exp_full: fac_cominthard
-    
+    com_lower_exp_full: fac_comlowinthard
+    com_upper_exp_full: fac_comuppinthard
+
     #Facial asymmetry
     fac_AsymMaskMouth: fac_asymmaskmouth
     fac_AsymMaskEye: fac_asymmaskeye
     fac_AsymMaskEyebrow: fac_asymmaskeyebrow
     fac_AsymMaskCom: fac_asymmaskcom
-    
+
     #Facial landmark
     fac_LMK00disp: fac_LMK00disp
     fac_LMK01disp: fac_LMK01disp
@@ -114,7 +118,7 @@ raw_feature:
     fac_LMK65disp: fac_LMK65disp
     fac_LMK66disp: fac_LMK66disp
     fac_LMK67disp: fac_LMK67disp
-    
+
     #Facial action unit
     fac_AU01int: fac_AU01int
     fac_AU02int: fac_AU02int
@@ -151,7 +155,7 @@ raw_feature:
     fac_AU26pres: fac_AU26pres
     fac_AU28pres: fac_AU28pres
     fac_AU45pres: fac_AU45pres
-    
+
     #Verbal markers
     aco_int: aco_int
     aco_ff: aco_ff
@@ -184,7 +188,7 @@ raw_feature:
     aco_speakingtime: aco_speakingtime
     aco_numpauses: aco_numpauses
     aco_pausefrac: aco_pausefrac
-    
+
     #Movement markers
     head_vel: mov_headvel
     mov_blink_ear: mov_blink_ear

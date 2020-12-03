@@ -18,18 +18,20 @@ class ConfigFaceReader(object):
         Args:
             service_config_yml (None, optional): yml file defined service configuration
         """
-        
+
         if service_config_yml is None:
             service_config = DBMLIB_FACE_CONFIG
         else:
             service_config = service_config_yml
-        
+
         with open(service_config, 'r') as ymlfile:
             config = yaml.load(ymlfile)
             self.ACTION_UNITS = config['cdx_face_config']['ACTION_UNITS']
             self.NEG_ACTION_UNITS = config['cdx_face_config']['NEG_ACTION_UNITS']
             self.POS_ACTION_UNITS = config['cdx_face_config']['POS_ACTION_UNITS']
-            self.NET_ACTION_UNITS = config['cdx_face_config']['NET_ACTION_UNITS']            
+            self.NET_ACTION_UNITS = config['cdx_face_config']['NET_ACTION_UNITS']
+            self.LOWER_ACTION_UNITS = config['cdx_face_config']['LOWER_ACTION_UNITS']
+            self.UPPER_ACTION_UNITS = config['cdx_face_config']['LOWER_ACTION_UNITS']           
             self.happiness = config['cdx_face_config']['happiness']
             self.sadness = config['cdx_face_config']['sadness']
             self.surprise = config['cdx_face_config']['surprise']
@@ -44,7 +46,7 @@ class ConfigFaceReader(object):
             self.AU_fl = config['cdx_face_config']['AU_filters']
             self.au_int = config['cdx_face_config']['au_intensity']
             self.au_prs = config['cdx_face_config']['au_presence']
-        
+
     def get_action_unit(self):
         """Summary
         Returns:
