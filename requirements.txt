@@ -8,7 +8,6 @@ sk-video
 watchtower
 opencv-python
 webrtcvad
-pysptk
 imutils
 dlib==19.13.0
 coloredlogs
