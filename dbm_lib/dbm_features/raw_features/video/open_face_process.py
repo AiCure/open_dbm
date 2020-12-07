@@ -45,8 +45,9 @@ def batch_open_face(filepaths,video_url, input_dir, out_dir, of_path, video_trac
             _, out_loc, fl_name = ut.filter_path(video_url, out_dir)
             full_f_name = fl_name + suffix
             output_directory = os.path.join(out_loc, full_f_name)
-            if not os.path.isdir(output_directory):
-                os.mkdir(output_directory)
+            
+            if video_tracking and not os.path.exists(os.path.abspath(output_directory)):
+                os.makedirs(os.path.abspath(output_directory))
             csv_files.append(ut.compute_open_face_features(fp,output_directory,of_path))
 
         except Exception as e:
