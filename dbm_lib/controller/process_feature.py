@@ -131,7 +131,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     logger.info('processing voice tremor....')
     voice_tremor.run_vtremor(video_uri, out_dir, r_config)
     
-def process_nlp(video_uri, out_dir, dbm_group, r_config, deep_path):
+def process_nlp(video_uri, out_dir, dbm_group, tran_tog, r_config, deep_path):
     """
     processing nlp features
     Args:
@@ -139,12 +139,12 @@ def process_nlp(video_uri, out_dir, dbm_group, r_config, deep_path):
         dbm_group: list of features to process; r_config: raw feature config object
         deep_path: deep speech build path
     """
-    if dbm_group != None and len(dbm_group)>0 and 'nlp' not in dbm_group:
+    if dbm_group != None and len(dbm_group)>0 and 'speech' not in dbm_group:
         return
     
     logger.info('Processing nlp variables from data in {}'.format(video_uri))
     transcribe.run_transcribe(video_uri, out_dir, r_config, deep_path)
-    speech_features.run_speech_feature(video_uri, out_dir, r_config)
+    speech_features.run_speech_feature(video_uri, out_dir, r_config, tran_tog)
     
 def remove_file(file_path):
     """
