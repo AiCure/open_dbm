@@ -8,7 +8,6 @@ sk-video
 watchtower
 opencv-python
 webrtcvad
-pysptk
 imutils
 dlib==19.13.0
 coloredlogs
@@ -20,3 +19,8 @@ more_itertools
 scipy==1.2.0
 pyyaml
 pydub
+deepspeech
+nltk
+lexicalrichness
+vaderSentiment
+textblob

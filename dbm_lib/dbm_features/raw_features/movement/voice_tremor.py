@@ -82,10 +82,11 @@ def run_vtremor(video_uri, out_dir, r_config):
             audio_file = aud_filter[0]
             aud_dur = librosa.get_duration(filename=audio_file)
 
-            if float(aud_dur) < 0.064:
-                logger.info('Output file {} size is less than 0.064sec'.format(audio_file))
-
-                prepare_empty_vt(video_uri, out_loc, fl_name, r_config)
+            if float(aud_dur) < 0.5:
+                logger.info('Output file {} size is less than 0.5sec'.format(audio_file))
+                
+                error_txt = 'error: length less than 0.5 sec'
+                prepare_empty_vt(video_uri, out_loc, fl_name, error_txt)
                 return
             prepare_vtrem_output(audio_file, out_loc, r_config, fl_name)
     except Exception as e:

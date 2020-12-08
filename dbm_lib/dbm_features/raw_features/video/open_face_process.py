@@ -66,10 +66,13 @@ def process_open_face(video_uri, input_dir, out_dir, of_path, dbm_group,video_tr
 
     """
     try:
-
-        if dbm_group != None and len(dbm_group) == 1 and 'acoustic' in dbm_group:
-            return
-
+        
+        if dbm_group != None:
+            check_group = ['facial','movement'] #add group here: if you want to use openface output for raw variable calculation
+            check_val = bool(len({*check_group} & {*dbm_group}))
+            if not check_val:
+                return
+        
         filepaths = [video_uri]
         csv_filepaths = batch_open_face(filepaths, video_uri, input_dir, out_dir, of_path, video_tracking)
 
