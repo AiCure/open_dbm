@@ -36,7 +36,7 @@ def common_video(video_file, args, r_config):
     of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group)
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
-    pf.process_nlp(video_file, out_path, args.dbm_group, r_config, DEEP_SPEECH)
+    pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
     
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
     pf.remove_file(video_file)
@@ -81,7 +81,7 @@ def process_raw_audio_file(args, s_config, r_config):
 
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio_file[0], out_path, args.dbm_group, r_config)
-                pf.process_nlp(audio_file[0], out_path, args.dbm_group, r_config, DEEP_SPEECH)
+                pf.process_nlp(audio_file[0], out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
                 
             else:
                 logger.info('Enter correct audio(*.wav) file path.')
@@ -132,7 +132,7 @@ def process_raw_audio_dir(args, s_config, r_config):
 
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio, out_path, args.dbm_group, r_config)
-                pf.process_nlp(audio, out_path, args.dbm_group, r_config, DEEP_SPEECH)
+                pf.process_nlp(audio, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
                 
             except Exception as e:
                 logger.error('Failed to process wav file.')
@@ -159,6 +159,7 @@ if __name__=="__main__":
     parser.add_argument("--input_path", help="path to the input files", required=True)
     parser.add_argument("--output_path", help="path to the raw and derived variable output", required=True)
     parser.add_argument("--dbm_group", help="list of feature groups", nargs='+')
+    parser.add_argument("--tr", help="speech transcription toogle")
 
     args = parser.parse_args()
     s_config = config_reader.ConfigReader()

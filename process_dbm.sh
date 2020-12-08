@@ -7,6 +7,7 @@ helpFunction()
    echo -e "\t--input_path: path to the input files"
    echo -e "\t--output_path: path to the raw and derived variable output"
    echo -e "\t--dbm_group: list of feature groups"
+   echo -e "\t--tr: Toggle for speech transcription(optional)"
    exit 1 # Exit script after printing help
 }
 
@@ -15,6 +16,7 @@ while [ $# -gt 0 ]; do
     --input_path=*) input_path="${1#*=}" ;;
     --output_path=*) output_path="${1#*=}" ;;
     --dbm_group=*) dbm_group="${1#*=}" ;;
+    --tr=*) tr="${1#*=}" ;;
     *) helpFunction ;;
   esac
   shift
@@ -55,8 +57,11 @@ fi
 if [[ $dbm_group == *"movement"* ]]; then
     dbm_new="$dbm_new movement"
 fi
-if [[ $dbm_group == *"nlp"* ]]; then
-    dbm_new="$dbm_new nlp"
+if [[ $dbm_group == *"speech"* ]]; then
+    dbm_new="$dbm_new speech"
+fi
+if [[ $dbm_group == *"speech"* ]] && [[ ${tr,,} == "on" ]]; then
+    dbm_new="$dbm_new --tr ${tr,,}"
 fi
 
 #docker commands to run container
