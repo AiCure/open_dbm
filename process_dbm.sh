@@ -60,8 +60,8 @@ fi
 if [[ $dbm_group == *"speech"* ]]; then
     dbm_new="$dbm_new speech"
 fi
-if [[ $dbm_group == *"speech"* ]] && [[ ${tr,,} == "on" ]]; then
-    dbm_new="$dbm_new --tr ${tr,,}"
+if [[ $dbm_group == *"speech"* ]] && [[ ${tr} == "on" ]]; then
+    dbm_new="$dbm_new --tr ${tr}"
 fi
 
 #docker commands to run container
