@@ -71,9 +71,9 @@ docker cp $input_path dbm_container:/app/raw_data
 docker start dbm_container
 if [ -z "$dbm_new" ]
   then
-    docker exec -it dbm_container /bin/bash -c "python3 process_data.py --input_path /app/raw_data --output_path /app/output"
+    docker exec -it dbm_container /bin/bash -c "python3 -W ignore process_data.py --input_path /app/raw_data --output_path /app/output"
 else
-    docker exec -it dbm_container /bin/bash -c "python3 process_data.py --input_path /app/raw_data --output_path /app/output --dbm_group$dbm_new"
+    docker exec -it dbm_container /bin/bash -c "python3 -W ignore process_data.py --input_path /app/raw_data --output_path /app/output --dbm_group$dbm_new"
 fi
 
 docker cp dbm_container:/app/output $output_path
