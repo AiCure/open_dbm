@@ -130,6 +130,7 @@ derive_feature:
     com_exp: ['mean', 'std', 'pct']
     com_lower_exp: ['mean','std','pct']
     com_upper_exp: ['mean','std','pct']
+    pai_exp: ['mean','std','pct']
     hap_exp_full: ['mean', 'std']
     sad_exp_full: ['mean', 'std']
     sur_exp_full: ['mean', 'std']
@@ -143,6 +144,7 @@ derive_feature:
     com_exp_full: ['mean', 'std']
     com_lower_exp_full: ['mean','std']
     com_upper_exp_full: ['mean', 'std']
+    pai_exp_full: ['mean','std']
 
     #Facial Landmarks
     fac_LMK00disp: ['mean', 'std']

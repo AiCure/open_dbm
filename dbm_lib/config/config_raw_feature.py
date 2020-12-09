@@ -196,6 +196,7 @@ class ConfigRawReader(object):
             self.com_exp = config['raw_feature']['com_exp']
             self.com_lower_exp = config['raw_feature']['com_lower_exp']
             self.com_upper_exp = config['raw_feature']['com_upper_exp']
+            self.pai_exp = config['raw_feature']['pai_exp']
             self.hap_exp_full = config['raw_feature']['hap_exp_full']
             self.sad_exp_full = config['raw_feature']['sad_exp_full']
             self.sur_exp_full = config['raw_feature']['sur_exp_full']
@@ -210,6 +211,8 @@ class ConfigRawReader(object):
             self.com_exp_full = config['raw_feature']['com_exp_full']
             self.com_lower_exp_full = config['raw_feature']['com_lower_exp_full']
             self.com_upper_exp_full = config['raw_feature']['com_upper_exp_full']
+            self.pai_exp_full = config['raw_feature']['pai_exp_full']
+
             self.fac_AsymMaskMouth = config['raw_feature']['fac_AsymMaskMouth']
             self.fac_AsymMaskEye = config['raw_feature']['fac_AsymMaskEye']
             self.fac_AsymMaskEyebrow = config['raw_feature']['fac_AsymMaskEyebrow']

@@ -12,6 +12,7 @@ cdx_face_config:
     anger: [[4, 5, 7, 23]]
     disgust: [[9, 15]]
     contempt: [[12, 14]]
+    pain: [[4, 6, 7, 9, 10, 12, 20, 26]]
     CAI: [[6, 12],[1, 4, 15],[2, 5, 26],[7, 20, 26],[23],[9],[12, 14]]
     SELECTED_FEATURES: AU,POSE
     face_expr_dir: /video/face_expressivity

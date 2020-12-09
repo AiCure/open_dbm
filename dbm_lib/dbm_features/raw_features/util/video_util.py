@@ -171,6 +171,8 @@ def calc_of_for_video(of,face_cfg,fe_cfg):
     emotion_exp(face_cfg.LOWER_ACTION_UNITS,of,[fe_cfg.com_lower_exp,fe_cfg.com_lower_exp_full],fe_cfg.err_reason)
     #Composite upper face Expressivity
     emotion_exp(face_cfg.UPPER_ACTION_UNITS,of,[fe_cfg.com_upper_exp,fe_cfg.com_upper_exp_full],fe_cfg.err_reason)
+    #Composite pain expressivity
+    emotion_exp(face_cfg.pai,of,[fe_cfg.pai_exp,fe_cfg.pai_exp_full],fe_cfg.err_reason)    
     #AU happiness presence
     emotion_pres(face_cfg.happiness,of,fe_cfg.happ_occ,fe_cfg.err_reason)
     #AU Sad presence
