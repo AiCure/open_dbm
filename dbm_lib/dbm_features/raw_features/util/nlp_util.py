@@ -126,7 +126,7 @@ def process_speech(transcribe_df,r_config):
         Returns:
             Dataframe for speech features
     """
-    
+    transcribe_df = transcribe_df.replace(np.nan, '', regex=True)
     err_transcribe = transcribe_df[r_config.err_reason].iloc[0]
     transcribe = transcribe_df[r_config.nlp_transcribe].iloc[0]
     total_time = transcribe_df[r_config.nlp_totalTime].iloc[0]

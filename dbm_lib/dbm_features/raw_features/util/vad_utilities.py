@@ -158,7 +158,7 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
     for frame in frames:
         is_speech = vad.is_speech(frame.bytes, sample_rate)
 
-        sys.stdout.write('1' if is_speech else '0')
+        #sys.stdout.write('1' if is_speech else '0')
         if not triggered:
             ring_buffer.append((frame, is_speech))
             num_voiced = len([f for f, speech in ring_buffer if speech])
@@ -167,7 +167,7 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
             # TRIGGERED state.
             if num_voiced > 0.9 * ring_buffer.maxlen:
                 triggered = True
-                sys.stdout.write('+(%s)' % (ring_buffer[0][0].timestamp,))
+                #sys.stdout.write('+(%s)' % (ring_buffer[0][0].timestamp,))
                 start_times.append(ring_buffer[0][0].timestamp)  # BT
                 ring_buffer.clear()
         else:
@@ -179,18 +179,18 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
             # unvoiced, then enter NOTTRIGGERED and yield whatever
             # audio we've collected.
             if num_unvoiced > 0.9 * ring_buffer.maxlen:
-                sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
+                #sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
                 end_times.append(ring_buffer[0][0].timestamp + frame.duration)  # BT
                 triggered = False
 
     if triggered:  # BT if were in triggered state at end of signal, set output time
-        sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
+        #sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
         if len(ring_buffer)>0:
             end_times.append(ring_buffer[0][0].timestamp )  # BT
         else:
             # only get here in very rare case that we triggered on 2nd-to-last frame
             end_times.append(frame.timestamp + frame.duration)
-    sys.stdout.write('\n')
+    #sys.stdout.write('\n')
 
     return(start_times, end_times)
 

@@ -10,6 +10,7 @@ import pandas as pd
 import glob
 from os.path import join
 import logging
+import shutil
 
 from dbm_lib.dbm_features.raw_features.util import util as ut
 from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
@@ -21,7 +22,7 @@ speech_dir = 'nlp/speech_feature'
 speech_ext = '_nlp.csv'
 transcribe_ext = 'nlp/transcribe/*_transcribe.csv'
 
-def run_speech_feature(video_uri, out_dir, r_config):
+def run_speech_feature(video_uri, out_dir, r_config, tran_tog):
     """
     Processing all patient's for fetching nlp features
     -------------------
@@ -42,6 +43,9 @@ def run_speech_feature(video_uri, out_dir, r_config):
 
             logger.info('Saving Output file {} '.format(out_loc))
             ut.save_output(df_speech, out_loc, fl_name, speech_dir, speech_ext)
+
+            if (tran_tog == None) or (tran_tog != 'on'):
+                shutil.rmtree(os.path.dirname(transcribe_path[0]))
             
     except Exception as e:
         logger.error('Failed to process video file')
