@@ -31,7 +31,11 @@ def formant_list(formant,snd):
     Returns:
         List of first through fourth formant for each frame
     """
-    f1_list, f2_list, f3_list, f4_list = ([], ) * 4
+    f1_list = []
+    f2_list = []
+    f3_list = []
+    f4_list = []
+    
     dur = snd.duration-0.02
     dur_round = round(dur, 2)
     
