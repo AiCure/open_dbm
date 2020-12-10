@@ -7,8 +7,9 @@ created: 2020-20-07
 from dbm_lib.dbm_features.raw_features.audio import intensity, pitch_freq, hnr, gne, voice_frame_score, formant_freq
 from dbm_lib.dbm_features.raw_features.audio import pause_segment, jitter, shimmer, mfcc
 from dbm_lib.dbm_features.raw_features.video import face_asymmetry, face_au, face_emotion_expressivity, face_landmark
-from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, eye_gaze, voice_tremor
+from dbm_lib.dbm_features.raw_features.movement import head_motion, eye_blink, eye_gaze, voice_tremor, facial_tremor
 from dbm_lib.dbm_features.raw_features.nlp import transcribe, speech_features
+
 
 import subprocess
 import logging
@@ -121,7 +122,7 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
 
     logger.info('processing head movement....')
     head_motion.run_head_movement(video_uri, out_dir, r_config)
-
+   
     logger.info('processing eye blink....')
     eye_blink.run_eye_blink(video_uri, out_dir, r_config, dlib_model)
 
@@ -130,6 +131,10 @@ def process_movement(video_uri, out_dir, dbm_group, r_config, dlib_model):
     
     logger.info('processing voice tremor....')
     voice_tremor.run_vtremor(video_uri, out_dir, r_config)
+
+    logger.info('processing facial tremor....')
+    facial_tremor.fac_tremor_process(video_uri, out_dir, r_config, model_output=True)
+
     
 def process_nlp(video_uri, out_dir, dbm_group, tran_tog, r_config, deep_path):
     """
@@ -146,6 +151,7 @@ def process_nlp(video_uri, out_dir, dbm_group, tran_tog, r_config, deep_path):
     transcribe.run_transcribe(video_uri, out_dir, r_config, deep_path)
     speech_features.run_speech_feature(video_uri, out_dir, r_config, tran_tog)
     
+
 def remove_file(file_path):
     """
     removing wav file

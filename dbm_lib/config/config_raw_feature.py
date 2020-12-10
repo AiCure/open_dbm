@@ -230,6 +230,16 @@ class ConfigRawReader(object):
             self.mov_amp_trem_index = config['raw_feature']['mov_amp_trem_index']
             self.mov_amp_trem_pindex = config['raw_feature']['mov_amp_trem_pindex']
 
+            self.fac_tremor_median_5 = config['raw_feature']['fac_tremor_median_5']
+            self.fac_tremor_median_12 = config['raw_feature']['fac_tremor_median_12']
+            self.fac_tremor_median_8 = config['raw_feature']['fac_tremor_median_8']
+            self.fac_tremor_median_48 = config['raw_feature']['fac_tremor_median_48']
+            self.fac_tremor_median_54 = config['raw_feature']['fac_tremor_median_54']
+            self.fac_tremor_median_28 = config['raw_feature']['fac_tremor_median_28']
+            self.fac_tremor_median_51 = config['raw_feature']['fac_tremor_median_51']
+            self.fac_tremor_median_66 = config['raw_feature']['fac_tremor_median_66']
+            self.fac_tremor_median_57 = config['raw_feature']['fac_tremor_median_57']
+
             self.mov_leye_x = config['raw_feature']['mov_leye_x']
             self.mov_leye_y = config['raw_feature']['mov_leye_y']
             self.mov_leye_z = config['raw_feature']['mov_leye_z']

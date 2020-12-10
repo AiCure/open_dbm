@@ -155,7 +155,7 @@ int main(int argc, char **argv)
         std::string base_filename = path.substr(path.find_last_of("/\\") + 1);
         base_filename = base_filename.replace(base_filename.find(ext),sizeof(ext)-1,"");
         results.open(out_dir + '/' + base_filename + "_landmark_output.csv");
-//         confidence.open(out_dir + '/' + base_filename +  "_landmark_likelihoods.csv");
+        confidence.open(out_dir + '/' + base_filename +  "_landmark_likelihoods.csv");
         int lx = 0;
         int ly = 0;
         for(lx = 0; lx < 2; lx++){
@@ -163,7 +163,7 @@ int main(int argc, char **argv)
 
                 if (lx == 0){
                     results << "l" << ly << "_x,";
-//                     confidence << "c" << ly <<",";
+                    confidence << "c" << ly <<",";
                 }
                 if (lx == 1){
                     results << "l" << ly << "_y,";
@@ -172,7 +172,7 @@ int main(int argc, char **argv)
         }
         results << "pose_Tx,pose_Ty,pose_Tz,pose_Rx,pose_Ry,pose_Rz" ;
         results << std::endl; 
-//         confidence << std::endl;
+        confidence << std::endl;
         
 		int counter = 0;
         
@@ -207,7 +207,6 @@ int main(int argc, char **argv)
 			// Gaze tracking, absolute gaze direction
 			cv::Point3f gazeDirection0(0, 0, -1);
 			cv::Point3f gazeDirection1(0, 0, -1);
-            cv::Vec6d pose_estimate(0, 0, 0, 0, 0, 0);
 
 			// If tracking succeeded and we have an eye model, estimate gaze
 			if (detection_success && face_model.eye_model)
@@ -217,9 +216,9 @@ int main(int argc, char **argv)
 			}
 
 			// Work out the pose of the head from the tracked model
-			if (detection_success){
-			pose_estimate = LandmarkDetector::GetPose(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy);
-            }
+
+			cv::Vec6d pose_estimate = LandmarkDetector::GetPose(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy);
+            
             
             
             
@@ -234,11 +233,11 @@ int main(int argc, char **argv)
 
 			// Displaying the tracking visualizations
 //             std::cout<< "setting observation landmarks"<<std::endl;
-// 			visualizer.SetImage(rgb_image, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy);
-// 			visualizer.SetObservationLandmarks(face_model.detected_landmarks, face_model.detection_certainty, face_model.GetVisibilities());
-// 			visualizer.SetObservationPose(pose_estimate, face_model.detection_certainty);
-// 			visualizer.SetObservationGaze(gazeDirection0, gazeDirection1, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy), face_model.detection_certainty);
-// 			visualizer.SetFps(fps_tracker.GetFPS());
+			visualizer.SetImage(rgb_image, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy);
+			visualizer.SetObservationLandmarks(face_model.detected_landmarks, face_model.detection_certainty, face_model.GetVisibilities());
+			visualizer.SetObservationPose(pose_estimate, face_model.detection_certainty);
+			visualizer.SetObservationGaze(gazeDirection0, gazeDirection1, LandmarkDetector::CalculateAllEyeLandmarks(face_model), LandmarkDetector::Calculate3DEyeLandmarks(face_model, sequence_reader.fx, sequence_reader.fy, sequence_reader.cx, sequence_reader.cy), face_model.detection_certainty);
+			visualizer.SetFps(fps_tracker.GetFPS());
             
 //             std::cout << "openfacerec set obs landmarks"<<std::endl;
 //             std::cout<< fps_tracker.GetFPS() <<std::endl;
@@ -264,15 +263,15 @@ int main(int argc, char **argv)
 			}                
 			results <<std::endl;
             
-//             for(i=0;i<68;i++){
-//                 if (i==67){
-//                 confidence << face_model.landmark_likelihoods[0][i];
-//                 }
-//                 else{
-//                 confidence << face_model.landmark_likelihoods[0][i] << ",";
-//                 }
-//             }
-//             confidence <<std::endl;
+            for(i=0;i<68;i++){
+                if (i==67){
+                confidence << face_model.landmark_likelihoods[0][i];
+                }
+                else{
+                confidence << face_model.landmark_likelihoods[0][i] << ",";
+                }
+            }
+            confidence <<std::endl;
 
 			// detect key presses (due to pecularities of OpenCV, you can get it when displaying images)
 			//char character_press = visualizer.ShowObservation();
@@ -310,5 +309,4 @@ int main(int argc, char **argv)
 	}
 	return 0;
 }
-
 

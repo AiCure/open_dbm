@@ -47,7 +47,7 @@ def prepare_vtrem_output(audio_file, out_loc, r_config, fl_name):
     df_tremor = tremor_praat(audio_file, r_config)
     df_tremor[r_config.err_reason] = 'Pass'# will replace with threshold in future release
 
-    logger.info('Processing Output file {} '.format(out_loc))
+    logger.info('Processing Output file {} '.format(os.path.join(out_loc, fl_name)))
     ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
 
 def prepare_empty_vt(out_loc, fl_name, r_config, error_txt):
@@ -61,7 +61,7 @@ def prepare_empty_vt(out_loc, fl_name, r_config, error_txt):
     out_val = [[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, error_txt]]
     df_tremor = pd.DataFrame(out_val, columns = cols)
 
-    logger.info('Saving Output file {} '.format(out_loc))
+    logger.info('Saving Output file {} '.format(os.path.join(out_loc, fl_name)))
     ut.save_output(df_tremor, out_loc, fl_name, vt_dir, csv_ext)
 
 def run_vtremor(video_uri, out_dir, r_config):
@@ -74,9 +74,9 @@ def run_vtremor(video_uri, out_dir, r_config):
         out_dir: (str) Output directory for processed output
     """
     try:
+
         input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
         aud_filter = glob.glob(join(input_loc, fl_name + '.wav'))
-
         if len(aud_filter)>0:
 
             audio_file = aud_filter[0]

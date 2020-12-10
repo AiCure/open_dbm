@@ -204,6 +204,16 @@ raw_feature:
     mov_amp_trem_index: mov_amptremindex
     mov_amp_trem_pindex: mov_amptrempindex
     
+    fac_tremor_median_5: fac_tremor_median_5
+    fac_tremor_median_12: fac_tremor_median_12
+    fac_tremor_median_8: fac_tremor_median_8
+    fac_tremor_median_48: fac_tremor_median_48
+    fac_tremor_median_54: fac_tremor_median_54
+    fac_tremor_median_28: fac_tremor_median_28
+    fac_tremor_median_51: fac_tremor_median_51
+    fac_tremor_median_66: fac_tremor_median_66
+    fac_tremor_median_57: fac_tremor_median_57
+
     mov_leye_x: mov_lefteyex
     mov_leye_y: mov_lefteyey
     mov_leye_z: mov_lefteyez

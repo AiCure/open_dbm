@@ -3,7 +3,7 @@ derive_feature:
     #DBM Feature Group
     FEATURE_GROUP: ['FAC_ASYM', 'FAC_AU', 'FAC_EXP', 'FAC_LMK', 'ACO_INT', 'ACO_FF', 'ACO_HNR', 'ACO_GNE', 'ACO_FM',
     'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'NLP_SPEECH',
-    'EYE_GAZE', 'MOV_VT']
+    'EYE_GAZE', 'MOV_VT', 'MOV_FT']
 
     #Feature group output file extensions
     FAC_ASYM_LOC: _facasym
@@ -26,6 +26,7 @@ derive_feature:
     NLP_SPEECH_LOC: _nlp
     EYE_GAZE_LOC: _eyegaze
     MOV_VT_LOC: _vtremor
+    MOV_FT_LOC: _fac_tremor
 
     #Facial category feature group
     FAC_ASYM: ['fac_AsymMaskMouth', 'fac_AsymMaskEyebrow', 'fac_AsymMaskEye', 'fac_AsymMaskCom']
@@ -70,6 +71,7 @@ derive_feature:
     EYE_BLINK: ['mov_blink_ear', 'vid_dur', 'mov_blinkdur']
     MOV_VT: ['mov_freq_trem_freq', 'mov_freq_trem_index', 'mov_freq_trem_pindex', 'mov_amp_trem_freq',
     'mov_amp_trem_index', 'mov_amp_trem_pindex']
+    MOV_FT: ['fac_tremor_median_5','fac_tremor_median_12','fac_tremor_median_8','fac_tremor_median_48','fac_tremor_median_54','fac_tremor_median_28','fac_tremor_median_51','fac_tremor_median_66','fac_tremor_median_57']
 
     EYE_GAZE: ['mov_leye_x', 'mov_leye_y', 'mov_leye_z', 'mov_reye_x', 'mov_reye_y', 'mov_reye_z', 'mov_eleft_disp',
     'mov_eright_disp']
@@ -270,6 +272,16 @@ derive_feature:
     mov_amp_trem_freq: ['mean']
     mov_amp_trem_index: ['mean']
     mov_amp_trem_pindex: ['mean']
+
+    fac_tremor_median_5: ['mean']
+    fac_tremor_median_12: ['mean']
+    fac_tremor_median_8: ['mean']
+    fac_tremor_median_48: ['mean']
+    fac_tremor_median_54: ['mean']
+    fac_tremor_median_28: ['mean']
+    fac_tremor_median_51: ['mean']
+    fac_tremor_median_66: ['mean']
+    fac_tremor_median_57: ['mean']
     
     mov_leye_x: ['mean', 'std']
     mov_leye_y: ['mean', 'std']
@@ -298,3 +310,4 @@ derive_feature:
     nlp_mattr: ['mean']
     nlp_wordsPerMin: ['mean']
     nlp_totalTime: ['mean']
+

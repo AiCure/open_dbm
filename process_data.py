@@ -19,6 +19,8 @@ import time
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
+#for ftremor
+OPENFACE_PATH_VIDEO = 'pkg/OpenFace/build/bin/FaceLandmarkVid'
 OPENFACE_PATH = 'pkg/OpenFace/build/bin/FeatureExtraction'
 DEEP_SPEECH = 'pkg/DeepSpeech'
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
@@ -33,10 +35,14 @@ def common_video(video_file, args, r_config):
     """
     out_path = os.path.join(args.output_path, 'raw_variables')
     pf.audio_to_wav(video_file)
-    of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group)
+
+    of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
-    pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
+    
+    pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)  
+    if args.dbm_group == None or len(args.dbm_group)>0 and 'movement' in args.dbm_group:
+        of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH_VIDEO, args.dbm_group, video_tracking=True)
     
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
     pf.remove_file(video_file)
