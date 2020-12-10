@@ -179,10 +179,11 @@ def run_head_movement(video_uri, out_dir, r_config):
         out_dir: (str) Output directory for processed output; r_config: raw variable config object
     """
     try:
-        
+
         #filtering path to generate input & output path
         input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
         of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+
 
         if len(of_csv_path)>0:
 

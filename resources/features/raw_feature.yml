@@ -1,11 +1,11 @@
 raw_feature:
     #error reason
     error_reason: error_reason
-    
+
     #Output range
     mov_headvel_start: 0
     mov_headvel_end: 200
-    
+
     #Facial markers
     hap_exp: fac_hapintsoft
     sad_exp: fac_sadintsoft
@@ -38,13 +38,13 @@ raw_feature:
     neu_exp_full: neu_exp_full
     cai_exp_full: cai_exp_full
     com_exp_full: fac_cominthard
-    
+
     #Facial asymmetry
     fac_AsymMaskMouth: fac_asymmaskmouth
     fac_AsymMaskEye: fac_asymmaskeye
     fac_AsymMaskEyebrow: fac_asymmaskeyebrow
     fac_AsymMaskCom: fac_asymmaskcom
-    
+
     #Facial landmark
     fac_LMK00disp: fac_LMK00disp
     fac_LMK01disp: fac_LMK01disp
@@ -114,7 +114,7 @@ raw_feature:
     fac_LMK65disp: fac_LMK65disp
     fac_LMK66disp: fac_LMK66disp
     fac_LMK67disp: fac_LMK67disp
-    
+
     #Facial action unit
     fac_AU01int: fac_AU01int
     fac_AU02int: fac_AU02int
@@ -151,7 +151,7 @@ raw_feature:
     fac_AU26pres: fac_AU26pres
     fac_AU28pres: fac_AU28pres
     fac_AU45pres: fac_AU45pres
-    
+
     #Verbal markers
     aco_int: aco_int
     aco_ff: aco_ff
@@ -184,7 +184,7 @@ raw_feature:
     aco_speakingtime: aco_speakingtime
     aco_numpauses: aco_numpauses
     aco_pausefrac: aco_pausefrac
-    
+
     #Movement markers
     head_vel: mov_headvel
     mov_blink_ear: mov_blink_ear
@@ -196,3 +196,52 @@ raw_feature:
     mov_Hpose_Yaw: mov_hposeyaw
     mov_Hpose_Roll: mov_hposeroll
     mov_Hpose_Dist: mov_hposedist
+
+    mov_freq_trem_freq: mov_freqtremfreq
+    mov_freq_trem_index: mov_freqtremindex
+    mov_freq_trem_pindex: mov_freqtrempindex
+    mov_amp_trem_freq: mov_amptremfreq
+    mov_amp_trem_index: mov_amptremindex
+    mov_amp_trem_pindex: mov_amptrempindex
+    
+    fac_tremor_median_5: fac_tremor_median_5
+    fac_tremor_median_12: fac_tremor_median_12
+    fac_tremor_median_8: fac_tremor_median_8
+    fac_tremor_median_48: fac_tremor_median_48
+    fac_tremor_median_54: fac_tremor_median_54
+    fac_tremor_median_28: fac_tremor_median_28
+    fac_tremor_median_51: fac_tremor_median_51
+    fac_tremor_median_66: fac_tremor_median_66
+    fac_tremor_median_57: fac_tremor_median_57
+
+    mov_leye_x: mov_lefteyex
+    mov_leye_y: mov_lefteyey
+    mov_leye_z: mov_lefteyez
+    mov_reye_x: mov_righteyex
+    mov_reye_y: mov_righteyey
+    mov_reye_z: mov_righteyez
+    mov_eleft_disp: mov_leyedisp
+    mov_eright_disp: mov_reyedisp
+
+    #NLP markers
+    nlp_transcribe: nlp_transcribe
+    nlp_numSentences: nlp_numSentences
+    nlp_singPronPerAns: nlp_singPronPerAns
+    nlp_singPronPerSen: nlp_singPronPerSen
+    nlp_pastTensePerAns: nlp_pastTensePerAns
+    nlp_pastTensePerSen: nlp_pastTensePerSen
+    nlp_pronounsPerAns: nlp_pronounsPerAns
+    nlp_pronounsPerSen: nlp_pronounsPerSen
+    nlp_verbsPerAns: nlp_verbsPerAns
+    nlp_verbsPerSen: nlp_verbsPerSen
+    nlp_adjectivesPerAns: nlp_adjectivesPerAns
+    nlp_adjectivesPerSen: nlp_adjectivesPerSen
+    nlp_nounsPerAns: nlp_nounsPerAns
+    nlp_nounsPerSen: nlp_nounsPerSen
+    nlp_sentiment_mean: nlp_sentiment_mean
+    nlp_mattr: nlp_mattr
+    nlp_wordsPerMin: nlp_wordsPerMin
+    nlp_totalTime: nlp_totalTime
+    
+
+

@@ -17,7 +17,7 @@ class ConfigRawReader(object):
         Args:
             feature_config_yml (None, optional): yml file defined service configuration
         """
-        
+
         if feature_config_yml is None:
             feature_config = DBMLIB_FEATURE_CONFIG
         else:
@@ -25,15 +25,15 @@ class ConfigRawReader(object):
 
         with open(feature_config, 'r') as ymlfile:
             config = yaml.load(ymlfile)
-            
+
             #Verbal features
             self.base_raw = config
             self.err_reason = config['raw_feature']['error_reason']
-            
+
             #Output range
             self.mov_headvel_start = config['raw_feature']['mov_headvel_start']
             self.mov_headvel_end = config['raw_feature']['mov_headvel_end']
-            
+
             #Acoustic variable
             self.aco_int = config['raw_feature']['aco_int']
             self.aco_ff = config['raw_feature']['aco_ff']
@@ -210,7 +210,7 @@ class ConfigRawReader(object):
             self.fac_AsymMaskEye = config['raw_feature']['fac_AsymMaskEye']
             self.fac_AsymMaskEyebrow = config['raw_feature']['fac_AsymMaskEyebrow']
             self.fac_AsymMaskCom = config['raw_feature']['fac_AsymMaskCom']
-            
+
             #Movement features
             self.head_vel = config['raw_feature']['head_vel']
             self.mov_blink_ear = config['raw_feature']['mov_blink_ear']
@@ -223,3 +223,49 @@ class ConfigRawReader(object):
             self.mov_Hpose_Roll = config['raw_feature']['mov_Hpose_Roll']
             self.mov_Hpose_Dist = config['raw_feature']['mov_Hpose_Dist']
             
+            self.mov_freq_trem_freq = config['raw_feature']['mov_freq_trem_freq']
+            self.mov_freq_trem_index = config['raw_feature']['mov_freq_trem_index']
+            self.mov_freq_trem_pindex = config['raw_feature']['mov_freq_trem_pindex']
+            self.mov_amp_trem_freq = config['raw_feature']['mov_amp_trem_freq']
+            self.mov_amp_trem_index = config['raw_feature']['mov_amp_trem_index']
+            self.mov_amp_trem_pindex = config['raw_feature']['mov_amp_trem_pindex']
+
+            self.fac_tremor_median_5 = config['raw_feature']['fac_tremor_median_5']
+            self.fac_tremor_median_12 = config['raw_feature']['fac_tremor_median_12']
+            self.fac_tremor_median_8 = config['raw_feature']['fac_tremor_median_8']
+            self.fac_tremor_median_48 = config['raw_feature']['fac_tremor_median_48']
+            self.fac_tremor_median_54 = config['raw_feature']['fac_tremor_median_54']
+            self.fac_tremor_median_28 = config['raw_feature']['fac_tremor_median_28']
+            self.fac_tremor_median_51 = config['raw_feature']['fac_tremor_median_51']
+            self.fac_tremor_median_66 = config['raw_feature']['fac_tremor_median_66']
+            self.fac_tremor_median_57 = config['raw_feature']['fac_tremor_median_57']
+
+            self.mov_leye_x = config['raw_feature']['mov_leye_x']
+            self.mov_leye_y = config['raw_feature']['mov_leye_y']
+            self.mov_leye_z = config['raw_feature']['mov_leye_z']
+            self.mov_reye_x = config['raw_feature']['mov_reye_x']
+            self.mov_reye_y = config['raw_feature']['mov_reye_y']
+            self.mov_reye_z = config['raw_feature']['mov_reye_z']
+            self.mov_eleft_disp = config['raw_feature']['mov_eleft_disp']
+            self.mov_eright_disp = config['raw_feature']['mov_eright_disp']
+
+            #NLP features
+            self.nlp_transcribe = config['raw_feature']['nlp_transcribe']
+            self.nlp_numSentences = config['raw_feature']['nlp_numSentences']
+            self.nlp_singPronPerAns = config['raw_feature']['nlp_singPronPerAns']
+            self.nlp_singPronPerSen = config['raw_feature']['nlp_singPronPerSen']
+            self.nlp_pastTensePerAns = config['raw_feature']['nlp_pastTensePerAns']
+            self.nlp_pastTensePerSen = config['raw_feature']['nlp_pastTensePerSen']
+            self.nlp_pronounsPerAns = config['raw_feature']['nlp_pronounsPerAns']
+            self.nlp_pronounsPerSen = config['raw_feature']['nlp_pronounsPerSen']
+            self.nlp_verbsPerAns = config['raw_feature']['nlp_verbsPerAns']
+            self.nlp_verbsPerSen = config['raw_feature']['nlp_verbsPerSen']
+            self.nlp_adjectivesPerAns = config['raw_feature']['nlp_adjectivesPerAns']
+            self.nlp_adjectivesPerSen = config['raw_feature']['nlp_adjectivesPerSen']
+            self.nlp_nounsPerAns = config['raw_feature']['nlp_nounsPerAns']
+            self.nlp_nounsPerSen = config['raw_feature']['nlp_nounsPerSen']
+            self.nlp_sentiment_mean = config['raw_feature']['nlp_sentiment_mean']
+            self.nlp_mattr = config['raw_feature']['nlp_mattr']
+            self.nlp_wordsPerMin = config['raw_feature']['nlp_wordsPerMin']
+            self.nlp_totalTime = config['raw_feature']['nlp_totalTime']
+         

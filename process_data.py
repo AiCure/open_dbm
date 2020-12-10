@@ -21,7 +21,9 @@ from os.path import splitext
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
+OPENFACE_PATH_VIDEO = 'pkg/OpenFace/build/bin/FaceLandmarkVid'
 OPENFACE_PATH = 'pkg/OpenFace/build/bin/FeatureExtraction'
+DEEP_SPEECH = 'pkg/DeepSpeech'
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
 
 def common_video(video_file, args, r_config):
@@ -34,12 +36,15 @@ def common_video(video_file, args, r_config):
     """
     out_path = os.path.join(args.output_path, 'raw_variables')
     pf.audio_to_wav(video_file)
-    of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group)
 
+    of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
-    pf.remove_file(video_file)
+    pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)  
+    if args.dbm_group == None or len(args.dbm_group)>0 and 'movement' in args.dbm_group:
+        of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH_VIDEO, args.dbm_group, video_tracking=True)
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
+    pf.remove_file(video_file)
 
 def process_raw_video_file(args, s_config, r_config):
     """
@@ -81,7 +86,7 @@ def process_raw_audio_file(args, s_config, r_config):
 
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio_file[0], out_path, args.dbm_group, r_config)
-
+                pf.process_nlp(audio_file[0], out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
             else:
                 logger.info('Enter correct audio(*.wav) file path.')
     except Exception as e:
@@ -109,6 +114,7 @@ def process_raw_video_dir(args, s_config, r_config):
                 if file_ext == '.mov':
                     convert_file(vid_file)
                 common_video(fname+'.mp4', args, r_config)
+
             except Exception as e:
                 logger.error('Failed to process mp4 file.')
                 pf.remove_file(vid_file)
@@ -136,6 +142,7 @@ def process_raw_audio_dir(args, s_config, r_config):
                     convert_file(audio)
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(fname+'.wav', out_path, args.dbm_group, r_config)
+                pf.process_nlp(fname +'.wav', out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
             except Exception as e:
                 logger.error('Failed to process wav file.')
 
@@ -154,6 +161,8 @@ def convert_file(input_filepath):
         call = ['ffmpeg', '-i', input_filepath, '-vcodec', 'h264','-acodec','aac', '-strict', '-2', output_filepath]
 
     subprocess.check_output(call)
+
+
 
 def process_derive(args, r_config, d_config, input_type):
     """
@@ -177,6 +186,7 @@ if __name__=="__main__":
     parser.add_argument("--input_path", help="path to the input files", required=True)
     parser.add_argument("--output_path", help="path to the raw and derived variable output", required=True)
     parser.add_argument("--dbm_group", help="list of feature groups", nargs='+')
+    parser.add_argument("--tr", help="speech transcription toogle")
 
     args = parser.parse_args()
     s_config = config_reader.ConfigReader()
