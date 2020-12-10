@@ -151,7 +151,7 @@ def convert_file(input_filepath):
     if file_ext == '.mov':
         output_filepath = fname + '.mp4'
         logger.info('Converting video from {} to mp4'.format(input_filepath))
-        call = ['ffmpeg', '-i', input_filepath, output_filepath]
+        call = ['ffmpeg', '-i', input_filepath, '-vcodec', 'h264','-acodec','aac', '-strict', '-2', output_filepath]
 
     subprocess.check_output(call)
 
@@ -186,7 +186,6 @@ if __name__=="__main__":
     _, file_ext = os.path.splitext(os.path.basename(args.input_path))
 
     if file_ext:
-        #add check for mov and mp3 here
         input_type = 'file'
 
         if file_ext.lower() in ['.mp4','.mov']:
