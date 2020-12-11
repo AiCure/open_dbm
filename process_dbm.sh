@@ -4,9 +4,10 @@ helpFunction()
 {
    echo ""
    echo "Usage: $0 --input_path parameterA --output_path parameterB --dbm_group parameterC"
-   echo -e "\t--input_path Description of what is parameterA"
-   echo -e "\t--output_path Description of what is parameterB"
-   echo -e "\t-dbm_group Description of what is parameterC"
+   echo -e "\t--input_path: path to the input files"
+   echo -e "\t--output_path: path to the raw and derived variable output"
+   echo -e "\t--dbm_group: list of feature groups"
+   echo -e "\t--tr: Toggle for speech transcription(optional)"
    exit 1 # Exit script after printing help
 }
 
@@ -15,6 +16,7 @@ while [ $# -gt 0 ]; do
     --input_path=*) input_path="${1#*=}" ;;
     --output_path=*) output_path="${1#*=}" ;;
     --dbm_group=*) dbm_group="${1#*=}" ;;
+    --tr=*) tr="${1#*=}" ;;
     *) helpFunction ;;
   esac
   shift
@@ -55,6 +57,12 @@ fi
 if [[ $dbm_group == *"movement"* ]]; then
     dbm_new="$dbm_new movement"
 fi
+if [[ $dbm_group == *"speech"* ]]; then
+    dbm_new="$dbm_new speech"
+fi
+if [[ $dbm_group == *"speech"* ]] && [[ ${tr} == "on" ]]; then
+    dbm_new="$dbm_new --tr ${tr}"
+fi
 
 #docker commands to run container
 docker create -ti --name dbm_container dbm bash
@@ -63,9 +71,9 @@ docker cp $input_path dbm_container:/app/raw_data
 docker start dbm_container
 if [ -z "$dbm_new" ]
   then
-    docker exec -it dbm_container /bin/bash -c "python3 process_data.py --input_path /app/raw_data --output_path /app/output"
+    docker exec -it dbm_container /bin/bash -c "python3 -W ignore process_data.py --input_path /app/raw_data --output_path /app/output"
 else
-    docker exec -it dbm_container /bin/bash -c "python3 process_data.py --input_path /app/raw_data --output_path /app/output --dbm_group$dbm_new"
+    docker exec -it dbm_container /bin/bash -c "python3 -W ignore process_data.py --input_path /app/raw_data --output_path /app/output --dbm_group$dbm_new"
 fi
 
 docker cp dbm_container:/app/output $output_path

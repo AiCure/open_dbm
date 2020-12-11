@@ -2,7 +2,8 @@ derive_feature:
 
     #DBM Feature Group
     FEATURE_GROUP: ['FAC_ASYM', 'FAC_AU', 'FAC_EXP', 'FAC_LMK', 'ACO_INT', 'ACO_FF', 'ACO_HNR', 'ACO_GNE', 'ACO_FM',
-    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK']
+    'ACO_JITTER','ACO_SHIMMER', 'ACO_PAUSE', 'ACO_VFS', 'ACO_MFCC', 'MOV_HM', 'MOV_HP', 'EYE_BLINK', 'NLP_SPEECH',
+    'EYE_GAZE', 'MOV_VT', 'MOV_FT']
 
     #Feature group output file extensions
     FAC_ASYM_LOC: _facasym
@@ -22,6 +23,10 @@ derive_feature:
     MOV_HM_LOC: _headmov
     MOV_HP_LOC: _headpose
     EYE_BLINK_LOC: _eyeblinks
+    NLP_SPEECH_LOC: _nlp
+    EYE_GAZE_LOC: _eyegaze
+    MOV_VT_LOC: _vtremor
+    MOV_FT_LOC: _fac_tremor
 
     #Facial category feature group
     FAC_ASYM: ['fac_AsymMaskMouth', 'fac_AsymMaskEyebrow', 'fac_AsymMaskEye', 'fac_AsymMaskCom']
@@ -33,7 +38,9 @@ derive_feature:
     FAC_EXP: ['hap_exp', 'sad_exp', 'sur_exp', 'fea_exp', 'ang_exp', 'dis_exp', 'con_exp', 'happ_occ', 'sad_occ',
     'sur_occ', 'fea_occ', 'ang_occ', 'dis_occ', 'con_occ', 'pos_exp', 'neg_exp', 'com_exp','com_lower_exp','com_upper_exp', 'hap_exp_full',
     'sad_exp_full', 'sur_exp_full','fea_exp_full', 'ang_exp_full', 'dis_exp_full', 'con_exp_full', 'pos_exp_full',
-    'neg_exp_full', 'com_exp_full','com_lower_exp_full','com_upper_exp_full']
+    'neg_exp_full', 'com_exp_full','com_lower_exp_full','com_upper_exp_full', 'pai_exp', 'pai_exp_full']
+
+
     FAC_LMK: ['fac_LMK00disp', 'fac_LMK01disp', 'fac_LMK02disp', 'fac_LMK03disp', 'fac_LMK04disp',
     'fac_LMK05disp', 'fac_LMK06disp', 'fac_LMK07disp', 'fac_LMK08disp', 'fac_LMK09disp', 'fac_LMK10disp',
     'fac_LMK11disp', 'fac_LMK12disp', 'fac_LMK13disp', 'fac_LMK14disp', 'fac_LMK15disp', 'fac_LMK16disp',
@@ -64,6 +71,18 @@ derive_feature:
     MOV_HM: ['head_vel']
     MOV_HP: ['mov_Hpose_Dist','mov_Hpose_Pitch','mov_Hpose_Yaw','mov_Hpose_Roll']
     EYE_BLINK: ['mov_blink_ear', 'vid_dur', 'mov_blinkdur']
+    MOV_VT: ['mov_freq_trem_freq', 'mov_freq_trem_index', 'mov_freq_trem_pindex', 'mov_amp_trem_freq',
+    'mov_amp_trem_index', 'mov_amp_trem_pindex']
+    MOV_FT: ['fac_tremor_median_5','fac_tremor_median_12','fac_tremor_median_8','fac_tremor_median_48','fac_tremor_median_54','fac_tremor_median_28','fac_tremor_median_51','fac_tremor_median_66','fac_tremor_median_57']
+
+    EYE_GAZE: ['mov_leye_x', 'mov_leye_y', 'mov_leye_z', 'mov_reye_x', 'mov_reye_y', 'mov_reye_z', 'mov_eleft_disp',
+    'mov_eright_disp']
+    
+    #NLP category feature group
+    NLP_SPEECH: ['nlp_numSentences', 'nlp_singPronPerAns', 'nlp_singPronPerSen', 'nlp_pastTensePerAns', 'nlp_pastTensePerSen',
+    'nlp_pronounsPerAns', 'nlp_pronounsPerSen', 'nlp_verbsPerAns', 'nlp_verbsPerSen', 'nlp_adjectivesPerAns', 
+    'nlp_adjectivesPerSen', 'nlp_nounsPerAns', 'nlp_nounsPerSen', 'nlp_sentiment_mean', 'nlp_mattr', 'nlp_wordsPerMin',
+    'nlp_totalTime']
 
     #Calculation for variables
     # Facial Asymmetry
@@ -254,3 +273,49 @@ derive_feature:
     mov_blink_ear: ['mean', 'std']
     vid_dur: ['count']
     mov_blinkdur: ['mean', 'std']
+
+    mov_freq_trem_freq: ['mean']
+    mov_freq_trem_index: ['mean']
+    mov_freq_trem_pindex: ['mean']
+    mov_amp_trem_freq: ['mean']
+    mov_amp_trem_index: ['mean']
+    mov_amp_trem_pindex: ['mean']
+
+    fac_tremor_median_5: ['mean']
+    fac_tremor_median_12: ['mean']
+    fac_tremor_median_8: ['mean']
+    fac_tremor_median_48: ['mean']
+    fac_tremor_median_54: ['mean']
+    fac_tremor_median_28: ['mean']
+    fac_tremor_median_51: ['mean']
+    fac_tremor_median_66: ['mean']
+    fac_tremor_median_57: ['mean']
+    
+    mov_leye_x: ['mean', 'std']
+    mov_leye_y: ['mean', 'std']
+    mov_leye_z: ['mean', 'std']
+    mov_reye_x: ['mean', 'std']
+    mov_reye_y: ['mean', 'std']
+    mov_reye_z: ['mean', 'std']
+    mov_eleft_disp: ['mean', 'std']
+    mov_eright_disp: ['mean', 'std']
+    
+    #NLP feature
+    nlp_numSentences: ['mean']
+    nlp_singPronPerAns: ['mean']
+    nlp_singPronPerSen: ['mean']
+    nlp_pastTensePerAns: ['mean']
+    nlp_pastTensePerSen: ['mean']
+    nlp_pronounsPerAns: ['mean']
+    nlp_pronounsPerSen: ['mean']
+    nlp_verbsPerAns: ['mean']
+    nlp_verbsPerSen: ['mean']
+    nlp_adjectivesPerAns: ['mean']
+    nlp_adjectivesPerSen: ['mean']
+    nlp_nounsPerAns: ['mean']
+    nlp_nounsPerSen: ['mean']
+    nlp_sentiment_mean: ['mean']
+    nlp_mattr: ['mean']
+    nlp_wordsPerMin: ['mean']
+    nlp_totalTime: ['mean']
+
