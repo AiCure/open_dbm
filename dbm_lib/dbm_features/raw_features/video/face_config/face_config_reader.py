@@ -31,7 +31,7 @@ class ConfigFaceReader(object):
             self.POS_ACTION_UNITS = config['cdx_face_config']['POS_ACTION_UNITS']
             self.NET_ACTION_UNITS = config['cdx_face_config']['NET_ACTION_UNITS']
             self.LOWER_ACTION_UNITS = config['cdx_face_config']['LOWER_ACTION_UNITS']
-            self.UPPER_ACTION_UNITS = config['cdx_face_config']['LOWER_ACTION_UNITS']
+            self.UPPER_ACTION_UNITS = config['cdx_face_config']['UPPER_ACTION_UNITS']
             self.happiness = config['cdx_face_config']['happiness']
             self.sadness = config['cdx_face_config']['sadness']
             self.surprise = config['cdx_face_config']['surprise']
