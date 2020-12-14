@@ -15,11 +15,12 @@ import argparse
 import logging
 import glob
 import time
+import subprocess
+from os.path import splitext
 
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-#for ftremor
 OPENFACE_PATH_VIDEO = 'pkg/OpenFace/build/bin/FaceLandmarkVid'
 OPENFACE_PATH = 'pkg/OpenFace/build/bin/FeatureExtraction'
 DEEP_SPEECH = 'pkg/DeepSpeech'
@@ -39,11 +40,9 @@ def common_video(video_file, args, r_config):
     of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
     pf.process_facial(video_file, out_path, args.dbm_group, r_config)
     pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
-    
     pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)  
     if args.dbm_group == None or len(args.dbm_group)>0 and 'movement' in args.dbm_group:
         of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH_VIDEO, args.dbm_group, video_tracking=True)
-    
     pf.process_movement(video_file, out_path, args.dbm_group, r_config, DLIB_SHAPE_MODEL)
     pf.remove_file(video_file)
 
@@ -88,7 +87,6 @@ def process_raw_audio_file(args, s_config, r_config):
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(audio_file[0], out_path, args.dbm_group, r_config)
                 pf.process_nlp(audio_file[0], out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
-                
             else:
                 logger.info('Enter correct audio(*.wav) file path.')
     except Exception as e:
@@ -103,7 +101,7 @@ def process_raw_video_dir(args, s_config, r_config):
         r_config: raw feature config object
     """
     if args.output_path != None:
-        vid_loc = glob.glob(args.input_path + '/*.mp4')
+        vid_loc = glob.glob(args.input_path + '/*.mp4') + glob.glob(args.input_path + '/*.mov')
 
         if len(vid_loc) == 0:
             logger.info('Directory does not have any MP4 files.')
@@ -112,7 +110,11 @@ def process_raw_video_dir(args, s_config, r_config):
         logger.info('Calculating raw variables...')
         for vid_file in vid_loc:
             try:
-                common_video(vid_file, args, r_config)
+                fname, file_ext = os.path.splitext(vid_file)
+                if file_ext == '.mov':
+                    convert_file(vid_file)
+                common_video(fname+'.mp4', args, r_config)
+
             except Exception as e:
                 logger.error('Failed to process mp4 file.')
                 pf.remove_file(vid_file)
@@ -126,7 +128,7 @@ def process_raw_audio_dir(args, s_config, r_config):
         r_config: raw feature config object
     """
     if args.output_path != None:
-        audio_loc = glob.glob(args.input_path + '/*.wav')
+        audio_loc = glob.glob(args.input_path + '/*.wav') + glob.glob(args.input_path + '/*.mp3')
 
         if len(audio_loc) == 0:
             logger.info('Directory does not have any WAV files.')
@@ -135,13 +137,32 @@ def process_raw_audio_dir(args, s_config, r_config):
         logger.info('Calculating raw variables...')
         for audio in audio_loc:
             try:
-
+                fname, file_ext = os.path.splitext(audio)
+                if file_ext == '.mp3':
+                    convert_file(audio)
                 out_path = os.path.join(args.output_path, 'raw_variables')
-                pf.process_acoustic(audio, out_path, args.dbm_group, r_config)
-                pf.process_nlp(audio, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
-                
+                pf.process_acoustic(fname+'.wav', out_path, args.dbm_group, r_config)
+                pf.process_nlp(fname +'.wav', out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
             except Exception as e:
                 logger.error('Failed to process wav file.')
+
+def convert_file(input_filepath):
+    _, file_ext = os.path.splitext(os.path.basename(input_filepath))
+    fname, _ = splitext(input_filepath)
+
+    if file_ext == '.mp3':
+        output_filepath = fname + '.wav'
+        logger.info('Converting audio from {} to wav'.format(input_filepath))
+        call = ['ffmpeg', '-i', input_filepath, output_filepath]
+
+    if file_ext == '.mov':
+        output_filepath = fname + '.mp4'
+        logger.info('Converting video from {} to mp4'.format(input_filepath))
+        call = ['ffmpeg', '-i', input_filepath, '-vcodec', 'h264','-acodec','aac', '-strict', '-2', output_filepath]
+
+    subprocess.check_output(call)
+
+
 
 def process_derive(args, r_config, d_config, input_type):
     """
@@ -176,14 +197,19 @@ if __name__=="__main__":
 
     if file_ext:
         input_type = 'file'
-        if file_ext.lower() == '.mp4':
+
+        if file_ext.lower() in ['.mp4','.mov']:
+            if file_ext.lower() == '.mov':
+                convert_file(args.input_path)
             process_raw_video_file(args, s_config, r_config)
 
-        elif file_ext.lower() == '.wav':
+        elif file_ext.lower() in ['.wav','.mp3']:
+            if file_ext.lower() == '.mp3':
+                convert_file(args.input_path)
             process_raw_audio_file(args, s_config, r_config)
 
         else:
-            logger.error('No WAV or MP4 files detected in input path')
+            logger.error('No WAV/MP3 or MOV/MP4 files detected in input path')
     else:
         input_type = 'dir'
         process_raw_video_dir(args, s_config, r_config)
