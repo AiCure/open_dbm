@@ -194,9 +194,6 @@ class ConfigRawReader(object):
             self.neu_exp = config['raw_feature']['neu_exp']
             self.cai_exp = config['raw_feature']['cai_exp']
             self.com_exp = config['raw_feature']['com_exp']
-            self.com_lower_exp = config['raw_feature']['com_lower_exp']
-            self.com_upper_exp = config['raw_feature']['com_upper_exp']
-            self.pai_exp = config['raw_feature']['pai_exp']
             self.hap_exp_full = config['raw_feature']['hap_exp_full']
             self.sad_exp_full = config['raw_feature']['sad_exp_full']
             self.sur_exp_full = config['raw_feature']['sur_exp_full']
@@ -209,10 +206,6 @@ class ConfigRawReader(object):
             self.neu_exp_full = config['raw_feature']['neu_exp_full']
             self.cai_exp_full = config['raw_feature']['cai_exp_full']
             self.com_exp_full = config['raw_feature']['com_exp_full']
-            self.com_lower_exp_full = config['raw_feature']['com_lower_exp_full']
-            self.com_upper_exp_full = config['raw_feature']['com_upper_exp_full']
-            self.pai_exp_full = config['raw_feature']['pai_exp_full']
-
             self.fac_AsymMaskMouth = config['raw_feature']['fac_AsymMaskMouth']
             self.fac_AsymMaskEye = config['raw_feature']['fac_AsymMaskEye']
             self.fac_AsymMaskEyebrow = config['raw_feature']['fac_AsymMaskEyebrow']
@@ -229,7 +222,7 @@ class ConfigRawReader(object):
             self.mov_Hpose_Yaw = config['raw_feature']['mov_Hpose_Yaw']
             self.mov_Hpose_Roll = config['raw_feature']['mov_Hpose_Roll']
             self.mov_Hpose_Dist = config['raw_feature']['mov_Hpose_Dist']
-
+            
             self.mov_freq_trem_freq = config['raw_feature']['mov_freq_trem_freq']
             self.mov_freq_trem_index = config['raw_feature']['mov_freq_trem_index']
             self.mov_freq_trem_pindex = config['raw_feature']['mov_freq_trem_pindex']
@@ -276,4 +269,3 @@ class ConfigRawReader(object):
             self.nlp_wordsPerMin = config['raw_feature']['nlp_wordsPerMin']
             self.nlp_totalTime = config['raw_feature']['nlp_totalTime']
          
-

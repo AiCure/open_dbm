@@ -11,32 +11,32 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 
 def smooth(x,window_len=11,window='hanning'):
     """smooth the data using a window with requested size.
-
+    
     This method is based on the convolution of a scaled window with the signal.
-    The signal is prepared by introducing reflected copies of the signal
+    The signal is prepared by introducing reflected copies of the signal 
     (with the window size) in both ends so that transient parts are minimized
     in the begining and end part of the output signal.
-
+    
     input:
-        x: the input signal
+        x: the input signal 
         window_len: the dimension of the smoothing window; should be an odd integer
         window: the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
             flat window will produce a moving average smoothing.
 
     output:
         the smoothed signal
-
+        
     example:
 
     t=linspace(-2,2,0.1)
     x=sin(t)+randn(len(t))*0.1
     y=smooth(x)
-
-    see also:
-
+    
+    see also: 
+    
     numpy.hanning, numpy.hamming, numpy.bartlett, numpy.blackman, numpy.convolve
     scipy.signal.lfilter
-
+ 
     TODO: the window parameter could be the window itself if an array instead of a string
     NOTE: length(output) != length(input), to correct this: return y[(window_len/2-1):-(window_len/2)] instead of just y.
     """
@@ -62,7 +62,7 @@ def filter_by_confidence_and_thresh(x, fea, thresh):
         return x[fea]
     else:
         return np.NaN
-
+    
 def add_au_emotion(x, emotion,emotion_type,exp_type):
     """
     computing individula emotion expressivity matrix
@@ -79,20 +79,20 @@ def add_au_emotion(x, emotion,emotion_type,exp_type):
             if x[au_c_label]==1 and (not np.isnan(x[au_r_label])): #there are data with face in, but au_c=0
                 sum_r += x[au_r_label]
                 cnt += 6
-            if exp_type=='full' and x[au_c_label]==0: #Logic to compute emotion expressivity when all AU's are present
-                cnt = 0
+            if exp_type=='full' and x[au_c_label]==0: #Logic to compute emotion expressivity when all AU's are present 
+                cnt = 0 
                 break
-        if cnt > 0:
+        if cnt > 0: 
             sum_r /= cnt
         else:
             sum_r = 0
-        v_emo = x[emotion_type] + sum_r
+        v_emo = x[emotion_type] + sum_r 
     else:
         v_emo = np.NaN
         error_reason = 'confidence less than 80%'
-
+    
     return v_emo, error_reason
-
+    
 def add_au_occ(x, emotion,emotion_type):
     """
     computing individula emotion presence
@@ -107,14 +107,14 @@ def add_au_occ(x, emotion,emotion_type):
             au_c_label = " AU{:02d}_c".format(au)
             if x[au_c_label]==1: #there are data with face in, but au_c=0
                 au_pres.append(1)
-
+                
         if len(au_pres) == len(emotion):
             em_pres = 1
     else:
         em_pres = np.NaN
         error_reason = 'confidence less than 80%'
     return em_pres, error_reason
-
+    
 def emotion_exp(em_au,of,em_col,err_col):
     """
         Computing individual emotion expressivity and adding it to dataframe
@@ -122,14 +122,14 @@ def emotion_exp(em_au,of,em_col,err_col):
     for emotion in em_au:
         of[[em_col[0],err_col]]=of.apply(add_au_emotion, args=(emotion,em_col[0],'partial',), axis=1, result_type='expand')
         of[[em_col[1],err_col]]=of.apply(add_au_emotion, args=(emotion,em_col[1],'full',), axis=1, result_type='expand')
-
+        
 def emotion_pres(em_au,of,em_col,err_col):
     """
         Computing individual emotion expressivity and adding it to dataframe
     """
     for emotion in em_au:
         of[[em_col,err_col]]=of.apply(add_au_occ, args=(emotion,em_col,), axis=1, result_type='expand')
-
+    
 def calc_of_for_video(of,face_cfg,fe_cfg):
     """
         Creating dataframe for emotion expressivity
@@ -142,7 +142,7 @@ def calc_of_for_video(of,face_cfg,fe_cfg):
                 fe_cfg.com_exp_full]
     of[new_cols] = pd.DataFrame([[0] * len(new_cols)], index=of.index)
     of[fe_cfg.err_reason] = 'Pass'
-
+    
     #Composite happiness expressivity
     emotion_exp(face_cfg.happiness,of,[fe_cfg.hap_exp,fe_cfg.hap_exp_full],fe_cfg.err_reason)
     #Composite sadness expressivity
@@ -167,12 +167,6 @@ def calc_of_for_video(of,face_cfg,fe_cfg):
     emotion_exp(face_cfg.cai,of,[fe_cfg.cai_exp,fe_cfg.cai_exp_full],fe_cfg.err_reason)
     #Composite Expressivity
     emotion_exp(face_cfg.ACTION_UNITS,of,[fe_cfg.com_exp,fe_cfg.com_exp_full],fe_cfg.err_reason)
-    #Composite lower face expressivity
-    emotion_exp(face_cfg.LOWER_ACTION_UNITS,of,[fe_cfg.com_lower_exp,fe_cfg.com_lower_exp_full],fe_cfg.err_reason)
-    #Composite upper face Expressivity
-    emotion_exp(face_cfg.UPPER_ACTION_UNITS,of,[fe_cfg.com_upper_exp,fe_cfg.com_upper_exp_full],fe_cfg.err_reason)
-    #Composite pain expressivity
-    emotion_exp(face_cfg.pain,of,[fe_cfg.pai_exp,fe_cfg.pai_exp_full],fe_cfg.err_reason)    
     #AU happiness presence
     emotion_pres(face_cfg.happiness,of,fe_cfg.happ_occ,fe_cfg.err_reason)
     #AU Sad presence
