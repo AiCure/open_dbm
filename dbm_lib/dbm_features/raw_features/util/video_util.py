@@ -135,10 +135,11 @@ def calc_of_for_video(of,face_cfg,fe_cfg):
         Creating dataframe for emotion expressivity
     """
     new_cols = [fe_cfg.hap_exp,fe_cfg.sad_exp,fe_cfg.sur_exp,fe_cfg.fea_exp,fe_cfg.ang_exp,fe_cfg.dis_exp,fe_cfg.con_exp,
-               fe_cfg.neg_exp,fe_cfg.pos_exp,fe_cfg.neu_exp,fe_cfg.cai_exp,fe_cfg.com_exp,fe_cfg.happ_occ,fe_cfg.sad_occ,
-               fe_cfg.sur_occ,fe_cfg.fea_occ,fe_cfg.ang_occ,fe_cfg.dis_occ,fe_cfg.con_occ,fe_cfg.hap_exp_full,
-                fe_cfg.sad_exp_full,fe_cfg.sur_exp_full,fe_cfg.fea_exp_full,fe_cfg.ang_exp_full,fe_cfg.dis_exp_full,
-                fe_cfg.con_exp_full,fe_cfg.neg_exp_full,fe_cfg.pos_exp_full,fe_cfg.neu_exp_full,fe_cfg.cai_exp_full,
+               fe_cfg.pai_exp,fe_cfg.neg_exp,fe_cfg.pos_exp,fe_cfg.neu_exp,fe_cfg.com_lower_exp,fe_cfg.com_upper_exp,
+                fe_cfg.cai_exp,fe_cfg.com_exp,fe_cfg.happ_occ,fe_cfg.sad_occ,fe_cfg.sur_occ,fe_cfg.fea_occ,fe_cfg.ang_occ,
+                fe_cfg.dis_occ,fe_cfg.con_occ,fe_cfg.hap_exp_full,fe_cfg.sad_exp_full,fe_cfg.sur_exp_full,fe_cfg.fea_exp_full,
+                fe_cfg.ang_exp_full,fe_cfg.dis_exp_full,fe_cfg.con_exp_full,fe_cfg.pai_exp_full,fe_cfg.neg_exp_full,
+                fe_cfg.pos_exp_full,fe_cfg.neu_exp_full,fe_cfg.cai_exp_full,fe_cfg.com_lower_exp_full,fe_cfg.com_upper_exp_full,
                 fe_cfg.com_exp_full]
     of[new_cols] = pd.DataFrame([[0] * len(new_cols)], index=of.index)
     of[fe_cfg.err_reason] = 'Pass'
@@ -167,6 +168,12 @@ def calc_of_for_video(of,face_cfg,fe_cfg):
     emotion_exp(face_cfg.cai,of,[fe_cfg.cai_exp,fe_cfg.cai_exp_full],fe_cfg.err_reason)
     #Composite Expressivity
     emotion_exp(face_cfg.ACTION_UNITS,of,[fe_cfg.com_exp,fe_cfg.com_exp_full],fe_cfg.err_reason)
+    #Composite lower face expressivity
+    emotion_exp(face_cfg.LOWER_ACTION_UNITS,of,[fe_cfg.com_lower_exp,fe_cfg.com_lower_exp_full],fe_cfg.err_reason)
+    #Composite upper face Expressivity
+    emotion_exp(face_cfg.UPPER_ACTION_UNITS,of,[fe_cfg.com_upper_exp,fe_cfg.com_upper_exp_full],fe_cfg.err_reason)
+    #Composite pain expressivity
+    emotion_exp(face_cfg.pain,of,[fe_cfg.pai_exp,fe_cfg.pai_exp_full],fe_cfg.err_reason) 
     #AU happiness presence
     emotion_pres(face_cfg.happiness,of,fe_cfg.happ_occ,fe_cfg.err_reason)
     #AU Sad presence

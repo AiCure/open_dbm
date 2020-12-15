@@ -29,7 +29,9 @@ class ConfigFaceReader(object):
             self.ACTION_UNITS = config['cdx_face_config']['ACTION_UNITS']
             self.NEG_ACTION_UNITS = config['cdx_face_config']['NEG_ACTION_UNITS']
             self.POS_ACTION_UNITS = config['cdx_face_config']['POS_ACTION_UNITS']
-            self.NET_ACTION_UNITS = config['cdx_face_config']['NET_ACTION_UNITS']            
+            self.NET_ACTION_UNITS = config['cdx_face_config']['NET_ACTION_UNITS']  
+            self.LOWER_ACTION_UNITS = config['cdx_face_config']['LOWER_ACTION_UNITS']
+            self.UPPER_ACTION_UNITS = config['cdx_face_config']['UPPER_ACTION_UNITS']
             self.happiness = config['cdx_face_config']['happiness']
             self.sadness = config['cdx_face_config']['sadness']
             self.surprise = config['cdx_face_config']['surprise']
@@ -37,6 +39,7 @@ class ConfigFaceReader(object):
             self.anger = config['cdx_face_config']['anger']
             self.disgust = config['cdx_face_config']['disgust']
             self.contempt = config['cdx_face_config']['contempt']
+            self.pain = config['cdx_face_config']['pain']
             self.cai = config['cdx_face_config']['CAI']
             self.SELECTED_FEATURES = config['cdx_face_config']['SELECTED_FEATURES'].split(',')
             self.face_expr_dir = config['cdx_face_config']['face_expr_dir']

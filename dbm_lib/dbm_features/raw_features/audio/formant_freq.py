@@ -18,7 +18,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-formant_dir = 'audio/formant_freq'
+formant_dir = 'acoustic/formant_freq'
 csv_ext = '_formant.csv'
 error_txt = 'error: length less than 0.064'
 

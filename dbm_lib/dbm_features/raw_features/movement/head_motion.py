@@ -182,7 +182,7 @@ def run_head_movement(video_uri, out_dir, r_config):
 
         #filtering path to generate input & output path
         input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
-        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_openface/*.csv'))
 
 
         if len(of_csv_path)>0:

@@ -21,8 +21,8 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-shimmer_dir = 'audio/shimmer'
-ff_dir = 'audio/pitch'
+shimmer_dir = 'acoustic/shimmer'
+ff_dir = 'acoustic/pitch'
 csv_ext = '_shimmer.csv'
 
 def audio_shimmer(sound):

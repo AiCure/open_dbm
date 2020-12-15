@@ -19,7 +19,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-face_lmk_dir = 'video/face_landmark'
+face_lmk_dir = 'facial/face_landmark'
 csv_ext = '_faclmk.csv'
 
 def extract_col_nm_lmk(cols):
@@ -98,7 +98,7 @@ def run_face_landmark(video_uri, out_dir, f_cfg):
         cfr = ConfigFaceReader()
         input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_openface/*.csv'))
         if len(of_csv_path)>0:
 
             df_of = pd.read_csv(of_csv_path[0], error_bad_lines=False)

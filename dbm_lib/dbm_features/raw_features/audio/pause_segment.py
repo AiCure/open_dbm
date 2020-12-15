@@ -20,7 +20,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-pause_seg_dir = 'audio/pause_segment'
+pause_seg_dir = 'acoustic/pause_segment'
 csv_ext = '_pausechar.csv'
 
 def get_timing_cues(seg_starts_sec, seg_ends_sec, r_config):

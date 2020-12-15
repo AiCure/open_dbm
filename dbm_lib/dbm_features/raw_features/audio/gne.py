@@ -19,8 +19,8 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-gne_dir = 'audio/glottal_noise'
-ff_dir =  'audio/pitch'
+gne_dir = 'acoustic/glottal_noise'
+ff_dir =  'acoustic/pitch'
 csv_ext = '_gne.csv'
 
 def gne_ratio(sound):

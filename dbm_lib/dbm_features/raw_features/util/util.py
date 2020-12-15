@@ -86,7 +86,7 @@ def compute_open_face_features(input_filepath,
 
     bn, _ = os.path.splitext(os.path.basename(input_filepath))
     if not output_directory:
-        output_directory = os.path.join(os.path.dirname(input_filepath), bn + '_OF_features')
+        output_directory = os.path.join(os.path.dirname(input_filepath), bn + '_openface')
 
     output_csv = os.path.join(output_directory, bn + '.csv')
     if not os.path.isfile(output_csv) or clobber:

@@ -18,7 +18,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-ff_dir = 'audio/pitch'
+ff_dir = 'acoustic/pitch'
 csv_ext = '_pitch.csv'
 error_txt = 'error: length less than 0.064'
 

@@ -33,9 +33,9 @@ def batch_open_face(filepaths,video_url, input_dir, out_dir, of_path, video_trac
         (itreable[str]) list of .csv files
     """    
     if video_tracking:
-        suffix = '_OF_video_features'
+        suffix = '_openface_lmk'
     else:
-        suffix = '_OF_features'
+        suffix = '_openface'
 
     csv_files = []
     
