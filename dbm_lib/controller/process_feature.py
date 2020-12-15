@@ -152,13 +152,13 @@ def process_nlp(video_uri, out_dir, dbm_group, tran_tog, r_config, deep_path):
     speech_features.run_speech_feature(video_uri, out_dir, r_config, tran_tog)
     
 
-def remove_file(file_path):
+def remove_file(file_path, file_ext = '.wav'):
     """
     removing wav file
     """
     file_dir = dirname(file_path)
     file_name, _ = splitext(basename(file_path))
-    wav_file = glob.glob(join(file_dir, file_name + '.wav'))
+    wav_file = glob.glob(join(file_dir, file_name + file_ext))
 
     if len(wav_file)> 0:
         os.remove(wav_file[0])

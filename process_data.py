@@ -101,7 +101,7 @@ def process_raw_video_dir(args, s_config, r_config):
         r_config: raw feature config object
     """
     if args.output_path != None:
-        vid_loc = glob.glob(args.input_path + '/*.mp4') + glob.glob(args.input_path + '/*.mov')
+        vid_loc = glob.glob(args.input_path + '/*.mp4') + glob.glob(args.input_path + '/*.mov') + glob.glob(args.input_path + '/*.MOV')
 
         if len(vid_loc) == 0:
             logger.info('Directory does not have any MP4 files.')
@@ -111,10 +111,12 @@ def process_raw_video_dir(args, s_config, r_config):
         for vid_file in vid_loc:
             try:
                 fname, file_ext = os.path.splitext(vid_file)
-                if file_ext == '.mov':
+                
+                if file_ext.lower() == '.mov':
                     convert_file(vid_file)
                 common_video(fname+'.mp4', args, r_config)
-
+                
+                remove_convert(vid_file, '.mp4') #removing files(ffmpeg converted ) after processing
             except Exception as e:
                 logger.error('Failed to process mp4 file.')
                 pf.remove_file(vid_file)
@@ -128,7 +130,7 @@ def process_raw_audio_dir(args, s_config, r_config):
         r_config: raw feature config object
     """
     if args.output_path != None:
-        audio_loc = glob.glob(args.input_path + '/*.wav') + glob.glob(args.input_path + '/*.mp3')
+        audio_loc = glob.glob(args.input_path + '/*.wav') + glob.glob(args.input_path + '/*.mp3') + glob.glob(args.input_path + '/*.MP3')
 
         if len(audio_loc) == 0:
             logger.info('Directory does not have any WAV files.')
@@ -138,31 +140,47 @@ def process_raw_audio_dir(args, s_config, r_config):
         for audio in audio_loc:
             try:
                 fname, file_ext = os.path.splitext(audio)
-                if file_ext == '.mp3':
+                if file_ext.lower() == '.mp3':
                     convert_file(audio)
+                    
                 out_path = os.path.join(args.output_path, 'raw_variables')
                 pf.process_acoustic(fname+'.wav', out_path, args.dbm_group, r_config)
                 pf.process_nlp(fname +'.wav', out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
+                
+                remove_convert(audio, '.wav') #removing files(ffmpeg converted) after processing
             except Exception as e:
                 logger.error('Failed to process wav file.')
 
 def convert_file(input_filepath):
+    """
+    Converting mp3/mov to wav/mp4 files
+    """
     _, file_ext = os.path.splitext(os.path.basename(input_filepath))
     fname, _ = splitext(input_filepath)
-
-    if file_ext == '.mp3':
+    call = []
+    
+    if file_ext.lower() == '.mp3':
         output_filepath = fname + '.wav'
         logger.info('Converting audio from {} to wav'.format(input_filepath))
         call = ['ffmpeg', '-i', input_filepath, output_filepath]
 
-    if file_ext == '.mov':
+    if file_ext.lower() == '.mov':
         output_filepath = fname + '.mp4'
         logger.info('Converting video from {} to mp4'.format(input_filepath))
         call = ['ffmpeg', '-i', input_filepath, '-vcodec', 'h264','-acodec','aac', '-strict', '-2', output_filepath]
 
-    subprocess.check_output(call)
-
-
+    if len(call)>0:
+        subprocess.check_output(call)
+        
+def remove_convert(input_filepath, file_ext):
+    """
+    removing converted files after processing
+    """
+    expected_ext = ['.mp3', '.mov']
+    input_loc, inp_ext = os.path.splitext(input_filepath)
+    
+    if inp_ext.lower() in expected_ext:
+        pf.remove_file(input_loc + file_ext, file_ext)
 
 def process_derive(args, r_config, d_config, input_type):
     """
@@ -201,13 +219,16 @@ if __name__=="__main__":
         if file_ext.lower() in ['.mp4','.mov']:
             if file_ext.lower() == '.mov':
                 convert_file(args.input_path)
+                
             process_raw_video_file(args, s_config, r_config)
+            remove_convert(args.input_path, '.mp4')
 
         elif file_ext.lower() in ['.wav','.mp3']:
             if file_ext.lower() == '.mp3':
                 convert_file(args.input_path)
+                
             process_raw_audio_file(args, s_config, r_config)
-
+            remove_convert(args.input_path, '.wav')
         else:
             logger.error('No WAV/MP3 or MOV/MP4 files detected in input path')
     else:

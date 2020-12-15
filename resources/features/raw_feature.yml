@@ -26,6 +26,9 @@ raw_feature:
     neu_exp: neu_exp
     cai_exp: cai_exp
     com_exp: fac_comintsoft
+    com_lower_exp: fac_comlowintsoft
+    com_upper_exp: fac_comuppintsoft
+    pai_exp: fac_paiintsoft
     hap_exp_full: fac_hapinthard
     sad_exp_full: fac_sadinthard
     sur_exp_full: fac_surinthard
@@ -38,6 +41,9 @@ raw_feature:
     neu_exp_full: neu_exp_full
     cai_exp_full: cai_exp_full
     com_exp_full: fac_cominthard
+    com_lower_exp_full: fac_comlowinthard
+    com_upper_exp_full: fac_comuppinthard
+    pai_exp_full: fac_paiinthard
 
     #Facial asymmetry
     fac_AsymMaskMouth: fac_asymmaskmouth
