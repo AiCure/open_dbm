@@ -25,7 +25,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-face_asym_dir = 'video/face_asymmetry'
+face_asym_dir = 'facial/face_asymmetry'
 csv_ext = '_facasym.csv'
 
 cv2_color_purple = (254,19,188)
@@ -339,7 +339,7 @@ def run_face_asymmetry(video_uri, out_dir, f_cfg):
         cfr = ConfigFaceReader()
         input_loc, out_loc, fl_name = ut.filter_path(video_uri, out_dir)
 
-        of_csv_path = glob.glob(join(out_loc, fl_name + '_OF_features/*.csv'))
+        of_csv_path = glob.glob(join(out_loc, fl_name + '_openface/*.csv'))
         if len(of_csv_path)>0:
 
             of_csv = of_csv_path[0]

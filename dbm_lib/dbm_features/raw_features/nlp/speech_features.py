@@ -18,9 +18,9 @@ from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-speech_dir = 'nlp/speech_feature'
+speech_dir = 'speech/speech_feature'
 speech_ext = '_nlp.csv'
-transcribe_ext = 'nlp/transcribe/*_transcribe.csv'
+transcribe_ext = 'speech/deepspeech/*_transcribe.csv'
 
 def run_speech_feature(video_uri, out_dir, r_config, tran_tog):
     """

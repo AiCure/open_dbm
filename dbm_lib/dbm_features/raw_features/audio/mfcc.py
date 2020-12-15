@@ -19,7 +19,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-mfcc_dir = 'audio/mfcc'
+mfcc_dir = 'acoustic/mfcc'
 csv_ext = '_mfcc.csv'
 error_txt = 'error: length less than 0.064'
 

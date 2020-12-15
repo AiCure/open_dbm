@@ -17,7 +17,7 @@ from dbm_lib.dbm_features.raw_features.util import util as ut
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-vfs_dir = 'audio/voice_frame_score'
+vfs_dir = 'acoustic/voice_frame_score'
 csv_ext = '_voiceprev.csv'
 error_txt = 'error: length less than 0.064'
 

@@ -17,7 +17,7 @@ from dbm_lib.dbm_features.raw_features.util import nlp_util as n_util
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-formant_dir = 'nlp/transcribe'
+formant_dir = 'speech/deepspeech'
 csv_ext = '_transcribe.csv'
 error_txt = 'error: length less than 0.1'
 
