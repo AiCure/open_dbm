@@ -41,7 +41,7 @@ def deepspeech(AUDIO_FILE,deep_path):
         stdout,stderr = out.communicate()
     except:
         return "error", "error"
-    print(stderr)
+    #print(stderr)
     return stdout,stderr
 
 def deep_speech_output_clean(result):
