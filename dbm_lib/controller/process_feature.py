@@ -60,11 +60,11 @@ def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     logger.info('processing audio pitch freq....')
     pitch_freq.run_pitch(video_uri, out_dir, r_config)
 
-    logger.info('processing HNR....')
-    hnr.run_hnr(video_uri, out_dir, r_config)
+    #logger.info('processing HNR....')
+    #hnr.run_hnr(video_uri, out_dir, r_config)
 
-    logger.info('processing GNE....')
-    gne.run_gne(video_uri, out_dir, r_config)
+    #logger.info('processing GNE....')
+    #gne.run_gne(video_uri, out_dir, r_config)
 
     logger.info('processing voice frame score....')
     voice_frame_score.run_vfs(video_uri, out_dir, r_config)
@@ -81,8 +81,8 @@ def process_acoustic(video_uri, out_dir, dbm_group, r_config):
     logger.info('processing shimmer....')
     shimmer.run_shimmer(video_uri, out_dir, r_config)
 
-    logger.info('processing mfcc....')
-    mfcc.run_mfcc(video_uri, out_dir, r_config)
+    #logger.info('processing mfcc....')
+    #mfcc.run_mfcc(video_uri, out_dir, r_config)
 
 def process_facial(video_uri, out_dir, dbm_group, r_config):
     """
