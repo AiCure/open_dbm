@@ -1,4 +1,5 @@
 # OpenFace 2.2.0: a facial behavior analysis toolkit
+### (Toolkit with update in facial landmarks video processing for face tremor calculation)
 
 [![Build Status](https://travis-ci.org/TadasBaltrusaitis/OpenFace.svg?branch=master)](https://travis-ci.org/TadasBaltrusaitis/OpenFace)
 [![Build status](https://ci.appveyor.com/api/projects/status/8msiklxfbhlnsmxp/branch/master?svg=true)](https://ci.appveyor.com/project/TadasBaltrusaitis/openface/branch/master)
