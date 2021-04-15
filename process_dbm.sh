@@ -68,7 +68,7 @@ fi
 repository="https://github.com/AiCure/open_dbm.git -b openface"
 open_Folder="pkg"
 cd $open_Folder
-git clone $open_repo
+git clone $repository
 
 #docker commands to run container
 docker create -ti --name dbm_container dbm bash
