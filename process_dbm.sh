@@ -64,6 +64,12 @@ if [[ $dbm_group == *"speech"* ]] && [[ ${tr} == "on" ]]; then
     dbm_new="$dbm_new --tr ${tr}"
 fi
 
+#cloning openface
+repository="https://github.com/AiCure/open_dbm.git -b openface"
+open_Folder="pkg"
+cd $open_Folder
+git clone $open_repo
+
 #docker commands to run container
 docker create -ti --name dbm_container dbm bash
 docker cp $input_path dbm_container:/app/raw_data

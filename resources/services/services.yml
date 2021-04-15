@@ -2,7 +2,7 @@ cdx_configuration:
     input_dir: data/result_CDX/
     output_dir: data/result_CDX/dbm_client_output/
     out_derived_dir: data/result_CDX_derived_output/dbm_client_derived_output/
-    open_face_path: pkg/OpenFace/build/bin/FeatureExtraction
+    open_face_path: pkg/open_dbm/OpenFace/build/bin/FeatureExtraction
     facial_landmarks: pkg/shape_detector/shape_predictor_68_face_landmarks.dat
     feature_group: ['facial', 'acoustic', 'movement']
     

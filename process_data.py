@@ -21,8 +21,8 @@ from os.path import splitext
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-OPENFACE_PATH_VIDEO = 'pkg/OpenFace/build/bin/FaceLandmarkVid'
-OPENFACE_PATH = 'pkg/OpenFace/build/bin/FeatureExtraction'
+OPENFACE_PATH_VIDEO = 'pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid'
+OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
 DEEP_SPEECH = 'pkg/DeepSpeech'
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
 
