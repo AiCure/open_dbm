@@ -19,8 +19,12 @@ RUN ln -sfn /usr/bin/pip3 /usr/bin/pip
 
 COPY . /app
 
+#cloning openface
+WORKDIR /app/pkg
+RUN git clone https://github.com/AiCure/open_dbm.git -b openface
+
 RUN echo "Installing OpenFace..."
-WORKDIR /app/pkg/OpenFace
+WORKDIR /app/pkg/open_dbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
 RUN su -c ./install.sh

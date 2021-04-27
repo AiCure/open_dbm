@@ -1,5 +1,0 @@
-AU6 results - rms 0.846, corr 0.786, ccc - 0.752
-AU10 results - rms 1.022, corr 0.741, ccc - 0.695
-AU12 results - rms 0.790, corr 0.870, ccc - 0.847
-AU14 results - rms 1.120, corr 0.522, ccc - 0.480
-AU17 results - rms 0.795, corr 0.628, ccc - 0.542
