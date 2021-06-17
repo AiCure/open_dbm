@@ -1,1 +1,0 @@
-User can copy their data in raw_data folder which they want to process

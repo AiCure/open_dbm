@@ -1,0 +1,4 @@
+#Python (3+)
+matplotlib=2.0.0
+scipy=1.2.0
+opencv-python
