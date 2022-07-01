@@ -1,0 +1,181 @@
+name: 🐛 OpenDBM Bug Report
+description: Use this template to report any bug report
+body:
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: Bug Type
+      description: What type of bug would you like to report?
+      multiple: false
+      options:
+        - Build/Install
+        - Performance
+        - Calculation / Algorithm
+        - Documentation Bug
+        - Others
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Please make sure that this is a bug. As per our [GitHub Policy](https://github.com/AiCure/open_dbm/blob/master/ISSUES.md),we only address code/doc bugs, performance issues, feature requests and build/installation issues on GitHub.
+
+  - type: markdown
+    attributes:
+      value: | 
+        You can obtain the OpenDBM version with: <br>`python -c "import open_dbm as od; print(od.GIT_VERSION, od.VERSION)"`
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source
+      description: OpenDBM installed from
+      options:
+        - source (default)
+        - binary
+    validations:
+      required: true
+  - type: input
+    id: odbmversion
+    attributes:
+      label: OpenDBBM Version
+      description: 
+      placeholder: ex,. od 1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: Code
+    attributes:
+      label: Custom Code
+      description: 
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: input
+    id: OS
+    attributes:
+      label: OS Platform and Distribution
+      description: 
+      placeholder: e.g., Linux Ubuntu 16.04
+    validations:
+      required: false
+  - type: input
+    id: Device
+    attributes:
+      label: Mobile device / Browser (for Doc bugs)
+      description: 
+      placeholder: e.g., Android / Mozilla Firefox 26.0
+    validations:
+      required: false
+  - type: input
+    id: Python
+    attributes:
+      label: Python version
+      description: 
+      placeholder: e.g., 3.9
+    validations:
+      required: false
+  - type: input
+    id: Compiler
+    attributes:
+      label: GCC/Compiler version
+      description: if compiling from source
+      placeholder: 
+    validations:
+      required: false
+  - type: input
+    id: Docker
+    attributes:
+      label: Docker version
+      description:
+      placeholder: 
+    validations:
+      required: false
+  - type: input
+    id: Gpu
+    attributes:
+      label: GPU model and memory
+      description: if compiling from source
+      placeholder: 
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 🐛 Describe the bug. Steps/Code to Reproduce
+      description: |
+        Please provide a clear and concise description of what the bug is.
+        
+        If relevant, add a minimal example so that we can reproduce the error by running the code. It is very important for the snippet to be as succinct (minimal) as possible, so please take time to trim down any irrelevant code to help us debug efficiently. We are going to copy-paste your code and we expect to get the same result as you did: avoid any external data, and include the relevant imports, etc. For example:
+
+        ```python
+        from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
+        from dbm_lib.controller import process_feature as pf
+        from dbm_lib.dbm_features.raw_features.video import open_face_process as of
+        from dbm_lib.dbm_features.derived_features import derive as der
+
+        import pandas as pd
+        import os
+        import argparse
+        import logging
+        import glob
+        import time
+        import subprocess
+        from os.path import splitext
+
+        logging.basicConfig(level=logging.INFO)
+        logger=logging.getLogger()
+
+        OPENFACE_PATH_VIDEO = 'pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid'
+        OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
+        DEEP_SPEECH = 'pkg/DeepSpeech'
+        DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
+        ```
+
+        If the code is too long, feel free to put it in a public gist and link it in the issue: https://gist.github.com.
+
+        In short, **we are going to copy-paste your code** to run it and we expect to get the same result as you.
+
+        We acknowledge that crafting a minimal reproducible code example requires some effort on your side but it really helps the maintainers quickly reproduce the problem and analyze its cause without any ambiguity. Ambiguous bug reports tend to be slower to fix because they will require more effort and back and forth discussion between the maintainers and the reporter to pin-point the precise conditions necessary to reproduce the problem.
+      placeholder: |
+        ```
+        Sample code to reproduce the problem
+        ```
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Results
+      description: >
+        Please paste or describe the expected results.
+      placeholder: >
+        Example: No error is thrown.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual Results and relevant log outputs
+      description: |
+        Please paste or describe the results you observe instead of the expected results. If you observe an error, please paste the error message including the **full traceback** of the exception. For instance the code above raises the following exception:
+
+        ```python-traceback
+        ---------------------------------------------------------------------------
+        TypeError                                 Traceback (most recent call last)
+        <ipython-input-1-a674e682c281> in <module>
+              4 of.process_open_face(video_file, os.path.dirname(video_file), out_path, OPENFACE_PATH, args.dbm_group,video_tracking=False)
+              5 pf.process_facial(video_file, out_path, args.dbm_group, r_config)
+        ----> 6 pf.process_acoustic(video_file, out_path, args.dbm_group, r_config)
+              7 pf.process_nlp(video_file, out_path, args.dbm_group, args.tr, r_config, DEEP_SPEECH)
+              8 if args.dbm_group == None or len(args.dbm_group)>0 and 'movement' in args.dbm_group:
+
+        TypeError: __init__() got an unexpected keyword argument 'process_nlp'
+        ```
+      placeholder: >
+        Please paste or specifically describe the actual output or traceback.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for contributing 🎉!!

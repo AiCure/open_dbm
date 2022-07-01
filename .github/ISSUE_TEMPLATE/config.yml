@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/AiCure/open_dbm/discussions/new
+    about: Ask questions and discuss with other OpenDBM community members
+  - name: OpenDBM Documentations
+    url: https://aicure.com/opendbm/docs/index.html
+    about: OpenDBM complete and detail documentations
+  - name: Blank issue
+    url: https://github.com/AiCure/open_dbm/issues/new
+    about: Use this blank template if you're unsure on what to choose
