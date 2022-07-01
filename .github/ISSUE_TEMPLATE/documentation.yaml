@@ -1,10 +1,10 @@
-name: 📚 OpenDBM Documentation Issue
+name: 📕 OpenDBM Documentation Issue
 description: Report a documentation issue related to https://aicure.com/opendbm/docs/stable/index.html
 
 body:
 - type: textarea
   attributes:
-    label: 📚 The doc issue
+    label: 📕 The doc issue
     description: >
       A clear and concise description of what content in https://aicure.com/opendbm/docs/stable/index.html is an issue.
   validations:

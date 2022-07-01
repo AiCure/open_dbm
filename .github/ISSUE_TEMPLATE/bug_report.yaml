@@ -1,4 +1,4 @@
-name: 🐛 OpenDBM Bug Report
+name: 🐞 OpenDBM Bug Report
 description: Use this template to report any bug report
 body:
   - type: dropdown
@@ -103,7 +103,7 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: 🐛 Describe the bug. Steps/Code to Reproduce
+      label: 🐞 Describe the bug. Steps/Code to Reproduce
       description: |
         Please provide a clear and concise description of what the bug is.
         
