@@ -100,7 +100,6 @@ export default class ScatterplotD3 {
                         $(".dot_" + k).css("fill", "red")
                 })
                 if($('#metadataButton').hasClass("btn-outline-primary")){
-                    console.log("e checked")
                 }
                 svg.property("value", value).dispatch("input");
             }

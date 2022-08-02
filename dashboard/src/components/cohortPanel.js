@@ -72,6 +72,7 @@ function CohortPanel() {
           attr.forEach((e, i) => {
             attrDict[e] = metadataColorList[i + 1]
           })
+          if(data.length > 0)
           data.forEach(e => {
             if (e['attr']) {
               metaColorData[e['id']] = attrDict[e['attr']]
@@ -280,7 +281,7 @@ function CohortPanel() {
           <div style={{ display: "flex", flexDirection: "row", justifyContent: 'flex-end', margin: "auto", marginLeft: "20px", opacity: "0" }} id="metadataAttributes">
             <div style={{ marginLeft: "5px", fontWeight: "bolder" }}>Attributes:</div>
             {metadataColorList.map((value, index) =>
-              <div style={{ display: "flex", flexDirection: "row", opacity: "0", marginLeft: "20px" }} id={value + "AttrContainer"} className="metadataAttr">
+              <div style={{ display: "flex", flexDirection: "row", opacity: "0", marginLeft: "20px" }} id={value + "AttrContainer"} key={value+"color"} className="metadataAttr">
 
                 <svg height="14" width="14" transform="translate(3,3)" id="1circle">
                   <circle cx="7" cy="7" r="50%" fill={value === "none" ? "#69b3a2" : value} />
@@ -355,7 +356,7 @@ function CohortPanel() {
             <button type="button" className={`btn ${checkedHideIdsState === true ? 'btn-primary' : 'btn-outline-primary'}  btn-sm`} style={{ marginTop: "10px" }} onClick={handleHideIds}>Hide Unselected</button>
             <div style={{ display: "inline-flex", flexDirection: "column", marginTop: "10px", height: "94%", overflowY: "auto", }}>
               {idData.map((value, index) =>
-                <label className="id_checkbox_container" id={value + "_id_container"}>
+                <label className="id_checkbox_container" id={value + "_id_container"} key={value + "id"}>
                   <input
                     type="checkbox"
                     id={value + "_id"}
@@ -369,7 +370,7 @@ function CohortPanel() {
           <Col id="distributionChartContainer" style={{ height: "93%", overflowY: "auto" }}>
             <h6 style={{ fontWeight: "bolder" }}>Attribute Distribution</h6>
             {distrArgs.map((value) =>
-              <div style={{ display: "inline-flex", flexDirection: "row", marginLeft: "10px" }}>
+              <div style={{ display: "inline-flex", flexDirection: "row", marginLeft: "10px" }} key={value + "distr"}>
                 {<DistributionChart data={distrData} attr={value} id={"distributionChart_" + value}
                   filteredIds={filteredIdData} metadata={metadataButton === true ? metadata : []}
                   hideIds={checkedHideIdsState} metadataAttrColor={metadataAttrColor} />}

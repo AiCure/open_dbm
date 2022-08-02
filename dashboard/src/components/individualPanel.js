@@ -276,6 +276,7 @@ function IndividualPanel() {
     if (corrMatrix_args.length === 0) {
       corrMatrix_args = meanEmotionsSoft.map(e => e.replace("_mean", ""))
     }
+    var sendId = typeof id === 'string' ? id : selectedId
     fetch("/updateCorrMatrix", {
       method: "POST",
       headers: {
@@ -284,7 +285,7 @@ function IndividualPanel() {
       body: JSON.stringify({
         "corrMatrix_args": corrMatrix_args,
         "individual": true,
-        "id": id ? id : selectedId
+        "id": sendId
       })
     }).then(
       res => res.json()
@@ -360,7 +361,7 @@ function IndividualPanel() {
                 step="1" value={timeslotValue} onChange={setTime} list="steplist"></input>
               <datalist id="steplist" style={{ display: "inline-flex", marginTop: "-10px !important" }}>
                 {timepoints.map((e, i) =>
-                  <option value={e} style={{ marginLeft: "2px", marginRight: "4px", fontSize: "0.7rem" }}>{i === 0 ? "*" : e}</option>
+                  <option value={e} style={{ marginLeft: "2px", marginRight: "4px", fontSize: "0.7rem" }} key={e+"timepoint"}>{i === 0 ? "*" : e}</option>
                 )}
               </datalist>
             </div>
@@ -391,7 +392,7 @@ function IndividualPanel() {
             <Row style={{ marginTop: "300px" }}>
               <div style={{ width: "100%", height: "3vh", fontSize: "0.7rem", paddingLeft: "0px", paddingRight: "0px", marginBottom: "5px" }}>
                 {AUsButton && emotions.map((value, index) =>
-                  <label className="id_checkbox_container" style={{ marginRight: "3px" }}>
+                  <label className="id_checkbox_container" style={{ marginRight: "3px" }} key={value+"AU"}>
                     <input
                       type="checkbox"
                       id={value + "_highlight"}
@@ -410,7 +411,7 @@ function IndividualPanel() {
                 <button type="button" className='btn btn-primary btn-sm'>Filter ID(s)</button>
                 <div style={{ fontSize: "0.8rem", width: "210px", display: "inline-flex", flexDirection: "column", marginTop: "10px", overflowY: "auto" }}>
                   {idData.map((value, index) =>
-                    <label className="id_checkbox_container" id={value + "_id_"}>
+                    <label className="id_checkbox_container" id={value + "_id_"} key={value+"idIndividual"}>
                       <input
                         type="checkbox"
                         id={value + "_id_checkbox"}
@@ -442,7 +443,7 @@ function IndividualPanel() {
                 </Col>
                 <Col className='col-2' style={{ width: "77%", height: "100%", overflowY: "hidden" }}>
                   {facialAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }}>
+                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }} key={value+"facHistogram"}>
                       {<Histogram data={rawFacialData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#41ab5d", "#c7e9c0"]} timeframe={timeslotValue} />}
                     </div>
                   )}
@@ -474,7 +475,7 @@ function IndividualPanel() {
                 <Col className='col-4'>
                   <h6 style={{ marginBotom: "10px", fontWeight: "bolder" }}>Speech</h6>
                   {speechDerivedData && speechDerivedData.map((value, index) =>
-                    <div style={{ fontSize: "0.8rem" }}>{DBMDict[value]['label'] + ": " + derivedData[value]}</div>
+                    <div style={{ fontSize: "0.8rem" }} key={value +"speech"}>{DBMDict[value]['label'] + ": " + derivedData[value]}</div>
                   )}
                 </Col>
               </div>}
@@ -513,7 +514,7 @@ function IndividualPanel() {
                 </Col>
                 <Col className='col-2' style={{ width: "80%", height: "100%", overflowY: "hidden" }}>
                   {movementAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }}>
+                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }} key={value+"movHistogram"}>
                       {<Histogram data={rawMovementData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#4292c6", "#c6dbef"]} timeframe={timeslotValue} />}
                     </div>
                   )}
@@ -538,7 +539,7 @@ function IndividualPanel() {
                 </Col>
                 <Col className='col-2' style={{ width: "80%", height: "100%", overflowY: "hidden", fontSize: "0.8rem", }}>
                   {acousticAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px" }}>
+                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px" }} key={value+"acoHistogram"}>
                       {<Histogram data={rawAcousticData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#807dba", "#dadaeb"]} timeframe={timeslotValue} />}
                     </div>
                   )}

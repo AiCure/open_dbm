@@ -14,7 +14,6 @@ const Scatterplot = ({ data, filteredIds, metadata, hideIds, metadataAttrColor }
     }, [data])
 
     return (
-        // <div ref={ref}></div>
         <React.Fragment>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <h6 style={{ fontWeight: "bolder" }}>PCA</h6>
