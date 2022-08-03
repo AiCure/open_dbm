@@ -28,7 +28,7 @@ export default class ColorLegendD3 {
         const negMovementColorScale = d3.scaleLinear().domain([-1, 0]).range(['#cb181d', "#fff5f0"])
         const posMovementColorScale = d3.scaleLinear().domain([0, 1]).range(["#fff5f0", '#cb181d'])
         const vissibleAUs = ['AU01', 'AU02', 'AU04', 'AU05', 'AU06', 'AU07', 'AU09', 'AU10', 'AU12', 'AU14', 'AU15', 'AU17', 'AU20', 'AU23', 'AU25', 'AU26']
-        
+
         if (parseInt(timeframe) === 0) {
             vissibleAUs.forEach(a => {
                 var el = "fac_" + a + "int"

@@ -9,6 +9,7 @@ import QueryPanel from './queryPanel.js';
 import ColorLegend from './colorLegend.js';
 import CorrelationMatrix from './correlationMatrix.js';
 import DBMDict from "../DBM_attribute_dict.json"
+import './individualPanel.css'
 
 function IndividualPanel() {
   const [movementButton, setMovementButton] = useState(false)
@@ -27,9 +28,12 @@ function IndividualPanel() {
   const [rawMovementData, setMovementRawData] = useState(null)
   const [rawAcousticData, setAcousticRawData] = useState(null)
   const [derivedData, setDerivedData] = useState({})
-  const meanEmotionsSoft = ["fac_feaintsoft_mean", "fac_disintsoft_mean", "fac_sadintsoft_mean", "fac_conintsoft_mean", "fac_surintsoft_mean", "fac_hapintsoft_mean", "fac_angintsoft_mean"]
-  const meanAUsSoft = ["fac_AU02int_mean", "fac_AU04int_mean", "fac_AU05int_mean", "fac_AU06int_mean", "fac_AU07int_mean", "fac_AU09int_mean", "fac_AU10int_mean",
-    "fac_AU12int_mean", "fac_AU14int_mean", "fac_AU15int_mean", "fac_AU17int_mean", "fac_AU20int_mean", "fac_AU23int_mean", "fac_AU25int_mean", "fac_AU26int_mean", "fac_AU01int_mean",]
+  const meanEmotionsSoft = ["fac_feaintsoft_mean", "fac_disintsoft_mean", "fac_sadintsoft_mean",
+    "fac_conintsoft_mean", "fac_surintsoft_mean", "fac_hapintsoft_mean", "fac_angintsoft_mean"]
+  const meanAUsSoft = ["fac_AU02int_mean", "fac_AU04int_mean", "fac_AU05int_mean", "fac_AU06int_mean",
+    "fac_AU07int_mean", "fac_AU09int_mean", "fac_AU10int_mean",
+    "fac_AU12int_mean", "fac_AU14int_mean", "fac_AU15int_mean", "fac_AU17int_mean", "fac_AU20int_mean",
+    "fac_AU23int_mean", "fac_AU25int_mean", "fac_AU26int_mean", "fac_AU01int_mean",]
 
   const [timeslotValue, setTimeslotValue] = useState("0")
   const timepoints = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
@@ -352,47 +356,56 @@ function IndividualPanel() {
   return (
     <div>
       {rawFacialData && rawFacialData.length > 0 &&
-        <div id="timelineContainer" style={{ height: "5%", position: "absolute", top: "0px", left: "250px", display: "flex", flexDirection: "row" }}>
-
-          <div className="sliderContainer" style={{ margin: "5px", display: "flex", flexDirection: "row" }}>
+        <div id="timelineContainer">
+          <div className="sliderContainer">
             <div>Timeline</div>
             <div>
-              <input type="range" min='0' max="20" id="myRange" className="slider" style={{ width: "400px" }}
+              <input type="range" min='0' max="20" id="timelineRange" className="slider"
                 step="1" value={timeslotValue} onChange={setTime} list="steplist"></input>
-              <datalist id="steplist" style={{ display: "inline-flex", marginTop: "-10px !important" }}>
+              <datalist id="steplist">
                 {timepoints.map((e, i) =>
-                  <option value={e} style={{ marginLeft: "2px", marginRight: "4px", fontSize: "0.7rem" }} key={e+"timepoint"}>{i === 0 ? "*" : e}</option>
+                  <option value={e} key={e + "timepoint"}>{i === 0 ? "*" : e}</option>
                 )}
               </datalist>
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: 'flex-end', margin: "auto", width: "70%" }}>
-            <div style={{ margin: "auto", fontWeight: "bolder" }}>Frames:</div>
-            <div style={{ margin: "auto", fontWeight: "bolder", color: "#41ab5d" }} id="facialFrameLabel">Facial</div>
-            <h6 style={{ margin: "auto", fontWeight: "bolder", color: "#4292c6" }} id="movementFrameLabel">Movement</h6>
-            <h6 style={{ margin: "auto", fontWeight: "bolder", color: "#807dba" }} id="acousticFrameLabel">Acoustics</h6>
+          <div id="timeFramesContainer">
+            <div id="frameLabel">Frames:</div>
+            <h6 id="facialFrameLabel">Facial</h6>
+            <h6 id="movementFrameLabel">Movement</h6>
+            <h6 id="acousticFrameLabel">Acoustics</h6>
           </div>
         </div>
       }
-      <Row style={{ height: "90vh", width: "99vw", marginLeft: "10px" }}>
+      <Row id="componentsContainer">
         {derivedData &&
-          <Col className="col-2" style={{ height: "100%", width: "250px" }}>
-            <Row style={{ width: "300", }} id='headContainer'>
-              <div style={{ display: "inline-flex", flexDirection: "row", gap: "3px", marginBottom: "10px", marginLeft: "-12px" }}>
-                <button type="button" id="asymMaskButton" className={`btn btn-sm ${asymetryButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleFaceMask("asym")}>Asym</button>
-                <button type="button" id="painMaskButton" className={`btn btn-sm ${painButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleFaceMask("pain")}>Pain</button>
-                <button type="button" id="exprMaskButton" className={`btn btn-sm ${expressivityButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleFaceMask("expr")}>Expr</button>
-                <button type="button" id="AUsMaskButton" className={`btn btn-sm ${AUsButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleFaceMask("aus")}>AUs</button>
-                <button type="button" id="movMaskButton" className={`btn btn-sm ${movementButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={handleMovementMask}>Mov</button>
+          <Col id="headAndIdPanelContainer" className="col-2">
+            <Row id='headContainer'>
+              <div id="faceMaskButtonContainer">
+                <button type="button" id="asymMaskButton"
+                  className={`btn btn-sm ${asymetryButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                  onClick={() => handleFaceMask("asym")}>Asym</button>
+                <button type="button" id="painMaskButton"
+                  className={`btn btn-sm ${painButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                  onClick={() => handleFaceMask("pain")}>Pain</button>
+                <button type="button" id="exprMaskButton"
+                  className={`btn btn-sm ${expressivityButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                  onClick={() => handleFaceMask("expr")}>Expr</button>
+                <button type="button" id="AUsMaskButton"
+                  className={`btn btn-sm ${AUsButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                  onClick={() => handleFaceMask("aus")}>AUs</button>
+                <button type="button" id="movMaskButton"
+                  className={`btn btn-sm ${movementButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                  onClick={handleMovementMask}>Mov</button>
               </div>
-              <div style={{ marginLeft: "10px" }}>
-                < HeadSVG width={200} height={300}/>
+              <div id="headComponentContainer">
+                < HeadSVG width={200} height={300} />
               </div>
             </Row>
-            <Row style={{ marginTop: "300px" }}>
-              <div style={{ width: "100%", height: "3vh", fontSize: "0.7rem", paddingLeft: "0px", paddingRight: "0px", marginBottom: "5px" }}>
+            <Row id="colorLegendAndIdPanelContainer">
+              <div id="AUButtonContainer">
                 {AUsButton && emotions.map((value, index) =>
-                  <label className="id_checkbox_container" style={{ marginRight: "3px" }} key={value+"AU"}>
+                  <label className="id_checkbox_container" key={value + "AU"}>
                     <input
                       type="checkbox"
                       id={value + "_highlight"}
@@ -404,14 +417,15 @@ function IndividualPanel() {
                   </label>
                 )}
               </div>
-              <div id="colorScaleContainer" style={{ width: "90%", height: "5vh", opacity: ((painButton | expressivityButton | AUsButton | asymetryButton) ? "1" : "0") }}>
-                <ColorLegend range={facialMaskVals} colorScale={["white", facialMaskColor]} derivedData={derivedData} id={"faceMaskColorLegend"} timelineData={facialTimelineData} timeframe={timeslotValue} />
+              <div id="colorScaleContainer" style={{ opacity: ((painButton | expressivityButton | AUsButton | asymetryButton) ? "1" : "0") }}>
+                <ColorLegend range={facialMaskVals} colorScale={["white", facialMaskColor]}
+                  derivedData={derivedData} id={"faceMaskColorLegend"} timelineData={facialTimelineData} timeframe={timeslotValue} />
               </div>
-              <Col className="col-2" style={{ display: "flex", flexDirection: "column", borderRadius: "15px", paddingTop: "10px", fontSize: "0.7rem", width: "230px", boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px", height: 'calc(90vh - 420px)' }}>
+              <Col id="idPanelContainerIndividual" className="col-2">
                 <button type="button" className='btn btn-primary btn-sm'>Filter ID(s)</button>
-                <div style={{ fontSize: "0.8rem", width: "210px", display: "inline-flex", flexDirection: "column", marginTop: "10px", overflowY: "auto" }}>
+                <div >
                   {idData.map((value, index) =>
-                    <label className="id_checkbox_container" id={value + "_id_"} key={value+"idIndividual"}>
+                    <label className="id_checkbox_container" id={value + "_id_"} key={value + "idIndividual"}>
                       <input
                         type="checkbox"
                         id={value + "_id_checkbox"}
@@ -426,96 +440,99 @@ function IndividualPanel() {
             </Row>
           </Col>
         }
-        <Col style={{ height: "100%", marginRight: "10px", width: "40%" }}>
+        <Col id="facialAndSpeechContainer">
           {rawFacialData && rawFacialData.length > 0 &&
-            <Row id="facialActivityContainer" style={{ height: "48%", backgroundColor: "#f7fcf5", padding: "10px", overflowY: "scroll" }}>
+            <Row id="facialActivityContainer">
               <div style={{ display: "flex", }}>
-                <Col className='col-2' style={{ fontSize: "0.8rem", width: "max-content", }}>
+                <Col id="facialContainer" className='col-2'>
                   {allFacialAttr &&
-                    <div style={{ marginLeft: "-10px", marginRight: "5px" }}>
-                      <div style={{ display: "inline-flex", flexDirection: "row" }}>
+                    <div id="facialQueryPanelContainer" >
+                      <div id="facialQueryPanelButtonsContainer">
                         <button type="button" className='btn btn-sm btn-outline-primary' onClick={() => handleUpdate("facial")}>Update</button>
-                        <button type="button" className="btn-close" aria-label="Close" style={{ marginTop: "5px", marginLeft: "5px" }} onClick={() => handleUnselectCheckboxes("facial")}></button>
+                        <button type="button" className="btn-close" aria-label="Close"
+                          onClick={() => handleUnselectCheckboxes("facial")}></button>
                       </div>
                       <QueryPanel allAcousticArg={[]} allMovementArg={[]} allSpeechArg={[]} allFacialArg={allFacialAttr}
                         checkedState={checkedFacialState} handleCheckboxChange={handleFacialCheckboxChange} idVal={"rawFacialIndividualAttr_"} />
                     </div>}
                 </Col>
-                <Col className='col-2' style={{ width: "77%", height: "100%", overflowY: "hidden" }}>
+                <Col id="facialHistogramsContainer" className='col-2'>
                   {facialAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }} key={value+"facHistogram"}>
-                      {<Histogram data={rawFacialData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#41ab5d", "#c7e9c0"]} timeframe={timeslotValue} />}
+                    <div className="histogramContainer" key={value + "facHistogram"}>
+                      {<Histogram data={rawFacialData} derivedData={derivedData} attr={value} id={"histogram_" + value}
+                        color={["#41ab5d", "#c7e9c0"]} timeframe={timeslotValue} />}
                     </div>
                   )}
                 </Col>
               </div>
             </Row>
           }
-          <Row style={{ marginTop: "30px", display: "flex", flexDirection: "row", height: "48%", overflowY: "auto" }}>
-            <div style={{ display: "inline-flex", flexDirection: "row", gap: "10px", marginTop: "10px" }}>
-              <button type="button" className={`btn btn-sm ${speechButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleSpeechPanel("speech")} id="speechPanelButton" style={{ height: "max-content", }}>{'Facial & Speech'}</button>
-              <button type="button" className={`btn btn-sm ${corrButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handleSpeechPanel("corr")} style={{ height: "max-content", }} id="corrMatrixPanelButton">Correlation</button>
+          <Row id="facialSpeechAndCorrPanelContainer">
+            <div id="facialSpeechAnCorrPanelButtons">
+              <button type="button" className={`btn btn-sm ${speechButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                onClick={() => handleSpeechPanel("speech")} id="speechPanelButton" >{'Facial & Speech'}</button>
+              <button type="button" className={`btn btn-sm ${corrButton === true ? 'btn-primary' : 'btn-secondary'}`}
+                onClick={() => handleSpeechPanel("corr")} id="corrMatrixPanelButton">Correlation</button>
             </div>
             {speechButton &&
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <Col className='col-8' style={{ display: "flex", flexDirection: "row" }}>
-                  <div style={{ width: "max-content", marginRight: "20px" }}>
-                    <div >
-                      <SpiderChart style={{ padding: "10px" }} label={'Emotion Intensity'} derivedData={derivedData} timelineData={facialTimelineData} timeframe={timeslotValue} levels={[0, 0.25, 0.5, 0.75, 1]}
-                        axes={meanEmotionsSoft.reverse()} />
-                    </div>
+              <div id="facialAndSpeechPanelContainer">
+                <Col id="SpiderChartContainer" className='col-8'>
+                  <div className="spiderComponent" >
+                    <SpiderChart label={'Emotion Intensity'} derivedData={derivedData}
+                      timelineData={facialTimelineData} timeframe={timeslotValue} levels={[0, 0.25, 0.5, 0.75, 1]}
+                      axes={meanEmotionsSoft.reverse()} />
                   </div>
-                  <div style={{ width: "max-content" }}>
-                    <div >
-                      <SpiderChart style={{ padding: "10px" }} label={'AU Intensity'} derivedData={derivedData} timelineData={facialTimelineData} timeframe={timeslotValue} levels={[0, 1, 2, 3, 4, 5]}
-                        axes={meanAUsSoft.reverse()} />
-                    </div>
+                  <div className="spiderComponent" >
+                    <SpiderChart className="spiderChart" label={'AU Intensity'} derivedData={derivedData}
+                      timelineData={facialTimelineData} timeframe={timeslotValue} levels={[0, 1, 2, 3, 4, 5]}
+                      axes={meanAUsSoft.reverse()} />
                   </div>
                 </Col>
                 <Col className='col-4'>
-                  <h6 style={{ marginBotom: "10px", fontWeight: "bolder" }}>Speech</h6>
+                  <h6 id="speechLabel">Speech</h6>
                   {speechDerivedData && speechDerivedData.map((value, index) =>
-                    <div style={{ fontSize: "0.8rem" }} key={value +"speech"}>{DBMDict[value]['label'] + ": " + derivedData[value]}</div>
+                    <div id="speechComponent" key={value + "speech"}>{DBMDict[value]['label'] + ": " + derivedData[value]}</div>
                   )}
                 </Col>
               </div>}
             {corrButton && ((rawFacialData && rawFacialData.length > 0) || (rawAcousticData && rawAcousticData.length > 0) || (rawMovementData && rawMovementData.length > 0)) &&
-              <Row style={{ height: "85%", marginTop: "5px" }}>
-                <Col className='col-2' style={{ width: "25%", height: "100%", overflowY: "scroll", fontSize: "0.8rem" }}>
-
+              <Row className="corrMatrixContainer">
+                <Col id="corrQueryPanelContainer" className='col-2'>
                   <div >
-                    <div style={{ display: "inline-flex", flexDirection: "row" }}>
-                      <button type="button" className='btn btn-sm btn-outline-primary' style={{ marginBottom: "10px" }} onClick={handleCorrMatrixUpdate}>Update</button>
+                    <div id="corrQuerryButton">
+                      <button type="button" className='btn btn-sm btn-outline-primary' onClick={handleCorrMatrixUpdate}>Update</button>
                     </div>
                     <QueryPanel allAcousticArg={allAcousticAttr} allMovementArg={allMovementAttr} allSpeechArg={[]} allFacialArg={allFacialAttr}
                       checkedState={checkedCorrMatrixState} handleCheckboxChange={handleCorrMatrixCheckboxChange} idVal={"corrMatrixIndividual_"} />
                   </div>
                 </Col>
-                <Col className='col-2' style={{ width: "75%", height: "90%", }} id="corrMatrixContainer" >
-                  <CorrelationMatrix data={corrMatrixData} />
+                <Col className='col-2' id="corrMatrixComponentIndividual" >
+                  <CorrelationMatrix data={corrMatrixData} parentId={"corrMatrixComponentIndividual"} />
                 </Col>
               </Row>}
           </Row>
         </Col>
-        <Col style={{ height: "100%", width: "40%" }}>
+        <Col id="movementAndAcousticContainer">
           {rawMovementData && rawMovementData.length > 0 &&
-            <Row id="headMovementContainer" style={{ height: "48%", overflowY: "scroll", backgroundColor: "#f7fbff" }}>
+            <Row id="headMovementContainer">
               <div style={{ display: "flex", }}>
-                <Col className='col-2' style={{ width: "max-content", fontSize: "0.8rem" }}>
+                <Col className='col-2' id="movementContainer">
                   {allMovementAttr &&
-                    <div style={{ marginLeft: "-10px", marginRight: "5px" }}>
-                      <div style={{ display: "inline-flex", flexDirection: "row" }}>
-                        <button type="button" className='btn btn-sm btn-outline-primary' style={{ marginBottom: "10px" }} onClick={() => handleUpdate("movement")}>Update</button>
-                        <button type="button" className="btn-close" aria-label="Close" style={{ marginTop: "5px", marginLeft: "5px" }} onClick={() => handleUnselectCheckboxes("movement")}></button>
+                    <div>
+                      <div id="movementQueryButtonContainer">
+                        <button type="button" className='btn btn-sm btn-outline-primary' onClick={() => handleUpdate("movement")}>Update</button>
+                        <button type="button" className="btn-close" aria-label="Close" onClick={() => handleUnselectCheckboxes("movement")}></button>
                       </div>
                       <QueryPanel allAcousticArg={[]} allMovementArg={allMovementAttr} allSpeechArg={[]} allFacialArg={[]}
                         checkedState={checkedMovementState} handleCheckboxChange={handleMovementCheckboxChange} idVal={"rawMovementIndividualAttr_"} />
-                    </div>}
+                    </div>
+                  }
                 </Col>
-                <Col className='col-2' style={{ width: "80%", height: "100%", overflowY: "hidden" }}>
+                <Col id="movementHistogramContainer" className='col-2'>
                   {movementAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px", fontSize: "0.8rem", }} key={value+"movHistogram"}>
-                      {<Histogram data={rawMovementData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#4292c6", "#c6dbef"]} timeframe={timeslotValue} />}
+                    <div className="histogramContainer" key={value + "movHistogram"}>
+                      {<Histogram data={rawMovementData} derivedData={derivedData} attr={value}
+                        id={"histogram_" + value} color={["#4292c6", "#c6dbef"]} timeframe={timeslotValue} />}
                     </div>
                   )}
                 </Col>
@@ -523,31 +540,31 @@ function IndividualPanel() {
             </Row>
           }
           {rawAcousticData && rawAcousticData.length > 0 &&
-            <Row id="voiceAcousticsContainer" style={{ height: "48%", overflowY: "scroll", backgroundColor: "#f7f4f9", marginTop: "30px" }}>
+            <Row id="voiceAcousticsContainer">
               <div style={{ display: "flex" }}>
-                <Col className='col-2' style={{ fontSize: "0.8rem", width: "max-content" }}>
+                <Col className='col-2' id="acousticsContainer">
                   {allAcousticAttr &&
-                    <div style={{ marginLeft: "-10px", marginRight: "5px" }}>
-                      <div style={{ display: "inline-flex", flexDirection: "row" }}>
-                        <button type="button" className='btn btn-sm btn-outline-primary' style={{ marginBottom: "10px" }} onClick={() => handleUpdate("acoustics")}>Update</button>
-                        <button type="button" className="btn-close" aria-label="Close" style={{ marginTop: "5px", marginLeft: "5px" }} onClick={() => handleUnselectCheckboxes("acoustics")}></button>
+                    <div >
+                      <div id="acousticsQueryButtonContainer">
+                        <button type="button" className='btn btn-sm btn-outline-primary' onClick={() => handleUpdate("acoustics")}>Update</button>
+                        <button type="button" className="btn-close" aria-label="Close" onClick={() => handleUnselectCheckboxes("acoustics")}></button>
 
                       </div>
                       <QueryPanel allAcousticArg={allAcousticAttr} allMovementArg={[]} allSpeechArg={[]} allFacialArg={[]}
                         checkedState={checkedAcousticState} handleCheckboxChange={handleAcousticCheckboxChange} idVal={"rawAcousticIndividualAttr_"} />
                     </div>}
                 </Col>
-                <Col className='col-2' style={{ width: "80%", height: "100%", overflowY: "hidden", fontSize: "0.8rem", }}>
+                <Col className='col-2' id="acousticsHistogramContainer">
                   {acousticAttr.map((value) =>
-                    <div style={{ display: "inline-flex", flexDirection: "row", padding: "10px" }} key={value+"acoHistogram"}>
-                      {<Histogram data={rawAcousticData} derivedData={derivedData} attr={value} id={"histogram_" + value} color={["#807dba", "#dadaeb"]} timeframe={timeslotValue} />}
+                    <div className="histogramContainer" key={value + "acoHistogram"}>
+                      {<Histogram data={rawAcousticData} derivedData={derivedData} attr={value}
+                        id={"histogram_" + value} color={["#807dba", "#dadaeb"]} timeframe={timeslotValue} />}
                     </div>
                   )}
                 </Col>
               </div>
             </Row>
           }
-
         </Col>
       </Row>
 

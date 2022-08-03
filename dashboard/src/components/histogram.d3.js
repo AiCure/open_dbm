@@ -14,7 +14,7 @@ export default class HistogramD3 {
             attr.includes("mov_") ? document.getElementById("headMovementContainer") :
                 document.getElementById("voiceAcousticsContainer")
 
-        var width = parentContainer.clientWidth / 3
+        var width = parentContainer.clientWidth > 600 ? parentContainer.clientWidth / 3.6 : parentContainer.clientWidth / 2
         var height = 70
         var marginLeft = 35
 
@@ -35,8 +35,8 @@ export default class HistogramD3 {
             .attr("transform", "translate(0," + (height - 20) + ")")
             .call(xAxis)
 
-        var minVal = DBMDict[attr]['range'].length >0 ? DBMDict[attr]['range'][0] : Math.min(...values)
-        var maxVal = DBMDict[attr]['range'].length >0 ? DBMDict[attr]['range'][1] : Math.max(...values)
+        var minVal = DBMDict[attr]['range'].length > 0 ? DBMDict[attr]['range'][0] : Math.min(...values)
+        var maxVal = DBMDict[attr]['range'].length > 0 ? DBMDict[attr]['range'][1] : Math.max(...values)
         var yScale = d3.scaleLinear()
             .range([height - 20, 5])
             .domain([minVal, maxVal])

@@ -3,7 +3,7 @@ import $ from "jquery";
 import "../index.css"
 
 export default class ScatterplotD3 {
-    constructor(chart, data, filteredIds, metadata,hideIds,metadataAttrColor) {
+    constructor(chart, data, filteredIds, metadata, hideIds, metadataAttrColor) {
 
         if (data) {
             if (!d3.select(chart).select('svg').empty()) {
@@ -69,7 +69,7 @@ export default class ScatterplotD3 {
                 .attr("class", d => "dot dotScatterplot dot_" + d['id'])
                 .attr("r", 5.5)
                 .style("fill", d => filteredIds.includes(d['id']) ? "red" : (metadataDict[d['id']] ? metadataAttrColor[d['id']] : "#69b3a2"))
-                .style("opacity", d => filteredIds.includes(d['id']) ? "0.4": hideIds ? "0" : "0.4")
+                .style("opacity", d => filteredIds.includes(d['id']) ? "0.4" : hideIds ? "0" : "0.4")
                 .attr("stroke", "grey")
                 .attr("stroke-width", '1.5px')
 
@@ -99,7 +99,7 @@ export default class ScatterplotD3 {
                     if ($('#' + k + "_id").is(":checked"))
                         $(".dot_" + k).css("fill", "red")
                 })
-                if($('#metadataButton').hasClass("btn-outline-primary")){
+                if ($('#metadataButton').hasClass("btn-outline-primary")) {
                 }
                 svg.property("value", value).dispatch("input");
             }

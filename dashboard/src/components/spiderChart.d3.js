@@ -84,16 +84,16 @@ export default class SpiderChartD3 {
                 .attr("text-anchor", "middle")
                 .attr("x", () => {
                     var rez = width / 2 * (1 - Math.sin(i * radians / totalAxes))
-                    if (rez < width/2.2) return rez +10
+                    if (rez < width / 2.2) return rez + 10
                     else return rez - 10
-                    })
+                })
                 .attr("y", () => {
                     var rez = height / 2 * (1 - Math.cos(i * radians / totalAxes))
-                    if (rez < height/2.2) return rez +5
+                    if (rez < height / 2.2) return rez + 5
                     else return rez - 5
-                    })
-                
-                    
+                })
+
+
                 .attr("font-size", "0.6rem");
         })
 

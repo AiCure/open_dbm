@@ -2,22 +2,23 @@ import React, { useRef, useEffect } from 'react';
 import { ComponentToPrint } from './componentToPrint';
 import { exportComponentAsJPEG } from 'react-component-export-image';
 import CorrelationMatrixD3 from './correlationMatrix.d3';
+import "./cohortPanel.css"
 
-const CorrelationMatrix = ({ data }) => {
+const CorrelationMatrix = ({ data, parentId }) => {
     const ref = useRef(null)
 
     useEffect(() => {
         const currElement = ref.current
         if (data) {
-            new CorrelationMatrixD3(currElement, data)
+            new CorrelationMatrixD3(currElement, data, parentId)
         }
     }, [data])
 
     return (
         <React.Fragment>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h6 style={{ fontWeight: "bolder" }}>Correlation Matrix</h6>
-                <button type="button" className='btn btn-outline-secondary btn-sm' onClick={() => exportComponentAsJPEG(ref)} style={{ width: "max-content", }}>
+            <div id="corrMatrixComponent">
+                <h6>Correlation Matrix</h6>
+                <button type="button" className='btn btn-outline-secondary btn-sm printButton' onClick={() => exportComponentAsJPEG(ref)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-printer" viewBox="0 0 16 16">
                         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
                         <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2

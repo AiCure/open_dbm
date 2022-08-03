@@ -3,21 +3,21 @@ import { ComponentToPrint } from './componentToPrint';
 import { exportComponentAsJPEG } from 'react-component-export-image';
 import DistributionChartD3 from './distributionChart.d3';
 
-const DistributionChart = ({ data, attr, filteredIds, metadata, hideIds, metadataAttrColor}) => {
+const DistributionChart = ({ data, attr, filteredIds, metadata, hideIds, metadataAttrColor }) => {
     const ref = useRef(null)
 
     useEffect(() => {
         const currElement = ref.current
         if (data) {
-            new DistributionChartD3(currElement, data, attr, filteredIds, metadata, hideIds,metadataAttrColor)
+            new DistributionChartD3(currElement, data, attr, filteredIds, metadata, hideIds, metadataAttrColor)
         }
     }, [data])
 
     return (
         <React.Fragment>
             <ComponentToPrint ref={ref} />
-            <div >
-                <button type="button" className='btn btn-outline-secondary btn-sm' onClick={() => exportComponentAsJPEG(ref)} style={{ width: "max-content", }}>
+            <div>
+                <button type="button" className='btn btn-outline-secondary btn-sm printButton' onClick={() => exportComponentAsJPEG(ref)} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-printer" viewBox="0 0 16 16">
                         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
                         <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2
@@ -27,7 +27,7 @@ const DistributionChart = ({ data, attr, filteredIds, metadata, hideIds, metadat
                     </svg>
                 </button>
             </div>
-            
+
         </React.Fragment>
     )
 }

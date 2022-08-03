@@ -1,0 +1,147 @@
+#metaDataButton {
+    height: 5%;
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    display: flex;
+    flex-direction: row;
+}
+
+#attributesTag {
+    margin-left: 5px;
+    font-weight: bolder;
+}
+
+#metadataAttributes {
+    display: flex;
+    flex--direction: row;
+    justify-content: flex-end;
+    margin: auto;
+    margin-left: 20px;
+    opacity: 0;
+}
+
+.metadataAttr {
+    display: flex;
+    flex-direction: row;
+    opacity: 0;
+    margin-left: 20px;
+}
+
+.metadataAttr div {
+    margin-left: 10px;
+    font-weight: bolder;
+}
+
+#cohortContainer {
+    height: 90vh;
+    width: 95vw;
+    margin-left: 10px;
+}
+
+#queryPanelContainer {
+    border-radius: 15px;
+    padding-top: 10px;
+    width: max-content;
+    height: 98%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#queryPanelButtonsContainer {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 3px;
+    margin-bottom: 10px;
+}
+
+#queryListContainer {
+    font-size: 0.8rem;
+    height: 90%;
+}
+
+.queryList {
+    height: 95%;
+}
+
+.queryUpdateButton {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.queryCheckboxContainer {
+    overflow-y: scroll;
+    height: 97%;
+}
+
+#scatterplotCorrMatrixContainer {
+    height: 95%;
+    width: 35%;
+}
+
+#scatterplotContainer {
+    height: 35vh;
+}
+
+#corrMatrixContainer {
+    height: 50%;
+    margin-top: 10%;
+    font-size: 0.8rem;
+}
+
+#idPanelContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    height: 98%;
+    padding-top: 10px;
+    font-size: 0.7rem;
+    width: max-content;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#hideIdButton {
+    margin-top: 10px
+}
+
+#idListContainer {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 10px;
+    height: 94%;
+    overflow-y: auto;
+}
+
+#distributionChartContainer {
+    height: 93%;
+    overflow-y: auto;
+}
+
+h6 {
+    font-weight: bolder;
+}
+
+.distributionChart {
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.printButton {
+    width: max-content;
+}
+
+#scatterplotComponent {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+#corrMatrixComponent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.queryPanel h6 {
+    margin-bottom: 10px;
+}

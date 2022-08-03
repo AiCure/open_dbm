@@ -6,6 +6,7 @@ import DistributionChart from './distributionChart';
 import CorrelationMatrix from './correlationMatrix';
 import QueryPanel from './queryPanel';
 import $ from 'jquery';
+import "./cohortPanel.css"
 
 function CohortPanel() {
 
@@ -15,7 +16,6 @@ function CohortPanel() {
 
   const distrDefaultArgs = ['fac_asymmaskmouth_mean', 'fac_asymmaskeyebrow_mean', 'fac_asymmaskeye_mean', 'fac_asymmaskcom_mean']
   const [distrArgs, setDistrArgs] = useState(distrDefaultArgs)
-  const [corrMatrixArgs, setCorrMatrixArgs] = useState(distrDefaultArgs)
 
   const [checkedDistrState, setCheckedDistrState] = useState([]);
   const [checkedPCAState, setCheckedPCAState] = useState([]);
@@ -72,12 +72,12 @@ function CohortPanel() {
           attr.forEach((e, i) => {
             attrDict[e] = metadataColorList[i + 1]
           })
-          if(data.length > 0)
-          data.forEach(e => {
-            if (e['attr']) {
-              metaColorData[e['id']] = attrDict[e['attr']]
-            }
-          })
+          if (data.length > 0)
+            data.forEach(e => {
+              if (e['attr']) {
+                metaColorData[e['id']] = attrDict[e['attr']]
+              }
+            })
         }
         setMetadataAttrColor(metaColorData)
       }
@@ -210,7 +210,6 @@ function CohortPanel() {
     ).then(
       data => {
         setCorrMatrixData(data)
-        setCorrMatrixArgs(corrMatrix_args)
       }
     )
   }
@@ -231,7 +230,10 @@ function CohortPanel() {
   const handleIdCheckboxChange = ev => {
     $('#' + ev.target.id).is(":checked") ?
       $(".dot_" + ev.target.id.replace("_id", "")).css("fill", "red") :
-      $(".dot_" + ev.target.id.replace("_id", "")).css("fill", (Object.keys(metadataAttrColor).includes(ev.target.id.replace("_id", "")) & metadataButton) ? metadataAttrColor[ev.target.id.replace("_id", "")] : "#69b3a2")
+      $(".dot_" + ev.target.id.replace("_id", "")).css("fill",
+        (Object.keys(metadataAttrColor).includes(ev.target.id.replace("_id", "")) &
+          metadataButton) ? metadataAttrColor[ev.target.id.replace("_id", "")] : "#69b3a2")
+
     var filteredIdData_aux = idData.filter(id =>
       $('#' + id + "_id").is(":checked"))
     setFilteredIdData(filteredIdData_aux)
@@ -259,79 +261,71 @@ function CohortPanel() {
 
   const handleUnselectCheckboxes = () => {
     const updatedCheckboxes = checkedCorrMatrixState.map(e => false)
-    if (distrButton) {
-      setCheckedDistrState(updatedCheckboxes)
-    }
-    else if (pcaButton) {
-      setCheckedPCAState(updatedCheckboxes)
-    }
-    else {
-      setCheckedCorrMatrixState(updatedCheckboxes)
-    }
+    if (distrButton) setCheckedDistrState(updatedCheckboxes)
+    else if (pcaButton) setCheckedPCAState(updatedCheckboxes)
+    else setCheckedCorrMatrixState(updatedCheckboxes)
   }
 
   return (
     <div>
       {metadata && metadata.length > 0 &&
-        <div id="metaDataButton" style={{ height: "5%", position: "absolute", top: "10px", left: "250px", display: "flex", flexDirection: "row" }}>
+        <div id="metaDataButton">
           <div>
             <button type="button" className={`btn btn-sm ${metadataButton === true ? 'btn-outline-primary' : 'btn-outline-secondary'}`}
               id="metadataButton" onClick={handleMetadata}>Metadata</button>
           </div>
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: 'flex-end', margin: "auto", marginLeft: "20px", opacity: "0" }} id="metadataAttributes">
-            <div style={{ marginLeft: "5px", fontWeight: "bolder" }}>Attributes:</div>
+          <div id="metadataAttributes">
+            <div id="attributesTag" >Attributes:</div>
             {metadataColorList.map((value, index) =>
-              <div style={{ display: "flex", flexDirection: "row", opacity: "0", marginLeft: "20px" }} id={value + "AttrContainer"} key={value+"color"} className="metadataAttr">
-
-                <svg height="14" width="14" transform="translate(3,3)" id="1circle">
+              <div id={value + "AttrContainer"} key={value + "color"} className="metadataAttr">
+                <svg height="14" width="14" transform="translate(3,3)" id={value + "circle"}>
                   <circle cx="7" cy="7" r="50%" fill={value === "none" ? "#69b3a2" : value} />
                 </svg>
-                <div style={{ marginLeft: "10px", fontWeight: "bolder", color: (value === "none" ? "#69b3a2" : value) }}
+                <div style={{ color: (value === "none" ? "#69b3a2" : value) }}
                   id={(value !== "none" ? value : "none") + "color"}>{value === "none" ? "None" : ""}</div>
               </div>
             )}
           </div>
         </div>
       }
-
       {allDBMArg.length > 0 &&
-        <Row style={{ height: "90vh", width: "95vw", marginLeft: "10px" }}>
-          <Col className="col-2" style={{ borderRadius: "15px", paddingTop: "10px", width: "max-content", height: "98%", boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }}>
-            <div style={{ display: "inline-flex", flexDirection: "row", gap: "3px", marginBottom: "10px" }}>
+        <Row id="cohortContainer">
+          <Col className="col-2" id="queryPanelContainer">
+            <div id="queryPanelButtonsContainer">
               <button type="button" className={`btn btn-sm ${pcaButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handlePanel("PCA")}>PCA</button>
               <button type="button" className={`btn btn-sm ${distrButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handlePanel("Distr")}>Distr</button>
               <button type="button" className={`btn btn-sm ${corrMatrixButton === true ? 'btn-primary' : 'btn-secondary'}`} onClick={() => handlePanel("Corr")}>Corr</button>
               <button type="button" className="btn-close" aria-label="Close" style={{ marginTop: "5px" }} onClick={handleUnselectCheckboxes}></button>
             </div>
-            <div style={{ fontSize: "0.8rem", height: "90%" }}>
+            <div id="queryListContainer">
               {pcaButton &&
-                <div style={{ height: "95%" }}>
-                  <div style={{ display: "inline-flex", flexDirection: "row" }}>
+                <div className='queryList'>
+                  <div className="queryUpdateButton">
                     <button type="button" className='btn btn-sm btn-outline-primary' onClick={handlePCAUpdate}>Update PCA</button>
                   </div>
-                  <div style={{ overflowY: "scroll", height: "97%" }}>
+                  <div className="queryCheckboxContainer">
                     <QueryPanel allAcousticArg={allAcousticArg} allMovementArg={allMovementArg} allSpeechArg={allSpeechArg} allFacialArg={allFacialArg}
                       checkedState={checkedPCAState} handleCheckboxChange={handlePCACheckboxChange} idVal={"pcaInputArg_"} />
                   </div>
                 </div>
               }
               {distrButton &&
-                <div style={{ height: "95%" }}>
-                  <div style={{ display: "inline-flex", flexDirection: "row" }}>
+                <div className='queryList'>
+                  <div className="queryUpdateButton">
                     <button type="button" className='btn btn-sm btn-outline-primary' onClick={handleDistrUpdate}>Update Distributions</button>
                   </div>
-                  <div style={{ overflowY: "scroll", height: "97%" }}>
+                  <div className="queryCheckboxContainer">
                     <QueryPanel allAcousticArg={allAcousticArg} allMovementArg={allMovementArg} allSpeechArg={allSpeechArg} allFacialArg={allFacialArg}
                       checkedState={checkedDistrState} handleCheckboxChange={handleDistrCheckboxChange} idVal={"distributionInputArg_"} />
                   </div>
                 </div>
               }
               {corrMatrixButton &&
-                <div style={{ height: "95%" }}>
-                  <div style={{ display: "inline-flex", flexDirection: "row" }}>
+                <div className='queryList'>
+                  <div className="queryUpdateButton">
                     <button type="button" className='btn btn-sm btn-outline-primary' onClick={handleCorrMatrixUpdate}>Update Correlations</button>
                   </div>
-                  <div style={{ overflowY: "scroll", height: "97%" }}>
+                  <div className="queryCheckboxContainer">
                     <QueryPanel allAcousticArg={allAcousticArg} allMovementArg={allMovementArg} allSpeechArg={allSpeechArg} allFacialArg={allFacialArg}
                       checkedState={checkedCorrMatrixState} handleCheckboxChange={handleCorrMatrixCheckboxChange} idVal={"corrmatrixInputArg_"} />
                   </div>
@@ -339,22 +333,20 @@ function CohortPanel() {
               }
             </div>
           </Col>
-          <Col className="col-4" style={{ height: "95%", width: "35%" }}>
-            <Row id="scatterplotContainer" style={{ height: "35vh" }}>
+          <Col className="col-4" id="scatterplotCorrMatrixContainer">
+            <Row id="scatterplotContainer">
               {pcaCoords && <Scatterplot data={pcaCoords} filteredIds={filteredIdData}
                 metadata={metadataButton === true ? metadata : []} hideIds={checkedHideIdsState} metadataAttrColor={metadataAttrColor} />}
             </Row>
-            <Row id="corrMatrixContainer" style={{ height: "50%", marginTop: "10%", fontSize: "0.8rem" }}>
-              <CorrelationMatrix data={corrMatrixData} />
+            <Row id="corrMatrixContainer">
+              <CorrelationMatrix data={corrMatrixData} parentId={"corrMatrixContainer"} />
             </Row>
           </Col>
-          <Col className="col-2" style={{
-            display: "flex", flexDirection: "column", borderRadius: "15px", height:
-              "98%", paddingTop: "10px", fontSize: "0.7rem", width: "max-content", boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px"
-          }}>
+          <Col id="idPanelContainer" className="col-2">
             <button type="button" className='btn btn-primary btn-sm'>Filter ID(s)</button>
-            <button type="button" className={`btn ${checkedHideIdsState === true ? 'btn-primary' : 'btn-outline-primary'}  btn-sm`} style={{ marginTop: "10px" }} onClick={handleHideIds}>Hide Unselected</button>
-            <div style={{ display: "inline-flex", flexDirection: "column", marginTop: "10px", height: "94%", overflowY: "auto", }}>
+            <button type="button" className={`btn ${checkedHideIdsState === true ? 'btn-primary' : 'btn-outline-primary'}  btn-sm`}
+              id="hideIdButton" onClick={handleHideIds}>Hide Unselected</button>
+            <div id="idListContainer">
               {idData.map((value, index) =>
                 <label className="id_checkbox_container" id={value + "_id_container"} key={value + "id"}>
                   <input
@@ -367,10 +359,10 @@ function CohortPanel() {
               )}
             </div>
           </Col>
-          <Col id="distributionChartContainer" style={{ height: "93%", overflowY: "auto" }}>
-            <h6 style={{ fontWeight: "bolder" }}>Attribute Distribution</h6>
+          <Col id="distributionChartContainer">
+            <h6>Attribute Distribution</h6>
             {distrArgs.map((value) =>
-              <div style={{ display: "inline-flex", flexDirection: "row", marginLeft: "10px" }} key={value + "distr"}>
+              <div className="distributionChart" key={value + "distr"}>
                 {<DistributionChart data={distrData} attr={value} id={"distributionChart_" + value}
                   filteredIds={filteredIdData} metadata={metadataButton === true ? metadata : []}
                   hideIds={checkedHideIdsState} metadataAttrColor={metadataAttrColor} />}

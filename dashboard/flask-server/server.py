@@ -111,15 +111,15 @@ def fetchIndividualFacialTimelineData():
 def getRawAttributesAndIds():
     result = {}
     if not individualFacialRawData.empty:
-        result['facial'] = [x for x in list(individualFacialRawData.columns) if x not in ["frame"]]
+        result['facial'] = [x for x in list(individualFacialRawData.columns)]
     else:
         result['facial'] =[]
     if not individualAcousticRawData.empty:
-        result['acoustic'] = [x for x in list(individualAcousticRawData.columns) if x not in ["Frames"]]
+        result['acoustic'] = [x for x in list(individualAcousticRawData.columns)]
     else:
         result['acoustic'] = []
     if not individualMovementRawData.empty:
-        result['movement'] = [x for x in list(individualMovementRawData.columns) if x not in ["Frames"]]
+        result['movement'] = [x for x in list(individualMovementRawData.columns)]
     else:
         result['movement'] = []
     if len(rawDataArgs) > 0:
@@ -151,77 +151,68 @@ def individualCorrMatrixData(id):
         all_df = f.copy()
         if len(f) == len(m):
             for x in m.columns:
-                if x not in ['Frames', 'frame']:
-                    all_df[x] = m[x]
+                all_df[x] = m[x]
         else:
             seg = int(len(m)/(max(len(f),1)))
             reminder = len(m)%(max(len(f),1))
             for i, row in all_df.iterrows():
                 for x in m.columns:
-                    if x not in ['Frames', 'frame']:
-                        if i <reminder:
-                            all_df.loc[i,x] = sum(list(m[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                        else:
-                            all_df.loc[i,x] = sum(list(m[i*seg:(i+1)*seg][x]))/seg
+                    if i <reminder:
+                        all_df.loc[i,x] = sum(list(m[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                    else:
+                        all_df.loc[i,x] = sum(list(m[i*seg:(i+1)*seg][x]))/seg
         if len(a) > len(f):
             seg = int(len(a)/(max(len(f),1)))
             reminder = len(a)%(max(len(f),1)) 
             for i, row in all_df.iterrows():
                 for x in a.columns:
-                    if x not in ['Frames', 'frame']:
-                        if i <reminder:
-                            all_df.loc[i,x] = sum(list(a[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                        else:
-                            all_df.loc[i,x] = sum(list(a[i*seg:(i+1)*seg][x]))/seg
+                    if i <reminder:
+                        all_df.loc[i,x] = sum(list(a[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                    else:
+                        all_df.loc[i,x] = sum(list(a[i*seg:(i+1)*seg][x]))/seg
         else:
             for x in a.columns:
-                if x not in ['Frames', 'frame']:
-                    all_df[x] = a[x]    
+                all_df[x] = a[x]    
     elif len(m) == min_len:
         all_df = m.copy()
         seg = int(len(f)/(max(len(m),1)))
         reminder = len(f)%(max(len(m),1))  
         for i, row in all_df.iterrows():
             for x in f.columns:
-                if x not in ['Frames', 'frame']:
-                    if i <reminder:
-                        all_df.loc[i,x] = sum(list(f[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                    else:
-                        all_df.loc[i,x] = sum(list(f[i*seg:(i+1)*seg][x]))/seg
+                if i <reminder:
+                    all_df.loc[i,x] = sum(list(f[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                else:
+                    all_df.loc[i,x] = sum(list(f[i*seg:(i+1)*seg][x]))/seg
         if len(a) > len(m):
             seg = int(len(a)/(max(len(m),1)))
             reminder = len(a)%(max(len(m),1))   
             for i, row in all_df.iterrows():
                 for x in a.columns:
-                    if x not in ['Frames', 'frame']:
-                        if i <reminder:
-                            all_df.loc[i,x] = sum(list(a[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                        else:
-                            all_df.loc[i,x] = sum(list(a[i*seg:(i+1)*seg][x]))/seg
+                    if i <reminder:
+                        all_df.loc[i,x] = sum(list(a[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                    else:
+                        all_df.loc[i,x] = sum(list(a[i*seg:(i+1)*seg][x]))/seg
         else:
             for x in a.columns:
-                if x not in ['Frames', 'frame']:
-                    all_df[x] = a[x]
+                all_df[x] = a[x]
     else:
         all_df = a.copy()
         seg = int(len(f)/(max(len(a),1)))
         reminder = len(f)%(max(len(a),1))
         for i, row in all_df.iterrows():
             for x in f.columns:
-                if x not in ['Frames', 'frame']:
-                    if i <reminder:
-                        all_df.loc[i,x] = sum(list(f[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                    else:
-                        all_df.loc[i,x] = sum(list(f[i*seg:(i+1)*seg][x]))/seg
+                if i <reminder:
+                    all_df.loc[i,x] = sum(list(f[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                else:
+                    all_df.loc[i,x] = sum(list(f[i*seg:(i+1)*seg][x]))/seg
         seg = int(len(m)/(max(len(a),1)))
         reminder = len(m)%(max(len(a),1))
         for i, row in all_df.iterrows():
             for x in m.columns:
-                if x not in ['Frames', 'frame']:
-                    if i <reminder:
-                        all_df.loc[i,x] = sum(list(m[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
-                    else:
-                        all_df.loc[i,x] = sum(list(m[i*seg:(i+1)*seg][x]))/seg
+                if i <reminder:
+                    all_df.loc[i,x] = sum(list(m[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
+                else:
+                    all_df.loc[i,x] = sum(list(m[i*seg:(i+1)*seg][x]))/seg
 
     return all_df.fillna(0)
 
