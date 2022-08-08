@@ -104,16 +104,16 @@ const HeadSVG = ({ width, height }, ref) => {
                     <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(141, 90)" id="au4RightHighlight" className="sad_highlight fea_highlight ang_highlight emotion_highlight">
                         <circle cx="10" cy="10" r="50%" fill="purple" opacity="0.4" />
                     </svg>
-                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(148, 65)" id="au1RightHighlight" className="sad_highlight sur_highlight fea_highlight emotion_highlight">
+                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(148, 65)" id="au2RightHighlight" className="sur_highlight fea_highlight emotion_highlight">
                         <circle cx="10" cy="10" r="50%" fill="purple" opacity="0.4" />
                     </svg>
-                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(35, 65)" id="au1LeftHighlight" className="sad_highlight sur_highlight fea_highlight emotion_highlight">
+                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(35, 65)" id="au2LeftHighlight" className="sur_highlight fea_highlight emotion_highlight">
                         <circle cx="10" cy="10" r="50%" fill="purple" opacity="0.4" />
                     </svg>
-                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(118, 68)" id="au2RightHighlight" className="sur_highlight fea_highlight emotion_highlight">
+                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(118, 68)" id="au1RightHighlight" className="sad_highlight sur_highlight fea_highlight emotion_highlight">
                         <circle cx="10" cy="10" r="50%" fill="purple" opacity="0.4" />
                     </svg>
-                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(68, 68)" id="au2LeftHighlight" className="sur_highlight fea_highlight emotion_highlight">
+                    <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(68, 68)" id="au1LeftHighlight" className="sad_highlight sur_highlight fea_highlight emotion_highlight">
                         <circle cx="10" cy="10" r="50%" fill="purple" opacity="0.4" />
                     </svg>
                     <svg width="20" height="20" style={{ position: "absolute" }} transform="translate(162, 104)" id="au5RightHighlight" className="sur_highlight fea_highlight ang_highlight emotion_highlight">
@@ -197,21 +197,21 @@ const HeadSVG = ({ width, height }, ref) => {
                         <path id="au4Right_path" strokeWidth="12%" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
                         <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >4</text>
                     </svg>
-                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU01" viewBox="0 0 16 16" transform="translate(150, 68)" id="au1Right">
-                        <path id="au1Right_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
-                        <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >1</text>
-                    </svg>
-                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU01" viewBox="0 0 16 16" transform="translate(37, 67)" id="au1Left">
-                        <path id="au1Left_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
-                        <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >1</text>
-                    </svg>
-                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU02" viewBox="0 0 16 16" transform="translate(120, 70)" id="au2Right">
+                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU02" viewBox="0 0 16 16" transform="translate(150, 68)" id="au2Right">
                         <path id="au2Right_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
                         <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >2</text>
                     </svg>
-                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU02" viewBox="0 0 16 16" transform="translate(70, 70)" id="au2Left">
+                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU02" viewBox="0 0 16 16" transform="translate(37, 67)" id="au2Left">
                         <path id="au2Left_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
                         <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >2</text>
+                    </svg>
+                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU01" viewBox="0 0 16 16" transform="translate(120, 70)" id="au1Right">
+                        <path id="au1Right_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                        <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >1</text>
+                    </svg>
+                    <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU01" viewBox="0 0 16 16" transform="translate(70, 70)" id="au1Left">
+                        <path id="au1Left_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                        <text className='AUtooltip' opacity='0' x="40%" y="50%" textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >1</text>
                     </svg>
                     <svg width="16" height="16" style={{ position: "absolute" }} className="bi bi-arrow-up AU05" viewBox="0 0 16 16" transform="translate(165, 105)" id="au5Right">
                         <path id="au5Right_path" strokeWidth="12%" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
@@ -272,11 +272,11 @@ const HeadSVG = ({ width, height }, ref) => {
 
                     <svg width="20" height="20" style={{ position: "absolute" }} className="bi bi-arrow-right AU07" viewBox="0 0 20 20" transform="translate(30, 125), rotate(-45)" id="au7Left">
                         <path id="au7Left_path" strokeWidth="12%" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                        <text className='AUtooltip' opacity='0' x="80%" y="20%" transform='rotate(45)' textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2">23</text>
+                        <text className='AUtooltip' opacity='0' x="80%" y="20%" transform='rotate(45)' textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2">7</text>
                     </svg>
                     <svg width="20" height="20" style={{ position: "absolute" }} className="bi bi-arrow-left AU07" viewBox="0 0 20 20" transform="translate(150, 127),  rotate(45)" id="au7Right">
                         <path id="au7Right_path" strokeWidth="12%" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-                        <text className='AUtooltip' opacity='0' x="0%" y="80%" transform='rotate(-45)' textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >23</text>
+                        <text className='AUtooltip' opacity='0' x="0%" y="80%" transform='rotate(-45)' textAnchor="middle" fontSize="10px" stroke="black" strokeWidth="0.2" >7</text>
                     </svg>
                 </div>
 

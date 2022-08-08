@@ -55,17 +55,22 @@ def read_rawFacialDf(ar, id):
     facial_expr = pd.read_csv(facial_expr_filename)
     facial_expr_cols = [col for col in facial_expr if col not in skip_cols and "AU" not in col]
 
-    face_df = facial_asym.loc[:, ~facial_asym.columns.isin(skip_cols)].copy()
-    for el in facial_au_cols:
-        face_df[el] = facial_au[el]
+    landmark = pd.read_csv(landmark_filename)
+    landmark_cols = [col for col in landmark if col not in skip_cols]
+
+    face_df = landmark.loc[:, ~landmark.columns.isin(skip_cols)].copy()
     for el in facial_expr_cols:
         face_df[el] = facial_expr[el]
-    return face_df.fillna(0)
+    for el in facial_au_cols:
+        face_df[el] = facial_au[el]
+    for el in facial_asym_cols:
+        face_df[el] = facial_asym[el]
+    return face_df[face_df.columns[::-1]].fillna(0)
 
 
 
 def read_rawMovementDf(ar, id):
-    skip_cols = ["error_reason", "dbm_master_url", "Frames", " Frames"]
+    skip_cols = ["error_reason", "dbm_master_url", "Frames", " Frames", "vid_dur", "fps" ]
 
     gaze_filename = ar + "/raw_variables/"+id+"/movement/gaze/"+id+"_eyegaze.csv"
     head_movement_filename = ar + "/raw_variables/"+id+"/movement/head_movement/"+id+"_headmov.csv"
@@ -85,11 +90,11 @@ def read_rawMovementDf(ar, id):
     head_movement_cols = [col for col in head_movement if col not in skip_cols]
 
 
-    # blinks = pd.read_csv(blinks_filename)
-    # blinks_cols = [col for col in blinks if col not in skip_cols]
+    blinks = pd.read_csv(blinks_filename)
+    blinks_cols = [col for col in blinks if col not in skip_cols]
 
-    # fac_tremor = pd.read_csv(fac_tremor_filename)
-    # fac_tremor_cols = [col for col in fac_tremor if col not in skip_cols]
+    fac_tremor = pd.read_csv(fac_tremor_filename)
+    fac_tremor_cols = [col for col in fac_tremor if col not in skip_cols]
 
     voice_tremor = pd.read_csv(voice_tremor_filename)
     voice_tremor_cols = [col for col in voice_tremor if col not in skip_cols]
@@ -103,10 +108,10 @@ def read_rawMovementDf(ar, id):
         movement_df[el] = head_movement[el]
     for el in gaze_cols:
         movement_df[el] = gaze[el]
-    # for el in blinks_cols:
-    #     movement_df[el] = blinks[el]
-    # for el in fac_tremor_cols:
-    #     movement_df[el] = fac_tremor[el]
+    for el in blinks_cols:
+        movement_df[el] = blinks[el]
+    for el in fac_tremor_cols:
+        movement_df[el] = fac_tremor[el]
     for el in voice_tremor_cols:
         movement_df[el] = voice_tremor[el]
     return movement_df.fillna(0)

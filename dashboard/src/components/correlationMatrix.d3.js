@@ -16,13 +16,14 @@ export default class CorrelationMatrixD3 {
             .attr('height', height)
 
         var values = Object.values(data).map(el => Object.values(el))
+        
         var keys = Object.keys(data).map(e => e.replace("aco_", "").replace("fac_", "").replace("mov_", ""))
 
         const minRowValue = values.map(el => Math.min(...(el)))
         const maxRowValue = values.map(el => Math.max(...(el)))
         const minValue = Math.min(...(minRowValue))
         const maxValue = Math.max(...(maxRowValue))
-        const colorScale = d3.scaleLinear().domain([minValue, 0, maxValue]).range(["#fdae61", "#f7f7f7", "#67a9cf"])
+        const colorScale = d3.scaleLinear().domain([minValue, 0, maxValue]).range(["#c34e4c", "#f2f2f2", "#4476a9"])
 
         var xScale = d3.scaleBand()
             .domain(keys).range([80, width - 20])
@@ -80,15 +81,15 @@ export default class CorrelationMatrixD3 {
             .attr("y2", "100%");
         linearGradient.append("stop")
             .attr("offset", "0%")
-            .attr("stop-color", "#fdae61")
+            .attr("stop-color", "#c34e4c")
 
         linearGradient.append("stop")
             .attr("offset", "50%")
-            .attr("stop-color", "#f7f7f7")
+            .attr("stop-color", "#f2f2f2")
 
         linearGradient.append("stop")
             .attr("offset", "100%")
-            .attr("stop-color", "#67a9cf")
+            .attr("stop-color", "#4476a9")
 
 
         const colorLegendHeight = height / 3

@@ -128,25 +128,43 @@ def getRawAttributesAndIds():
         result['ids'] = []
     return result
 
-def individualCorrMatrixData(id):
+def individualCorrMatrixData(id, corrArgs):
+    individualFacialRawData = pd.DataFrame()
+    individualMovementRawData = pd.DataFrame()
+    individualAcousticRawData = pd.DataFrame()
     if id:
-        individualFacialRawData = process_input_data.read_rawFacialDf(sys.argv[1], id)
-        individualMovementRawData  = process_input_data.read_rawMovementDf(sys.argv[1], id)
-        individualAcousticRawData = process_input_data.read_rawAcousticDf(sys.argv[1], id)
+        if len([x for x in corrArgs if "fac_" in x])>0:
+            individualFacialRawData = process_input_data.read_rawFacialDf(sys.argv[1], id)
+        if len([x for x in corrArgs if "mov_" in x])>0:
+            individualMovementRawData  = process_input_data.read_rawMovementDf(sys.argv[1], id)
+        if len([x for x in corrArgs if "aco_" in x])>0:
+            individualAcousticRawData = process_input_data.read_rawAcousticDf(sys.argv[1], id)
     else:
-        individualFacialRawData = process_input_data.read_rawFacialDf(sys.argv[1], inputData['Filename'][0])
-        individualMovementRawData  = process_input_data.read_rawMovementDf(sys.argv[1], inputData['Filename'][0])
-        individualAcousticRawData = process_input_data.read_rawAcousticDf(sys.argv[1], inputData['Filename'][0])
-    f = individualFacialRawData
-    m = individualMovementRawData
-    a = individualAcousticRawData
+        if len([x for x in corrArgs if "fac_" in x])>0:
+            individualFacialRawData = process_input_data.read_rawFacialDf(sys.argv[1], inputData['Filename'][0])
+        if len([x for x in corrArgs if "mov_" in x])>0:
+            individualMovementRawData  = process_input_data.read_rawMovementDf(sys.argv[1], inputData['Filename'][0])
+        if len(list(filter(lambda x : "aco_" in x or "tremor_median" in x or "fac_features_mean" in x or "fac_corr" in x, individualMovementRawData))) >0:
+            individualAcousticRawData = process_input_data.read_rawAcousticDf(sys.argv[1], inputData['Filename'][0])
+    f = individualFacialRawData.loc[:, individualFacialRawData.columns.isin(corrArgs)]
+    m = individualMovementRawData.loc[:, individualMovementRawData.columns.isin(corrArgs)]
+    a = individualAcousticRawData.loc[:, individualAcousticRawData.columns.isin(corrArgs)]
     if f.empty:
         f = pd.DataFrame()
     if m.empty:
         m = pd.DataFrame()
     if a.empty:
         a = pd.DataFrame()
-    min_len =  min(min(len(a), len(m)), len(f))
+    min_len = float('inf')
+    if not f.empty:
+        min_len = len(f)
+    if not m.empty:
+        min_len = min(min_len, len(m))
+    if not a.empty:
+        min_len=min(min_len, len(a))
+    if min_len == float('inf'):
+        min_len = 0
+
     if min_len == len(f):
         all_df = f.copy()
         if len(f) == len(m):
@@ -213,7 +231,6 @@ def individualCorrMatrixData(id):
                     all_df.loc[i,x] = sum(list(m[i*(seg + 1):(i+1)*(seg+1)][x]))/(seg+1)
                 else:
                     all_df.loc[i,x] = sum(list(m[i*seg:(i+1)*seg][x]))/seg
-
     return all_df.fillna(0)
 
 
@@ -309,8 +326,9 @@ def updateCorrMatrix(attr=[], individual = False, id=None):
     if individual:
         if not id:
             id = request.json['id']
-        d = individualCorrMatrixData(id)
-        df = d.loc[:, d.columns.isin(corrMatrixArgs)]
+        d = individualCorrMatrixData(id, corrMatrixArgs)
+        df = d
+        # df = d.loc[:, d.columns.isin(corrMatrixArgs)]
     else:
         df = inputData.loc[:, inputData.columns.isin(corrMatrixArgs)]
 

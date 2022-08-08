@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap';
 import $ from 'jquery';
@@ -21,7 +21,6 @@ function IndividualPanel() {
   const [facialMaskVals, setFacialMaskVals] = useState(null)
   const emotions = ["ang", "fea", "dig", "sad", "con", "sur", "hap"]
   const [checkedEmotions, setCheckedEmotions] = useState(new Array(emotions.length).fill(false))
-  const componentRef = useRef();
 
   const [rawFacialData, setFacialRawData] = useState(null)
   const [facialTimelineData, setFacialTimelineData] = useState(null)
@@ -79,16 +78,20 @@ function IndividualPanel() {
     setAsymetryButton(param === "asym" ? !asymetryButton : false)
     setPainButton(param === "pain" ? !painButton : false)
     setExpressivityButton(param === "expr" ? !expressivityButton : false)
+    if(param === "aus" & AUsButton){
+      $('.emotion_highlight').css("opacity", "0")
+    }
+   
     setAUsButton(param === "aus" ? !AUsButton : false)
-    setFacialMaskColor(param === "asym" ? "pink" : param === "pain" ? "red" : param === "expr" ? "orange" : "#cb181d")
-    setFacialMaskVals(param === "asym" ? [0, 10] : param === "pain" ? [0, 1] : param === "expr" ? [0, 1] : [0, 1])
+    setFacialMaskColor(param === "asym" ? "#de77ae" : param === "pain" ? "red" : param === "expr" ? "orange" : "#cb181d")
+    setFacialMaskVals(param === "asym" ? [0, 40] : param === "pain" ? [0, 1] : param === "expr" ? [0, 1] : [0, 1])
   }
 
   const handleMovementMask = () => {
     $('#headMovementMaskContainer').css("opacity", !movementButton ? "1" : "0")
     setMovementButton(!movementButton)
-    setFacialMaskColor(asymetryButton ? "pink" : painButton ? "red" : expressivityButton ? "orange" : "#cb181d")
-    setFacialMaskVals(asymetryButton ? [0, 10] : painButton ? [0, 1] : expressivityButton ? [0, 1] : [0, 1])
+    setFacialMaskColor(asymetryButton ? "#de77ae" : painButton ? "red" : expressivityButton ? "orange" : "#cb181d")
+    setFacialMaskVals(asymetryButton ? [0, 40] : painButton ? [0, 1] : expressivityButton ? [0, 1] : [0, 1])
   }
 
   const fetchIndividualData = id => {
@@ -347,9 +350,13 @@ function IndividualPanel() {
       updatedCheckedState = checkedMovementState.map(e => false)
       setCheckedMovementState(updatedCheckedState)
     }
-    else {
+    else if (param === "acoustics"){
       updatedCheckedState = checkedAcousticState.map(e => false)
       setCheckedAcousticState(updatedCheckedState)
+    }
+    else {
+      updatedCheckedState = checkedCorrMatrixState.map(e => false)
+      setCheckedCorrMatrixState(updatedCheckedState)
     }
   }
 
@@ -501,6 +508,8 @@ function IndividualPanel() {
                   <div >
                     <div id="corrQuerryButton">
                       <button type="button" className='btn btn-sm btn-outline-primary' onClick={handleCorrMatrixUpdate}>Update</button>
+                      <button type="button" className="btn-close" aria-label="Close"
+                          onClick={() => handleUnselectCheckboxes("corr")}></button>
                     </div>
                     <QueryPanel allAcousticArg={allAcousticAttr} allMovementArg={allMovementAttr} allSpeechArg={[]} allFacialArg={allFacialAttr}
                       checkedState={checkedCorrMatrixState} handleCheckboxChange={handleCorrMatrixCheckboxChange} idVal={"corrMatrixIndividual_"} />

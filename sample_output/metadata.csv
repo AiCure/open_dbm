@@ -1,4 +1,4 @@
 id,attr
-subj01_timepoint01,1
-subj02_timepoint02,1
-subj02_timepoint01,2
+subj01_timepoint01,attr1
+subj02_timepoint02,attr1
+subj02_timepoint01,attr2

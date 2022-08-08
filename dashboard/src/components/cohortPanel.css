@@ -14,11 +14,12 @@
 
 #metadataAttributes {
     display: flex;
-    flex--direction: row;
+    flex-direction: row;
     justify-content: flex-end;
     margin: auto;
     margin-left: 20px;
     opacity: 0;
+    color: #000;
 }
 
 .metadataAttr {

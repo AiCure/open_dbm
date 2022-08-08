@@ -37,7 +37,7 @@ function CohortPanel() {
   const [allDBMArg, setAllDBMArg] = useState([])
 
   const [metadata, setMetadata] = useState([])
-  const metadataColorList = ['none', 'gold', 'blue', 'brown', 'purple', 'orange']
+  const metadataColorList = ['none', 'gold', 'blue', 'deeppink', 'darkviolet', 'cyan', 'black', 'brown', 'greenyellow', 'orchid','mediumpurple']
   const [metadataAttrColor, setMetadataAttrColor] = useState({})
 
   useEffect(() => {
@@ -64,9 +64,9 @@ function CohortPanel() {
       res => res.json()
     ).then(
       data => {
-        setMetadata(data)
         var attr = [...new Set(Object.values(data).map(el => el['attr']).filter(e => e != null))]
         if (attr.length <= metadataColorList.length - 1) {
+          setMetadata(data)
           var metaColorData = {}
           var attrDict = {}
           attr.forEach((e, i) => {
@@ -228,11 +228,12 @@ function CohortPanel() {
 
 
   const handleIdCheckboxChange = ev => {
+
     $('#' + ev.target.id).is(":checked") ?
-      $(".dot_" + ev.target.id.replace("_id", "")).css("fill", "red") :
+      $(".dot_" + ev.target.id.replace("_id", "")).css("fill", "darkorange") :
       $(".dot_" + ev.target.id.replace("_id", "")).css("fill",
-        (Object.keys(metadataAttrColor).includes(ev.target.id.replace("_id", "")) &
-          metadataButton) ? metadataAttrColor[ev.target.id.replace("_id", "")] : "#69b3a2")
+        metadataButton 
+       ? metadataAttrColor[ev.target.id.replace("_id", "")] : "#41ab5d")
 
     var filteredIdData_aux = idData.filter(id =>
       $('#' + id + "_id").is(":checked"))
@@ -272,16 +273,15 @@ function CohortPanel() {
         <div id="metaDataButton">
           <div>
             <button type="button" className={`btn btn-sm ${metadataButton === true ? 'btn-outline-primary' : 'btn-outline-secondary'}`}
-              id="metadataButton" onClick={handleMetadata}>Metadata</button>
+              id="metadataButton" onClick={handleMetadata}>Extra Attributes</button>
           </div>
           <div id="metadataAttributes">
-            <div id="attributesTag" >Attributes:</div>
             {metadataColorList.map((value, index) =>
               <div id={value + "AttrContainer"} key={value + "color"} className="metadataAttr">
                 <svg height="14" width="14" transform="translate(3,3)" id={value + "circle"}>
-                  <circle cx="7" cy="7" r="50%" fill={value === "none" ? "#69b3a2" : value} />
+                  <circle cx="7" cy="7" r="50%" fill={value === "none" ? "#41ab5d" : value} />
                 </svg>
-                <div style={{ color: (value === "none" ? "#69b3a2" : value) }}
+                <div
                   id={(value !== "none" ? value : "none") + "color"}>{value === "none" ? "None" : ""}</div>
               </div>
             )}

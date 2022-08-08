@@ -1,2 +1,0 @@
-nlp_numSentences,nlp_singPronPerAns,nlp_singPronPerSen,nlp_pastTensePerAns,nlp_pastTensePerSen,nlp_pronounsPerAns,nlp_pronounsPerSen,nlp_verbsPerAns,nlp_verbsPerSen,nlp_adjectivesPerAns,nlp_adjectivesPerSen,nlp_nounsPerAns,nlp_nounsPerSen,nlp_sentiment_mean,nlp_mattr,nlp_wordsPerMin,nlp_totalTime,dbm_master_url
-1,1,1.0,0,0.0,0,0.0,0,0.0,1,1.0,1,1.0,0.0,0.875,18.133223684210524,6.617687074829933,sample_data/subj02_timepoint02.mp4

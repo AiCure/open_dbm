@@ -39,7 +39,7 @@ export default class HistogramD3 {
         var maxVal = DBMDict[attr]['range'].length > 0 ? DBMDict[attr]['range'][1] : Math.max(...values)
         var yScale = d3.scaleLinear()
             .range([height - 20, 5])
-            .domain([minVal, maxVal])
+            .domain(attr ==="aco_int" ? [0, maxVal]: [minVal, maxVal])
 
 
         var yAxis = axisLeft(yScale)

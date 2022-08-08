@@ -21,12 +21,12 @@ export default class ColorLegendD3 {
             return
         }
 
-        const asymetryColorScale = d3.scaleLinear().domain([0, 10]).range(["white", 'pink'])
+        const asymetryColorScale = d3.scaleLinear().domain([0, 40]).range(["white", '#de77ae'])
         const painColorScale = d3.scaleLinear().domain([0, 1]).range(["white", 'red'])
         const expressivityColorScale = d3.scaleLinear().domain([0, 1]).range(["white", 'orange'])
         const AUsColorScale = d3.scaleLinear().domain([0, 5]).range(["white", '#cb181d'])
-        const negMovementColorScale = d3.scaleLinear().domain([-1, 0]).range(['#cb181d', "#fff5f0"])
-        const posMovementColorScale = d3.scaleLinear().domain([0, 1]).range(["#fff5f0", '#cb181d'])
+        const negMovementColorScale = d3.scaleLinear().domain([-3.14, 0]).range(['#cb181d', "#fff5f0"])
+        const posMovementColorScale = d3.scaleLinear().domain([0, 3.14]).range(["#fff5f0", '#cb181d'])
         const vissibleAUs = ['AU01', 'AU02', 'AU04', 'AU05', 'AU06', 'AU07', 'AU09', 'AU10', 'AU12', 'AU14', 'AU15', 'AU17', 'AU20', 'AU23', 'AU25', 'AU26']
 
         if (parseInt(timeframe) === 0) {

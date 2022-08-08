@@ -31,9 +31,6 @@ export default class DistributionChart {
 
         var metadataDict = {}
         if (metadata.length > 0) {
-            var metadataAttr = [...new Set(Object.values(metadata).map(el => el['attr']).filter(e => e != null))]
-            var metadataColor = d3.scaleOrdinal().domain(metadataAttr)
-                .range(["gold", "blue"])
             var d = Object.values(metadata).map(el => [el['id'], el['attr']])
             d.forEach(el => {
                 metadataDict[el[0]] = el[1]
@@ -41,7 +38,7 @@ export default class DistributionChart {
         }
 
         var yScale = d3.scaleLinear()
-            .domain([Math.min(...values), Math.max(...values)])
+            .domain(DBMDict[attr]['range'].length > 0 ? DBMDict[attr]['range'] : [Math.min(...values), Math.max(...values)])
             .range([height - 30, 20])
         svg.append("g")
             .attr("transform", "translate(40 ,0)")
@@ -97,30 +94,30 @@ export default class DistributionChart {
             .attr("cx", d => (xScale(attr) + xScale.bandwidth() / 2 - Math.random() * jitterWidth - 5))
             .attr("cy", d => yScale(d[1]))
             .attr("r", 5.5)
-            .style("fill", d => filteredIds.includes(d[0]) ? "red" : (metadataDict[d[0]] ? metadataAttrColor[d[0]] : "#69b3a2"))
+            .style("fill", d => filteredIds.includes(d[0]) ? "darkorange" : (metadataDict[d[0]] ? metadataAttrColor[d[0]] : "#41ab5d"))
             .style("opacity", d => filteredIds.includes(d[0]) ? "0.4" : hideIds ? "0" : "0.4")
             .attr("stroke", "grey")
             .attr("stroke-width", '1.5px')
             .on("mouseover", d => {
                 var className = "dot_" + d.target.id.replace("_distr_" + attr, "")
-                d3.selectAll("." + className).style("fill", "red")
+                d3.selectAll("." + className).style("fill", "darkorange")
                 $("#" + d.target.id.replace("_distr_" + attr, "") + "_id_container").css("color", "#fc6a03")
                 keys.forEach(k => {
                     if ($('#' + k + "_id").is(":checked"))
-                        $(".dot_" + k).css("fill", "red")
+                        $(".dot_" + k).css("fill", "darkorange")
                 })
             })
             .on("mouseout", d => {
                 keys.forEach(k => {
-                    $(".dot_" + k).css("fill", filteredIds.includes(k) ? "red" : (metadataDict[k] ? metadataAttrColor[k] : "#69b3a2"))
+                    $(".dot_" + k).css("fill", $('#' + k+ "_id").is(":checked") ? "darkorange" : (metadataDict[k] ? metadataAttrColor[k] : "#41ab5d"))
                     if ($('#' + k + "_id").is(":checked")) {
-                        $(".dot_" + k).css("fill", "red")
+                        $(".dot_" + k).css("fill", "darkorange")
                     }
                 })
                 $(".id_checkbox_container").css("color", "black")
             })
             .append("title")
-            .text(d => "ID: " + String(d[0]) + "\n" + "Value: " + d[1])
+            .text(d => "ID: " + String(d[0]) + "\n" + "Value: " + String(d[1]))
 
 
 
