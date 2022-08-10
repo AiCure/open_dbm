@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import $ from "jquery";
 import "../index.css"
+import DBMDict from '../DBM_attribute_dict.json'
 
 export default class CorrelationMatrixD3 {
     constructor(chart, data, parentId) {
@@ -17,7 +18,7 @@ export default class CorrelationMatrixD3 {
 
         var values = Object.values(data).map(el => Object.values(el))
         
-        var keys = Object.keys(data).map(e => e.replace("aco_", "").replace("fac_", "").replace("mov_", ""))
+        var keys = Object.keys(data).map(e => DBMDict[e]['label'])
 
         const minRowValue = values.map(el => Math.min(...(el)))
         const maxRowValue = values.map(el => Math.max(...(el)))

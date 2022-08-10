@@ -28,7 +28,7 @@ export default class ScatterplotD3 {
                 $('#metadataAttributes').css("opacity", 1)
                 var medataAttr = [...new Set(Object.values(metadata).map(el => el['attr']).filter(e => e != null))]
                 var metadataColor = d3.scaleOrdinal().domain(medataAttr)
-                    .range(['gold', 'blue', 'deeppink', 'darkviolet', 'cyan', 'black', 'brown', 'greenyellow', 'orchid','mediumpurple'])
+                    .range(['gold', 'blue', 'pink', 'darkviolet', 'cyan', 'black', 'brown', 'greenyellow', 'orchid','mediumpurple'])
                 var d = Object.values(metadata).map(el => [el['id'], el['attr']])
 
                 d.forEach(el => {

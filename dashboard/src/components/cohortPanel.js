@@ -37,7 +37,7 @@ function CohortPanel() {
   const [allDBMArg, setAllDBMArg] = useState([])
 
   const [metadata, setMetadata] = useState([])
-  const metadataColorList = ['none', 'gold', 'blue', 'deeppink', 'darkviolet', 'cyan', 'black', 'brown', 'greenyellow', 'orchid','mediumpurple']
+  const metadataColorList = ['none', 'gold', 'blue', 'pink', 'darkviolet', 'cyan', 'black', 'brown', 'greenyellow', 'orchid','mediumpurple']
   const [metadataAttrColor, setMetadataAttrColor] = useState({})
 
   useEffect(() => {

@@ -319,6 +319,7 @@
 #acousticsContainer {
     padding: 10px;
     margin-left: -10px;
+    font-size: 0.8rem;
     margin-right: 5px;
     width: max-content;
 }
