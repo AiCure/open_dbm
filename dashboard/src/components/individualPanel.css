@@ -1,0 +1,337 @@
+.histogramComponent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.printButton {
+    width: max-content;
+    height: max-content;
+}
+
+.spiderChartLabel {
+    font-size: 0.8rem;
+}
+
+.spiderChartComponent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.histogramStatisticsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.histogramStatistics {
+    font-size: 0.7rem;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+#timelineContainer {
+    height: 5%;
+    position: absolute;
+    top: 0px;
+    left: 250px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sliderContainer {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+#timelineRange {
+    width: 400px;
+}
+
+#steplist {
+    display: inline-flex;
+    margin-top: -10px !important;
+}
+
+#steplist option {
+    margin-left: 2px;
+    margin-right: 4px;
+    font-size: 0.7rem;
+}
+
+#timeFramesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: auto;
+    width: 70%;
+}
+
+#facialFrameLabel {
+    margin: auto;
+    font-weight: bolder;
+    color: #41ab5d;
+}
+
+#movementFrameLabel {
+    margin: auto;
+    font-weight: bolder;
+    color: #4292c6;
+}
+
+#acousticFrameLabel {
+    margin: auto;
+    font-weight: bolder;
+    color: #807dba;
+}
+
+#frameLabel {
+    margin: auto;
+    font-weight: bolder;
+}
+
+#headContainer {
+    width: 300px;
+}
+
+#headAndIdPanelContainer {
+    height: 100%;
+    width: 250px;
+}
+
+#componentsContainer {
+    height: 90vh;
+    width: 99vw;
+    margin-left: 10px;
+}
+
+#faceMaskButtonContainer {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 3px;
+    margin-bottom: 10px;
+    margin-left: -12px;
+}
+
+#headComponentContainer {
+    margin-left: 10px;
+}
+
+#colorLegendAndIdPanelContainer {
+    margin-top: 300px;
+}
+
+#AUButtonContainer {
+    width: 100%;
+    height: 3vh;
+    font-size: 0.7rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 5px;
+}
+
+.id_checkbox_container {
+    margin-right: 3px;
+}
+
+#colorScaleContainer {
+    width: 90%;
+    height: 5vh;
+}
+
+#idPanelContainerIndividual {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding-top: 10px;
+    font-size: 0.7rem;
+    width: 230px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: calc(90vh - 420px);
+}
+
+#idPanelContainerIndividual div {
+    font-size: 0.8rem;
+    width: 210px;
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+#facialAndSpeechContainer {
+    height: 100%;
+    margin-right: 10px;
+    width: 40%;
+}
+
+#facialActivityContainer {
+    height: 48%;
+    background-color: #f7fcf5;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+#facialContainer {
+    font-size: 0.8rem;
+    width: max-content;
+}
+
+#facialQueryPanelContainer {
+    margin-left: -10px;
+    margin-right: 5px;
+}
+
+#facialQueryPanelButtonsContainer {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+#facialHistogramsContainer {
+    width: 77%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+
+.histogramContainer {
+    display: inline-flex;
+    flex-direction: row;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+#facialSpeechAndCorrPanelContainer {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    height: 48%;
+    overflow-y: auto;
+}
+
+#facialSpeechAnCorrPanelButtons {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#facialSpeechAnCorrPanelButtons .btn {
+    height: max-content;
+}
+
+#facialAndSpeechPanelContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#SpiderChartContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.spiderComponent {
+    width: max-content;
+    margin-right: 20px;
+}
+
+.spiderChart {
+    padding: 10px;
+}
+
+#speechLabel {
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+#speechComponent {
+    font-size: 0.8rem;
+}
+
+.corrMatrixContainer {
+    height: 85%;
+    margin-top: 5px;
+}
+
+#corrQueryPanelContainer {
+    width: 25%;
+    height: 95%;
+    overflow-y: scroll;
+    font-size: 0.8rem;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    overflow-x: hidden;
+}
+
+#corrQuerryButton {
+    display: inline-flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+#corrMatrixComponentIndividual {
+    width: 74%;
+    height: 90%;
+}
+
+#movementAndAcousticContainer {
+    height: 100%;
+    width: 40%;
+}
+
+#headMovementContainer {
+    height: 48%;
+    overflow-Y: scroll;
+    background-color: #f7fbff;
+    display: flex;
+    padding: 10px;
+
+}
+
+#movementContainer {
+    width: max-content;
+    font-size: 0.8rem;
+}
+
+#movementQueryButtonContainer {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.btn-close {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+#movementHistogramContainer {
+    width: 80%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+#voiceAcousticsContainer {
+    height: 48%;
+    overflow-y: scroll;
+    background-color: #f7f4f9;
+    margin-top: 30px;
+}
+
+#acousticsContainer {
+    padding: 10px;
+    margin-left: -10px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    width: max-content;
+}
+
+#acousticsQueryButtonContainer {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+#acousticsHistogramContainer {
+    width: 79%;
+    height: 100%;
+    overflow-y: hidden;
+    font-size: 0.8rem;
+}
