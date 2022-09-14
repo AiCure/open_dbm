@@ -1,7 +1,11 @@
-FROM python:3.6
+FROM python:3.7
 FROM ubuntu:18.04
 
 MAINTAINER fnndsc "vijay.yadav@aicure.com"
+
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 RUN apt-get update && apt-get install -y python3-pip \
                    && apt-get install -y wget \
@@ -20,21 +24,21 @@ RUN ln -sfn /usr/bin/pip3 /usr/bin/pip
 COPY . /app
 
 #cloning openface
-WORKDIR /app/pkg
+WORKDIR /app/opendbm/pkg
 RUN git clone https://github.com/AiCure/open_dbm.git -b openface
 
 RUN echo "Installing OpenFace..."
-WORKDIR /app/pkg/open_dbm/OpenFace
+WORKDIR /app/opendbm/pkg/open_dbm/OpenFace
 RUN bash ./download_models.sh
 RUN dpkg --configure -a
 RUN su -c ./install.sh
 RUN echo "Done OpenFace!"
 
 RUN echo "Cloning DeepSpeech..."
-WORKDIR /app/pkg
+WORKDIR /app/opendbm/pkg
 RUN git clone https://github.com/mozilla/DeepSpeech.git
 
-WORKDIR /app/pkg/DeepSpeech
+WORKDIR /app/opendbm/pkg/DeepSpeech
 RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspeech-0.9.1-models.pbmm
 RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.1/deepspeech-0.9.1-models.scorer
 
