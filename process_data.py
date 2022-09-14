@@ -4,10 +4,10 @@ project_name: DBM
 created: 2020-20-07
 """
 
-from dbm_lib.config import config_reader, config_raw_feature, config_derive_feature
-from dbm_lib.controller import process_feature as pf
-from dbm_lib.dbm_features.raw_features.video import open_face_process as of
-from dbm_lib.dbm_features.derived_features import derive as der
+from opendbm.dbm_lib.config import config_reader, config_derive_feature, config_raw_feature
+from opendbm.dbm_lib.controller import process_feature as pf
+from opendbm.dbm_lib import open_face_process as of
+from opendbm.dbm_lib.dbm_features.derived_features import derive as der
 
 import pandas as pd
 import os
@@ -21,8 +21,8 @@ from os.path import splitext
 logging.basicConfig(level=logging.INFO)
 logger=logging.getLogger()
 
-OPENFACE_PATH_VIDEO = 'pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid'
-OPENFACE_PATH = 'pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
+OPENFACE_PATH_VIDEO = 'opendbm/pkg/open_dbm/OpenFace/build/bin/FaceLandmarkVid'
+OPENFACE_PATH = 'opendbm/pkg/open_dbm/OpenFace/build/bin/FeatureExtraction'
 DEEP_SPEECH = 'pkg/DeepSpeech'
 DLIB_SHAPE_MODEL = 'pkg/shape_detector/shape_predictor_68_face_landmarks.dat'
 
