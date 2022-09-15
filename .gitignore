@@ -1,0 +1,76 @@
+.DS_Store
+.ipynb_checkpoints/
+docs/node_modules
+*/.pyc
+.vscode
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+#Pydoc generated_file for OpenDBM Python API Documentation
+docs/website/api/*api.md
+
+#docker dependencies for mac
+.github/brew-colima
+.github/brew-docker
+# Distribution / packaging
+speech/
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+#pycharm
+.idea/
+
+#documentation
+docs/.docusaurus
+.docusaurus
+docs/.nvmrc
+.nvmrc
+node_modules
+docs/website/build/
+docs/sync-api-docs/generatedComponentApiDocs.js
+docs/sync-api-docs/extracted.json
