@@ -31,7 +31,7 @@ class FacialActivity(VideoModel):
 
     def fit(self, path):
         """Fit a file in filepath to OpenFace Model. Make sure to set the Docker to be active first.
-        For installation, see https://teebid.github.io/aicure_opendbm/docs/openface-docker-installation
+        For installation, see https://aicure.github.io/open_dbm/docs/openface-docker-installation
 
         Parameters
         ----------
