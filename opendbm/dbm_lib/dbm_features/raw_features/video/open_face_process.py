@@ -4,19 +4,23 @@ project_name: DBM
 created: 2020-20-07
 """
 
-import os
-import numpy as np
-import pandas as pd
 import glob
 import logging
+import os
+
+import numpy as np
+import pandas as pd
 
 from opendbm.dbm_lib.dbm_features.raw_features.util import util as ut
 
 logging.basicConfig(level=logging.INFO)
-logger=logging.getLogger()
+logger = logging.getLogger()
 
-def batch_open_face(filepaths,video_url, input_dir, out_dir, of_path, video_tracking=False):
-    """ Computes open_face features for the files in filepaths
+
+def batch_open_face(
+    filepaths, video_url, input_dir, out_dir, of_path, video_tracking=False
+):
+    """Computes open_face features for the files in filepaths
 
     Args:
     -----
@@ -31,31 +35,36 @@ def batch_open_face(filepaths,video_url, input_dir, out_dir, of_path, video_trac
     Returns:
     --------
         (itreable[str]) list of .csv files
-    """    
+    """
     if video_tracking:
-        suffix = '_openface_lmk'
+        suffix = "_openface_lmk"
     else:
-        suffix = '_openface'
+        suffix = "_openface"
 
     csv_files = []
-    
+
     for fp in filepaths:
         try:
 
             _, out_loc, fl_name = ut.filter_path(video_url, out_dir)
             full_f_name = fl_name + suffix
             output_directory = os.path.join(out_loc, full_f_name)
-            
+
             if video_tracking and not os.path.exists(os.path.abspath(output_directory)):
                 os.makedirs(os.path.abspath(output_directory))
-            csv_files.append(ut.compute_open_face_features(fp,output_directory,of_path))
+            csv_files.append(
+                ut.compute_open_face_features(fp, output_directory, of_path)
+            )
 
         except Exception as e:
-            logger.error('Failed to run OpenFace on {}\n{}'.format(fp, e))
+            logger.error("Failed to run OpenFace on {}\n{}".format(fp, e))
 
     return csv_files
 
-def process_open_face(video_uri, input_dir, out_dir, of_path, dbm_group,video_tracking):
+
+def process_open_face(
+    video_uri, input_dir, out_dir, of_path, dbm_group, video_tracking
+):
     """
     Processing all patient's for fetching emotion expressivity
     -------------------
@@ -66,15 +75,21 @@ def process_open_face(video_uri, input_dir, out_dir, of_path, dbm_group,video_tr
 
     """
     try:
-        
-        if dbm_group != None:
-            check_group = ['facial','movement'] #add group here: if you want to use openface output for raw variable calculation
+
+        if dbm_group is not None:
+            check_group = [
+                "facial",
+                "movement",
+            ]  # add group here: if you want to use openface output for raw variable calculation
             check_val = bool(len({*check_group} & {*dbm_group}))
             if not check_val:
                 return
-        
+
         filepaths = [video_uri]
-        csv_filepaths = batch_open_face(filepaths, video_uri, input_dir, out_dir, of_path, video_tracking)
+        batch_open_face(
+            filepaths, video_uri, input_dir, out_dir, of_path, video_tracking
+        )
 
     except Exception as e:
-        logger.error('Failed to process video file')
+        e
+        logger.error("Failed to process video file")
