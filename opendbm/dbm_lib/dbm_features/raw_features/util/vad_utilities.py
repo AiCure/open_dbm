@@ -10,11 +10,12 @@ import contextlib
 import sys
 import wave
 
+
 def read_wave(path):
     """Reads a .wav file.
     Takes the path, and returns (PCM audio data, sample rate).
     """
-    with contextlib.closing(wave.open(path, 'rb')) as wf:
+    with contextlib.closing(wave.open(path, "rb")) as wf:
         num_channels = wf.getnchannels()
         assert num_channels == 1
         sample_width = wf.getsampwidth()
@@ -27,10 +28,12 @@ def read_wave(path):
 
 class Frame(object):
     """Represents a "frame" of audio data."""
+
     def __init__(self, bytes, timestamp, duration):
         self.bytes = bytes
         self.timestamp = timestamp
         self.duration = duration
+
 
 def frame_generator(frame_duration_ms, audio, sample_rate):
     """Generates audio frames from PCM audio data.
@@ -43,13 +46,12 @@ def frame_generator(frame_duration_ms, audio, sample_rate):
     timestamp = 0.0
     duration = (float(n) / sample_rate) / 2.0
     while offset + n < len(audio):
-        yield Frame(audio[offset:offset + n], timestamp, duration)
+        yield Frame(audio[offset : offset + n], timestamp, duration)
         timestamp += duration
         offset += n
 
 
-def vad_collector(sample_rate, frame_duration_ms,
-                  padding_duration_ms, vad, frames):
+def vad_collector(sample_rate, frame_duration_ms, padding_duration_ms, vad, frames):
     """Filters out non-voiced audio frames.
     Given a webrtcvad.Vad and a source of audio frames, yields only
     the voiced audio.
@@ -80,7 +82,7 @@ def vad_collector(sample_rate, frame_duration_ms,
     for frame in frames:
         is_speech = vad.is_speech(frame.bytes, sample_rate)
 
-        sys.stdout.write('1' if is_speech else '0')
+        sys.stdout.write("1" if is_speech else "0")
         if not triggered:
             ring_buffer.append((frame, is_speech))
             num_voiced = len([f for f, speech in ring_buffer if speech])
@@ -89,7 +91,7 @@ def vad_collector(sample_rate, frame_duration_ms,
             # TRIGGERED state.
             if num_voiced > 0.9 * ring_buffer.maxlen:
                 triggered = True
-                sys.stdout.write('+(%s)' % (ring_buffer[0][0].timestamp,))
+                sys.stdout.write("+(%s)" % (ring_buffer[0][0].timestamp,))
                 # We want to yield all the audio we see from now until
                 # we are NOTTRIGGERED, but we have to start with the
                 # audio that's already in the ring buffer.
@@ -106,23 +108,23 @@ def vad_collector(sample_rate, frame_duration_ms,
             # unvoiced, then enter NOTTRIGGERED and yield whatever
             # audio we've collected.
             if num_unvoiced > 0.9 * ring_buffer.maxlen:
-                sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
+                sys.stdout.write("-(%s)" % (frame.timestamp + frame.duration))
                 triggered = False
-                yield b''.join([f.bytes for f in voiced_frames])
+                yield b"".join([f.bytes for f in voiced_frames])
                 ring_buffer.clear()
                 voiced_frames = []
     if triggered:  # BT if were in triggered state at end of signal, set output time
-        sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
-    sys.stdout.write('\n')
+        sys.stdout.write("-(%s)" % (frame.timestamp + frame.duration))
+    sys.stdout.write("\n")
     # If we have any leftover voiced audio when we run out of input,
     # yield it.
     if voiced_frames:
-        yield b''.join([f.bytes for f in voiced_frames])
+        yield b"".join([f.bytes for f in voiced_frames])
 
 
-
-def vad_get_segment_times(sample_rate, frame_duration_ms,
-                  padding_duration_ms, vad, frames):
+def vad_get_segment_times(
+    sample_rate, frame_duration_ms, padding_duration_ms, vad, frames
+):
     """Filters out non-voiced audio frames.
     BT: based on vad_collector, but returns start and end times for voiced segs
 
@@ -158,7 +160,7 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
     for frame in frames:
         is_speech = vad.is_speech(frame.bytes, sample_rate)
 
-        #sys.stdout.write('1' if is_speech else '0')
+        # sys.stdout.write('1' if is_speech else '0')
         if not triggered:
             ring_buffer.append((frame, is_speech))
             num_voiced = len([f for f, speech in ring_buffer if speech])
@@ -167,7 +169,7 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
             # TRIGGERED state.
             if num_voiced > 0.9 * ring_buffer.maxlen:
                 triggered = True
-                #sys.stdout.write('+(%s)' % (ring_buffer[0][0].timestamp,))
+                # sys.stdout.write('+(%s)' % (ring_buffer[0][0].timestamp,))
                 start_times.append(ring_buffer[0][0].timestamp)  # BT
                 ring_buffer.clear()
         else:
@@ -179,23 +181,23 @@ def vad_get_segment_times(sample_rate, frame_duration_ms,
             # unvoiced, then enter NOTTRIGGERED and yield whatever
             # audio we've collected.
             if num_unvoiced > 0.9 * ring_buffer.maxlen:
-                #sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
+                # sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
                 end_times.append(ring_buffer[0][0].timestamp + frame.duration)  # BT
                 triggered = False
 
     if triggered:  # BT if were in triggered state at end of signal, set output time
-        #sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
-        if len(ring_buffer)>0:
-            end_times.append(ring_buffer[0][0].timestamp )  # BT
+        # sys.stdout.write('-(%s)' % (frame.timestamp + frame.duration))
+        if len(ring_buffer) > 0:
+            end_times.append(ring_buffer[0][0].timestamp)  # BT
         else:
             # only get here in very rare case that we triggered on 2nd-to-last frame
             end_times.append(frame.timestamp + frame.duration)
-    #sys.stdout.write('\n')
+    # sys.stdout.write('\n')
 
-    return(start_times, end_times)
+    return (start_times, end_times)
 
 
-def filter_seg_times(seg_starts, seg_ends, pad_at_start = 0.5, len_to_keep=2.5 ):
+def filter_seg_times(seg_starts, seg_ends, pad_at_start=0.5, len_to_keep=2.5):
     """
     do some filtering on the segments found to select part for analysis
     rule: find the first segment that is at least (pad_at_start+len_to_keep sec long.
@@ -210,12 +212,14 @@ def filter_seg_times(seg_starts, seg_ends, pad_at_start = 0.5, len_to_keep=2.5 )
 
     not_found = True
     for iseg in range(len(seg_starts)):
-        seg_dur = seg_ends[iseg]-seg_starts[iseg]
-        if (not_found & (seg_dur > (pad_at_start + len_to_keep))):
+        seg_dur = seg_ends[iseg] - seg_starts[iseg]
+        if not_found & (seg_dur > (pad_at_start + len_to_keep)):
             t_start = seg_starts[iseg] + pad_at_start
             sel_start.append(t_start)
             sel_end.append(t_start + len_to_keep)
-            sel_end_longer.append(max(t_start + len_to_keep, seg_ends[iseg]-pad_at_start))
+            sel_end_longer.append(
+                max(t_start + len_to_keep, seg_ends[iseg] - pad_at_start)
+            )
             not_found = False
 
     return sel_start, sel_end, sel_end_longer
