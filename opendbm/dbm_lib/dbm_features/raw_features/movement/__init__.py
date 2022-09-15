@@ -4,14 +4,9 @@ project_name: DBM
 created: 2020-20-07
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 
-import os
-
-DBMLIB_PATH = os.path.dirname(__file__)
-DBMLIB_VTREMOR_LIB = os.path.abspath(os.path.join(DBMLIB_PATH,
-                                                  '../../../../resources/libraries/voice_tremor.praat'))
-DBMLIB_FTREMOR_CONFIG = os.path.abspath(os.path.join(DBMLIB_PATH, '../../../../resources/features/facial/config.json'))
-
+from .eye_blink import run_eye_blink
+from .eye_gaze import run_eye_gaze
+from .facial_tremor import fac_tremor_process
+from .head_motion import run_head_movement
