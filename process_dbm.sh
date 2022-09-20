@@ -79,5 +79,4 @@ fi
 docker cp dbm_container:/app/output $output_path
 docker stop dbm_container
 docker rm dbm_container
-
 exit
