@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# OpenDBM Visual Analytics Interface 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Name](https://img.shields.io/badge/OpenDBM-Visualization%20Interface%20Tool-orange)![Name](https://img.shields.io/badge/Version-v0.1-blue)
+<img width="911" alt="opendbm_vistool_overview" src="https://user-images.githubusercontent.com/34843515/191345731-b12004b2-c424-455e-83cc-2bb18aa96d47.png">
+
+## Cohort Panel
+https://user-images.githubusercontent.com/34843515/191345803-2a74ab15-bf45-4746-bd9e-507ca28ed404.mp4
+
+
+## Individual Panel
+https://user-images.githubusercontent.com/34843515/191345766-5e284854-f2a1-4a2d-b3fc-8bab98293f0a.mp4
 
 ## Available Scripts
 
