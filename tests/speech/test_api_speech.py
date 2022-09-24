@@ -5,9 +5,6 @@ from pytest import mark
 @mark.non_docker
 @mark.speech
 class SpeechTest:
-    def test_dummy_3(self):
-        assert True
-
     def test_get_transcribe(self, processing_speech_mp4, processing_speech_wav):
         actual_totaltime = 87.978685
         len_words_count = 57

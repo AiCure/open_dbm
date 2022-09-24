@@ -37,6 +37,3 @@ class FacialTest:
 
         assert_allclose(df_act.mean(), res.mean(), rtol=0.35, atol=1e-8)
         assert_allclose(df_act.std(), res.std(), rtol=0.35, atol=1e-8)
-
-    def test_dummy_facial(self):
-        assert True

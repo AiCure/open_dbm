@@ -81,6 +81,3 @@ class MovementTest:
         res = processing_movement.get_vocal_tremor()
 
         assert_allclose(actual_mean, res.mean(), rtol=0.1, atol=1e-8)
-
-    def test_dummy_movement(self):
-        assert True

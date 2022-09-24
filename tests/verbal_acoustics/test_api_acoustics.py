@@ -175,9 +175,3 @@ class AcousticTest:
 
         assert_allclose(res_mp4.std(), actual_std, rtol=0.1, atol=1e-8)
         assert_allclose(res_wav.std(), actual_std, rtol=0.1, atol=1e-8)
-
-    def test_dummy_1(self):
-        assert True
-
-    def test_dummy_2(self):
-        assert True
