@@ -17,7 +17,6 @@ docs/website/api/*api.md
 .github/brew-colima
 .github/brew-docker
 # Distribution / packaging
-speech/
 .Python
 build/
 develop-eggs/
