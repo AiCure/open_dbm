@@ -1,0 +1,36 @@
+{
+  "api": [
+    {
+      "type": "category",
+      "label": "OpenDBM API",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        {
+          "id": "api-doc",
+          "type": "doc"
+        },
+        {
+          "id": "facial-activity-api",
+          "type": "doc",
+          "label": "Facial Activity"
+        },
+        {
+          "id": "movement-api",
+          "type": "doc",
+          "label": "Movement"
+        },
+        {
+          "id": "verbal-acoustics-api",
+          "type": "doc",
+          "label": "Verbal Acoustics"
+        },
+        {
+          "id": "speech-api",
+          "type": "doc",
+          "label": "Speech"
+        }
+      ]
+    }
+  ]
+}

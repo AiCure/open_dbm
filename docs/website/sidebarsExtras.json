@@ -1,0 +1,32 @@
+{
+  "extras": [
+    {
+      "type": "category",
+      "label": "Resources",
+      "collapsed": false,
+      "items": ["extras",
+        "ci-cd-pipeline",
+        "odbm-rest-api",
+        "odbm-doc",
+        "opendbm-python-api",
+        "opendbm-python-api-unittest",
+        "opendbm-python-api-add-new-variable"]
+    },
+    {
+      "type": "category",
+      "label": "Contributing",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "overview",
+        "code-of-conduct",
+        "how-to-contribute-code",
+        "issue-reporting",
+        "community-discussions",
+        "publications-and-referencing",
+        "opendbm-listserv-signup",
+        "license-contact"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "contributing": [
+    {
+      "type": "category",
+      "label": "Contributing to OpenDBM",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "overview",
+        "code-of-conduct",
+        "how-to-contribute-code",
+        "issue-reporting",
+        "community-discussions",
+        "publications-and-referencing",
+        "opendbm-listserv-signup",
+        "license-contact"
+      ]
+    }
+  ]
+}
