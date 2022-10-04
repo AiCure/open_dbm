@@ -14,7 +14,7 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 boto3 = "^1.24.25"
 aiofiles = "^0.8.0"
-open_dbm
+opendbm
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
