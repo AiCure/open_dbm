@@ -1,0 +1,29 @@
+[
+  {
+    "name": "OpenFace",
+    "icon": "openface.png",
+    "linkAppStore": "https://cmusatyalab.github.io/openface/",
+    "linkPlayStore": "https://cmusatyalab.github.io/openface/",
+    "infoLink": "https://cmusatyalab.github.io/openface/",
+    "infoTitle": "Free and open source face recognition with deep neural networks.",
+    "pinned": true
+  },
+  {
+    "name": "Parselmouth",
+    "icon": "parselmouth.png",
+    "linkAppStore": "https://parselmouth.readthedocs.io/en/stable/",
+    "linkPlayStore": "https://parselmouth.readthedocs.io/en/stable/",
+    "infoLink": "https://parselmouth.readthedocs.io/en/stable/",
+    "infoTitle": "Parselmouth is a Python library for the Praat software.",
+    "pinned": true
+  },
+  {
+    "name": "DeepSpeech",
+    "icon": "deepspech.png",
+    "linkAppStore": "https://deepspeech.readthedocs.io/en/r0.9/",
+    "linkPlayStore": "https://deepspeech.readthedocs.io/en/r0.9/",
+    "infoLink": "https://deepspeech.readthedocs.io/en/r0.9/",
+    "infoTitle": "DeepSpeech is an open source Speech-To-Text engine, using a model trained by machine learning techniques based on Baidu’s Deep Speech research paper",
+    "pinned": true
+  }
+]

@@ -1,0 +1,117 @@
+{
+  "docs": [
+    {
+      "type": "category",
+      "label": "The Basics",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "getting-started",
+        "dependencies-installation",
+        "beginner-installation",
+        "pro-installation",
+        "more-resources"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Using Docker OpenDBM",
+      "collapsed": false,
+      "collapsible": true,
+      "items": ["opendbm-docker-usage", "windows-usage"]
+    },
+    {
+      "type": "category",
+      "label": "OpenDBM Output",
+      "collapsed": false,
+      "collapsible": true,
+      "items": ["opendbm-docker-output", "raw-variables"]
+    }
+  ],
+  "variable": [
+    {
+      "type": "category",
+      "label": "Biomaker Variables",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "biomaker-variables",
+        {
+          "type": "category",
+          "label": "Facial Activity",
+          "collapsed": false,
+          "collapsible": true,
+          "items": [
+            "facial-activity",
+            "facial-landmark",
+            "action-units",
+            "emotional-expressivity",
+            "overall-expressivity",
+            "facial-asymmetry",
+            "pain-expressivity"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Verbal Acoustic",
+          "collapsed": false,
+          "collapsible": true,
+          "items": [
+            "verbal-acoustic",
+            "fundamental-frequency",
+            "formant-frequencies",
+            "audio-intensity",
+            "harmonics-to-noise-ratio",
+            "glottal-to-noise-excitation-ratio",
+            "jitter",
+            "shimmer",
+            "pause-characteristics",
+            "voice-prevalence"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Speech",
+          "collapsed": false,
+          "collapsible": true,
+          "items": [
+            "speech",
+            "parts-of-speech",
+            "sentiment-of-speech",
+            "lexical-richness",
+            "rate-of-speech"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Movement",
+          "collapsed": false,
+          "collapsible": true,
+          "items": [
+            "head-movement",
+            "eye-blink-behavior",
+            "eye-gaze-directionality",
+            "facial-tremor",
+            "vocal-tremor"
+          ]
+        }
+      ]
+    }
+  ],
+  "guidelines": [
+    {
+      "type": "category",
+      "label": "Data Guidelines",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "data-guidelines",
+        "supported-file-types",
+        "video-guidelines",
+        "audio-guidelines",
+        "behavioral-considerations",
+        "amount-data-needed"
+      ]
+    }
+  ]
+}
