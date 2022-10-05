@@ -1,0 +1,175 @@
+# This workflow will check OpenDMB code quality and run unit tests
+# For more information see: https://www.aicure.com/open_dbm#cicd
+
+name: OpenDBM Code Checking
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'dbm_lib/**'
+      - 'opendbm/**'
+      - '.github/workflows/open_dbm-code-checking.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - 'tests/**'
+      - 'pkg/**'
+      - 'resources/**'
+      - 'requirements.txt'
+      
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'dbm_lib/**'
+      - 'opendbm/**'
+      - '.github/workflows/open_dbm-code-checking.yml'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - 'tests/**'
+      - 'pkg/**'
+      - 'resources/**'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v23.1
+    - name: Report list of changed files
+      run: |
+        echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
+    - name: Get PYTHON changed files
+      id: python-changed-files
+      uses: tj-actions/changed-files@v23.1
+      with:
+          files: |
+            *.py*
+            **/*.py*
+    - name: Report list of PYTHON changed files
+      run: |
+        echo Changed PYTHON files: ${{ steps.python-changed-files.outputs.all_changed_files }}
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Run flake8
+      run: |
+        pip install flake8
+        for file in ${{ steps.python-changed-files.outputs.all_changed_files }}; do
+          flake8 $file --count --show-source --statistics
+        done
+
+  vulnerability_scanning:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Run safety
+      run: |
+        pip install safety
+        safety check
+
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ env.GH_TOKEN }}
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-openface:latest
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+    - name : Install libsndfile and sox(only for linux machine)
+      run: |
+        sudo apt-get install libsndfile1
+        sudo apt-get install sox
+        sudo apt-get install ffmpeg
+    - name: Run Pytest and Coverage
+      id: odbm_test
+      run: |
+        ls -lart
+        pip install pytest coverage
+        coverage run -m pytest
+        coverage report -mi --fail-under=30 --skip-covered
+    - name: Update shield TEST status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/test:status-$STATUS-$COLOR?style=flat" > images/badges/test_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git pull origin master
+          git add images/badges/test_status.svg
+          git commit -am "Modify test status in test badge"
+          git push
+        else
+          echo "no changes on test badge"
+        fi
+    - name: Update shield COVERAGE only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      run: |
+        set -x
+        total=`coverage report -i | grep TOTAL | awk '{print $4+0}'`
+        if (( $(echo "$total < 30" | bc -l) )) ; then
+          COLOR=red
+        elif (( $(echo "$total >= 60" | bc -l) )); then
+          COLOR=green
+        else
+          COLOR=orange
+        fi
+        curl "https://img.shields.io/badge/code:coverage-$total%25-$COLOR?style=flat" > images/badges/code_coverage.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        
+        if [[ `git status --porcelain` ]]; then
+          git pull origin master
+          git add images/badges/code_coverage.svg
+          git commit -am "Modify coverage percentage in coverage badge"
+          git push
+        else
+          echo "no changes on coverage badge"
+        fi

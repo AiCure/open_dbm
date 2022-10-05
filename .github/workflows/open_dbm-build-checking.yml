@@ -1,0 +1,285 @@
+# This workflow will check OpenDMB code quality, run unit tests and update the build status on README.md
+# For more information see: https://www.aicure.com/open_dbm#cicd
+
+name: OpenDBM Build Checking
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'dbm_lib/**'
+      - 'opendbm/**'
+      - '.github/workflows/open_dbm-build-checking.yml'
+      - '.github/workflows/open_dbm-code-checking.yml'
+      - 'tests/**'
+      - 'pkg/**'
+      - 'resources/**'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  unit_tests_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ env.GH_TOKEN }}
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-openface:latest
+    - name: Setup FFmpeg
+      uses: FedericoCarboni/setup-ffmpeg@v1.1.0
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+#        ls not_exist_file #####commented because of unknown command and it make the build error
+    - name : Install libsndfile and sox(only for linux machine)
+      run: |
+        sudo apt-get install libsndfile1
+        sudo apt-get install sox
+    - name: Run Pytest
+      id: odbm_linux_test
+      run: |
+        pytest
+    - name: Update shield LINUX BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_linux_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_linux_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/linux:build-$STATUS-$COLOR?style=flat&logo=linux" > images/badges/linux_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git pull origin master
+          git add images/badges/linux_status.svg
+          git commit -am "Modify Linux Build status in badge"
+          git push
+        else
+          echo "no changes on linux build badge"
+        fi
+
+  unit_tests_windows:
+    runs-on: windows-latest
+    steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ env.GH_TOKEN }}
+#    - name: install WSL distribution
+#      uses: Vampire/setup-wsl@v1
+#      with:
+#        distribution: Ubuntu-18.04
+#    - name: update wsl
+#      run: |
+#
+#        wsl --install
+#        wsl --list
+#    - name: Set up QEMU
+#      uses: docker/setup-qemu-action@v2
+#    - name: Set up Docker Buildx
+#      uses: docker/setup-buildx-action@v2
+#    - name: Login to Docker Hub
+#      uses: docker/login-action@v2
+#      with:
+#        username: ${{ secrets.DOCKERHUB_USERNAME }}
+#        password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name: Pull OpenFace Image
+#        run: |
+#          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-openface:latest
+#          docker images
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: windows-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: Switch git-bash shell to MSYS2 shell by adding MSYS2 path to PATH front
+      run: echo "$MSYS2_SHELL_PATH" >> $GITHUB_PATH
+    - name: Install SoX and add to Path
+      uses: ./.github/actions/win-install-sox
+    - name: Setup FFmpeg
+      uses: FedericoCarboni/setup-ffmpeg@v1.1.0
+    - name: add sox to PATH
+      uses: myci-actions/export-env-var-powershell@1
+      with:
+        name: PATH
+        value: $env:PATH;D:/a/${{ github.event.repository.name }}/${{ github.event.repository.name }}/bin/sox-14.4.2/
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |    
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+        pip install https://github.com/sachadee/Dlib/blob/main/dlib-19.22.99-cp37-cp37m-win_amd64.whl?raw=true
+    - name: Run Pytest
+      id: odbm_windows_test
+      run: |
+        pytest -m "speech or acoustic"
+    - name: Update shield WINDOWS BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        Write-Host "${{ steps.odbm_windows_test.outcome }}";
+        $test_status='${{ steps.odbm_windows_test.outcome }}'
+
+        if($test_status -eq "success"){
+          $COLOR="green"
+          $STATUS="passed"
+        }else {
+          $COLOR="red"
+          $STATUS="failed"
+        }
+        $Parameters = @{
+            style = 'flat'
+            logo = 'windows'
+        }
+        Write-Host "$COLOR $STATUS"
+        Invoke-WebRequest -Uri "https://img.shields.io/badge/windows:build-$STATUS-$COLOR" -Body $Parameters -Method Get -PassThru -OutFile images/badges/windows_status.svg
+        
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if (git status --porcelain) {
+          git pull origin master
+          git add images/badges/windows_status.svg
+          git commit -am "Modify Windows Build status in badge"
+          git push
+        }else {
+          Write-Host "no changes on Windows build badge"
+        }
+
+  unit_tests_macos:
+    runs-on: macos-latest
+    steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ env.GH_TOKEN }}
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: macos-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+    - name: setup docker
+      uses: douglascamata/setup-docker-macos-action@v1-alpha
+#      docker-practice/actions-setup-docker@master
+    - name: check docker
+      run: |
+            set -x
+
+            docker version
+
+            docker run --rm hello-world
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Pull OpenFace Image
+      run: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/dbm-openface:latest
+    - name: Setup FFmpeg
+      uses: FedericoCarboni/setup-ffmpeg@v1.1.0
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+    - name : Install sox
+      run: brew install sox
+    - name: Run Pytest
+      id: odbm_macos_test
+      run: |
+        pytest
+    - name: Update shield MACOS BUILD status only for branch push master
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
+      run: |
+        echo "${{ steps.odbm_macos_test.outcome }}"
+        set -x
+        test_status='${{ steps.odbm_macos_test.outcome }}'
+        if [ "$test_status" = "success" ] ; then
+          COLOR=green
+          STATUS=passed
+        else
+          COLOR=red
+          STATUS=failed
+        fi
+        curl "https://img.shields.io/badge/macos:build-$STATUS-$COLOR?style=flat&logo=apple" > images/badges/macos_status.svg
+        git config --global user.name 'AiCure ODBM Pipeline'
+        git config --global user.email 'system@aicure.com'
+        if [[ `git status --porcelain` ]]; then
+          git pull origin master
+          git add images/badges/macos_status.svg
+          git commit -am "Modify MacOs Build status in badge"
+          git push
+        else
+          echo "no changes on MacOs build badge"
+        fi
+
+  update_status_badge_master:
+    runs-on: ubuntu-latest
+    needs: [unit_tests_linux, unit_tests_windows, unit_tests_macos]
+    if: |
+      always()
+    steps:
+    - name: 🔍 GH_TOKEN
+      if: env.GH_TOKEN == ''
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ env.GH_TOKEN }}
+    - name: Purge README Images
+      run: make purge
+
+  
+  

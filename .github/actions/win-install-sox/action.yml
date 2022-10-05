@@ -1,0 +1,16 @@
+#"C:/Program Files/7-Zip/7z.exe"
+name: "Install SoX and add to PATH"
+description: "Install SoX and add to PATH"
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+       
+        curl -L --output sox-14.4.2-win32.zip --url https://sourceforge.net/projects/sox/files/sox/14.4.2/sox-14.4.2-win32.zip/download
+        7z x -o`pwd`/bin/ -tzip -aoa sox-14.4.2-win32.zip
+        echo `pwd`
+        rm sox-*zip
+
+      
+

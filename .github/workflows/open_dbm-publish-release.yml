@@ -1,0 +1,52 @@
+# This workflow will publish OpenDBM to PyPI based on created release tag
+# For more information see: https://www.aicure.com/open_dbm#cicd
+
+name: OpenDBM Publish Release
+
+on:
+  release:
+    types: [published]
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  release-job:
+    runs-on: ubuntu-latest
+    name: Build and publish OpenDBM distributions 📦 to PyPI
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+    - name: Checkout OpenDBM code
+      uses: actions/checkout@v3
+    #   with:
+    #     fetch-depth: 2
+    #     ref: ${{ github.ref }}
+    #     token: ${{ env.GH_TOKEN }}
+    # - run: git checkout HEAD^
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.cfg') }}-${{ hashFiles('requirements.txt') }}
+    - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install wheel build twine
+        pip install -e .
+    - name: Builds and uploads to PyPI
+    ## can use python3 instead python if didnt work
+      run: |
+        echo "GITHUB REFNAME"
+        echo "${{ github.ref_name }}"
+        tag='${{ github.ref_name }}'
+        sed -Ei "s/^(version[[:blank:]]*=[[:blank:]]*).*/\1$tag/" setup.cfg
+        python -m build
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
