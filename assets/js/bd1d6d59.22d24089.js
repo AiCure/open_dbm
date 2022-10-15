@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkopendbm_website=self.webpackChunkopendbm_website||[]).push([[6870],{1053:function(e){e.exports=JSON.parse('{"label":"announcement","permalink":"/open_dbm/blog/tags/announcement","allTagsPath":"/open_dbm/blog/tags","count":2}')}}]);

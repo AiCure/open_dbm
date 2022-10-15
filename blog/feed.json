@@ -1,0 +1,39 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "OpenDBM Blog",
+    "home_page_url": "https://aicure.github.io/open_dbm/blog",
+    "description": "OpenDBM Blog",
+    "items": [
+        {
+            "id": "/2022/07/24/version-021",
+            "content_html": "<p>We are excited to release a new version of OpenDBM, 0.2.1. This version comes with several improvements for the lot of things. Read on to learn more!</p>",
+            "url": "https://aicure.github.io/open_dbm/blog/2022/07/24/version-021",
+            "title": "Announcing OpenDBM 0.2.1",
+            "summary": "We are excited to release a new version of OpenDBM, 0.2.1. This version comes with several improvements for the lot of things. Read on to learn more!",
+            "date_modified": "2022-07-24T00:00:00.000Z",
+            "author": {
+                "name": "Rudy Haryanto",
+                "url": "https://twitter.com/rudy-haryanto"
+            },
+            "tags": [
+                "announcement",
+                "release"
+            ]
+        },
+        {
+            "id": "/2022/07/08/test-blog",
+            "content_html": "",
+            "url": "https://aicure.github.io/open_dbm/blog/2022/07/08/test-blog",
+            "title": "Test Blog",
+            "date_modified": "2022-07-08T00:00:00.000Z",
+            "author": {
+                "name": "Rudy Haryanto",
+                "url": "https://twitter.com/rudy-haryanto"
+            },
+            "tags": [
+                "announcement",
+                "release"
+            ]
+        }
+    ]
+}
