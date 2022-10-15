@@ -36,10 +36,10 @@ At a modular level, OpenDBM is a library that consists of the following componen
 
 | Component | Description |
 | ---- | --- |
-| [**Facial**](https://teebid.github.io/aicure_opendbm/docs/category/api/facial) | An OpenDBM module to get facial attributes |
-| [**Movement**](https://teebid.github.io/aicure_opendbm/docs/category/api/movement) | An OpenDBM module to get movement attributes |
-| [**Acoustic**](https://teebid.github.io/aicure_opendbm/docs/category/api/acoustic) | An OpenDBM module to get acoustic attributes  |
-| [**Audio**](https://teebid.github.io/aicure_opendbm/docs/category/api/audio) | An OpenDBM module to get audio attributes |
+| [**Facial**](https://aicure.github.io/open_dbm/docs/category/api/facial) | An OpenDBM module to get facial attributes |
+| [**Movement**](https://aicure.github.io/open_dbm/docs/category/api/movement) | An OpenDBM module to get movement attributes |
+| [**Acoustic**](https://aicure.github.io/open_dbm/docs/category/api/acoustic) | An OpenDBM module to get acoustic attributes  |
+| [**Audio**](https://aicure.github.io/open_dbm/docs/category/api/audio) | An OpenDBM module to get audio attributes |
 
 Usually, OpenDBM is used for:
 
@@ -80,7 +80,7 @@ conda install -c conda-forge cmake ffmpeg sox
 conda install -c conda-forge ffmpeg sox dlib
 ```
 ### Without Conda Environment
-[Installation instructions](https://teebid.github.io/aicure_opendbm/docs/dependencies-installation)
+[Installation instructions](https://aicure.github.io/open_dbm/docs/dependencies-installation)
 ## OpenDBM Installation
 ```bash
 pip install opendbm 
@@ -89,7 +89,7 @@ pip install opendbm
 ## Model Download ( Facial and Movement Components)
 Make sure you have installed docker and already login to Docker Hub. 
 
-If you haven't, Find the tutorial [here](https://teebid.github.io/aicure_opendbm/docs/openface-docker-installation)
+If you haven't, Find the tutorial [here](https://aicure.github.io/open_dbm/docs/openface-docker-installation)
 ```bash
 docker pull opendbmteam/dbm-openface
 ```
@@ -122,9 +122,9 @@ landmark.to_dataframe() # convert results as pandas dataframe
 
 For more in-depth tutorials about OpenDBM, you can check out:
 
--   [Introduction to OpenDBM](https://teebid.github.io/aicure_opendbm/docs/intro)
--   [Advance Guide](https://teebid.github.io/aicure_opendbm/docs/advance)
--   [API Documentation](https://teebid.github.io/aicure_opendbm/docs/category/api)
+-   [Introduction to OpenDBM](https://aicure.github.io/open_dbm/docs/intro)
+-   [Advance Guide](https://aicure.github.io/open_dbm/docs/advance)
+-   [API Documentation](https://aicure.github.io/open_dbm/docs/category/api)
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>

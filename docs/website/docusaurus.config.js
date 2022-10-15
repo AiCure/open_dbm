@@ -8,7 +8,7 @@ const commonDocsOptions = {
   breadcrumbs: false,
   showLastUpdateAuthor: false,
   showLastUpdateTime: true,
-  editUrl: 'https://github.com/AiCure/open_dbm/blob/master/docs/',
+  editUrl: 'https://github.com/AiCure/open_dbm/blob/master/docs/docs',
   remarkPlugins: [require('@react-native-website/remark-snackplayer')],
 };
 
@@ -16,10 +16,10 @@ const commonDocsOptions = {
 module.exports = {
   title: 'OpenDBM',
   tagline: 'AiCure Digital Biomaker Tools',
-  organizationName: 'teebid',
-  projectName: 'aicure_opendbm',
-  url: 'https://teebid.github.io',
-  baseUrl: '/aicure_opendbm/',
+  organizationName: 'AiCure',
+  projectName: 'open_dbm',
+  url: 'https://aicure.github.io',
+  baseUrl: '/open_dbm/',
   clientModules: [require.resolve('./snackPlayerInitializer.js')],
   trailingSlash: false, // because trailing slashes can break some existing relative links
   scripts: [
@@ -239,7 +239,6 @@ module.exports = {
             docId: 'extras',
             position: 'right',
             docsPluginId: 'extras',
-
           },
 
           {
@@ -356,13 +355,13 @@ module.exports = {
         {
           property: 'og:image',
           content:
-            'https://raw.githubusercontent.com/teebid/aicure_opendbm/master/docs/website/static/img/header_logo.png',
+            'https://raw.githubusercontent.com/AiCure/open_dbm/master/docs/website/static/img/header_logo.png',
         },
         {name: 'twitter:card', content: 'summary_large_image'},
         {
           name: 'twitter:image',
           content:
-            'https://raw.githubusercontent.com/teebid/aicure_opendbm/master/docs/website/static/img/header_logo.png',
+            'https://raw.githubusercontent.com/AiCure/open_dbm/master/docs/website/static/img/header_logo.png',
         },
         {name: 'twitter:site', content: '@aicure'},
       ],

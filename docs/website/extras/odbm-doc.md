@@ -70,16 +70,15 @@ Your node must be set to stable version (as of now version 16) to be able to ins
 Under the docs directory:
 * ```bash yarn``` to install all the dependencies
 * Then go to the the `website` directory and run the app by typing:
-    * Command below is for start the website for the **first time**.
+    * Command below is for start the website for the **first time**. Run below commands under docs/ folder
 
     ```bash
-    cd website
     pip install pydoc-markdown
     pydoc-markdown -I ../opendbm/api_lib/facial_activity -m api --render-toc > website/api/facial-activity-api.md
     pydoc-markdown -I ../opendbm/api_lib/movement -m api --render-toc > website/api/movement-api.md
     pydoc-markdown -I ../opendbm/api_lib/verbal_acoustics -m api --render-toc > website/api/verbal-acoustics-api.md
     pydoc-markdown -I ../opendbm/api_lib/speech -m api --render-toc > website/api/speech-api.md
-    yarn start
+    cd website && yarn start
     ```
 
     * This command is the one you execute if you have already generated dynamic documentation from pydoc-markdown

@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "license": "CC-BY-4.0",
-  "homepage": "https://teebid.github.io/aicure_opendbm/",
-  "repository": "github:teebid/aicure_opendbm",
+  "homepage": "https://aicure.github.io/open_dbm/",
+  "repository": "github:aicure/open_dbm",
   "bugs": {
     "url": "https://github.com/AiCure/open_dbm/issues"
   },
