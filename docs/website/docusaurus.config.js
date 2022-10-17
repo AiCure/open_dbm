@@ -258,7 +258,7 @@ module.exports = {
             ],
           },
           {
-            href: 'https://github.com/AiCure/open-dbm',
+            href: 'https://github.com/AiCure/open_dbm',
             'aria-label': 'GitHub repository',
             position: 'right',
             className: 'navbar-github-link',
@@ -316,7 +316,7 @@ module.exports = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/AiCure/open-dbm',
+                href: 'https://github.com/AiCure/open_dbm',
               },
             ],
           },

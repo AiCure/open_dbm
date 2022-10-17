@@ -1,0 +1,7 @@
+
+include opendbm/resources/services/*.yml
+include opendbm/resources/features/*.yml
+include opendbm/resources/features/facial/*.json
+include opendbm/resources/libraries/voice_tremor.praat
+include opendbm/pkg/shape_detector/*.dat
+include opendbm/pkg/v_tremor/*.sav
