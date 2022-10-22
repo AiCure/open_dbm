@@ -346,9 +346,9 @@ module.exports = {
         copyright,
       },
       algolia: {
-        appId: '8TDSE0OHGQ',
-        apiKey: '83cd239c72f9f8b0ed270a04b1185288',
-        indexName: 'react-native-v2',
+        appId: '8TDSE0OAAA',
+        apiKey: '83cd239c72f9f8b0ed2701abb1185288',
+        indexName: 'aicure-opendbm-v2',
         contextualSearch: true,
       },
       metadata: [
