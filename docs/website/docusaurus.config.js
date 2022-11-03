@@ -346,8 +346,8 @@ module.exports = {
         copyright,
       },
       algolia: {
-        appId: '8TDSE0OAAA',
-        apiKey: '83cd239c72f9f8b0ed2701abb1185288',
+        appId: 'TTALLK32E9',
+        apiKey: '442113503f37a52e418dd1fa294df1a7',
         indexName: 'aicure-opendbm-v2',
         contextualSearch: true,
       },
