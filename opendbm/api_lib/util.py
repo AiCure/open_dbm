@@ -131,8 +131,8 @@ def docker_command_dec(fn):
 
     def inner(*args, **kwargs):
         wsl_cmd, path = wsllize((args[1]))
-
-        check_docker_model_exist(wsl_cmd, "dbm-openface")
+        openface_repo = "opendbmteam/dbm-openface"
+        check_docker_model_exist(wsl_cmd, openface_repo)
 
         create_docker = wsl_cmd + [
             "docker",
@@ -140,7 +140,7 @@ def docker_command_dec(fn):
             "-ti",
             "--name",
             "dbm_container",
-            "dbm-openface",
+            openface_repo,
             "bash",
         ]
 
