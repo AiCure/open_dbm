@@ -1,4 +1,3 @@
-# Copyright (C) 2012-2022 james jameson
 
 
 if __name__ == "__main__":
