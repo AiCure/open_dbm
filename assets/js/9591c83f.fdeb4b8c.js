@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkopendbm_website=self.webpackChunkopendbm_website||[]).push([[5231],{6522:function(e){e.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"extras"}')}}]);
