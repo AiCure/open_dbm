@@ -1,6 +1,6 @@
 ---
 id: api-doc
-title: OpendDBM API
+title: OpenDBM API
 ---
 
 This section give an overview of OpenDBM APi methods and functions. It is not a requirement to be familiar with all materials to be effective with OpenDBM. You can still benefit from this section as it will give you insights into how we manage things to give added values to this repository.
