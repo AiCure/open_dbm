@@ -1,6 +1,6 @@
 ---
-id: opendbm-docker-usage
-title: Windows Usage
+id: windows-usage
+title: Docker Windows Usage
 ---
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
