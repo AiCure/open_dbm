@@ -124,7 +124,7 @@ jobs:
         ls -lart
         pip install pytest coverage
         coverage run -m pytest
-        coverage report -mi --fail-under=30 --skip-covered
+        coverage report -mi --fail-under=80 --skip-covered
     - name: Update shield TEST status only for branch push master
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && always() }}
       run: |
