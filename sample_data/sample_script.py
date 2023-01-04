@@ -9,9 +9,9 @@ import siuba.dply.verbs
 import siuba.dply.vector
 
 #from opendbm import FacialActivity  #needed with docker?
-#from opendbm import VerbalAcoustics as va #needed with docker? 
-from opendbm import Speech as sp
 from opendbm import Movement as mv
+from opendbm import VerbalAcoustics as va #needed with docker? 
+from opendbm import Speech as sp
 
 
 ### FINDING DATASETS ----
@@ -28,10 +28,12 @@ path_file = list_mp4[0]
 #fit the model
 model = va()
 model.fit(path_file)
+#model_va = va().fit(pathfile) # one-line alternative
+var_intensity = model.get_audio_intensity()
 
 # get audio intensity
-var_intensity = model.get_audio_intensity()
 df_va_intensity = var_intensity.to_dataframe()
+print(df_va_intensity)
 
 # get attributes from audio intesity 
 var_1 = var_intensity.mean()
