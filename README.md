@@ -28,7 +28,7 @@ OpenDBM is a software package that allows for calculation of digital
 biomarkers of health and functioning from video or audio of an individual’s 
 behavior. It integrates existing tools for behavioral measurements such as
 facial activity, voice, speech, and movement into a single package for measurement 
-of overall behavior.
+of overall behavior.  Checkout the OpenDBM [**digital biomarker variables**](https://aicure.github.io/open_dbm/docs/biomaker-variables).
 
 # More About OpenDBM
 
@@ -36,10 +36,10 @@ At a modular level, OpenDBM is a library that consists of the following componen
 
 | Component | Description |
 | ---- | --- |
-| [**Facial**](https://aicure.github.io/open_dbm/docs/category/api/facial) | An OpenDBM module to get facial attributes |
-| [**Movement**](https://aicure.github.io/open_dbm/docs/category/api/movement) | An OpenDBM module to get movement attributes |
-| [**Acoustic**](https://aicure.github.io/open_dbm/docs/category/api/acoustic) | An OpenDBM module to get acoustic attributes  |
-| [**Audio**](https://aicure.github.io/open_dbm/docs/category/api/audio) | An OpenDBM module to get audio attributes |
+| [**Facial**](https://aicure.github.io/open_dbm/api/facial-activity-api) | An OpenDBM module to get facial attributes |
+| [**Movement**](https://aicure.github.io/open_dbm/api/movement-api) | An OpenDBM module to get movement attributes |
+| [**Verbal Acoustic**](https://aicure.github.io/open_dbm/api/verbal-acoustics-api) | An OpenDBM module to get verbal acoustic attributes  |
+| [**Speech & Language**](https://aicure.github.io/open_dbm/api/speech-api) | An OpenDBM module to get speech & language attributes |
 
 Usually, OpenDBM is used for:
 
