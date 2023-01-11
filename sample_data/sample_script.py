@@ -41,3 +41,12 @@ va_inten_mean = var_intensity.mean()
 ### Movement 
 model_mv = mv()
 model_mv.fit(path_file) # Requires Docker
+
+#get head movement
+var_headmv = model_mv.get_head_movement() 
+
+#convert head movement to dataframe
+df_headmv = var_headmv.to_dataframe()
+#note can check to see headmovement in jupyter:variables
+# this can be helpful for QC to see if head movement was captured.
+# wheh face is not detected no movement is captured and return is array of nan
