@@ -132,9 +132,10 @@ For more in-depth tutorials about OpenDBM, you can check out:
 </div>
 
 # ⭐️ More resources
--   [OpenDBM Github Pages]([https://github.com/AiCure/open_dbm/wiki](https://aicure.github.io/open_dbm/))
+-   [OpenDBM Github Pages](https://github.com/AiCure/open_dbm/wiki](https://aicure.github.io/open_dbm/)
 -   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1zek5fBvOZ_OwPYpsD6pso4u1N4K-ZuTO7j9ycHJSB-s/edit?usp=sharing)
 -   [AiCure page](https://aicure.com/opendbm/)
+-   [Submit to the list of publications](https://docs.google.com/forms/d/e/1FAIpQLScVDFF8Kkl_C4iq6N6-T6m4JwwPmFIt-Wwa70DgL4L4eGLaeA/viewform?vc=0&c=0&w=1&flr=0)
 -   [Sign up to join the list serve](https://docs.google.com/forms/d/e/1FAIpQLScKUCdYdK9UTd569IuF3O8Q2A9fXuMJ5z9wXbX4r5yzcwfphQ/viewform?fbzx=-1747756377554914236&pli=1)
 
 <div align="right">
