@@ -28,7 +28,7 @@ OpenDBM is a software package that allows for calculation of digital
 biomarkers of health and functioning from video or audio of an individual’s 
 behavior. It integrates existing tools for behavioral measurements such as
 facial activity, voice, speech, and movement into a single package for measurement 
-of overall behavior.  Checkout the OpenDBM [**digital biomarker variables**](https://aicure.github.io/open_dbm/docs/biomaker-variables).
+of overall behavior.  Checkout the OpenDBM [**digital biomarker variables**](https://aicure.github.io/open_dbm/docs/biomaker-variables) and [list of scientific publications](https://docs.google.com/spreadsheets/d/1p22VDBA6A7md5335oqAtzSV3NUs0fFb7aufQH2cqhyQ/edit#gid=0)
 
 # More About OpenDBM
 
@@ -135,6 +135,7 @@ For more in-depth tutorials about OpenDBM, you can check out:
 -   [OpenDBM Github Pages]([https://github.com/AiCure/open_dbm/wiki](https://aicure.github.io/open_dbm/))
 -   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1zek5fBvOZ_OwPYpsD6pso4u1N4K-ZuTO7j9ycHJSB-s/edit?usp=sharing)
 -   [AiCure page](https://aicure.com/opendbm/)
+-   [Sign up to join the list serve](https://docs.google.com/forms/d/e/1FAIpQLScKUCdYdK9UTd569IuF3O8Q2A9fXuMJ5z9wXbX4r5yzcwfphQ/viewform?fbzx=-1747756377554914236&pli=1)
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
