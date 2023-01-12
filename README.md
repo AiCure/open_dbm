@@ -122,17 +122,18 @@ landmark.to_dataframe() # convert results as pandas dataframe
 
 For more in-depth tutorials about OpenDBM, you can check out:
 
--   [Introduction to OpenDBM](https://aicure.github.io/open_dbm/docs/intro)
--   [Advance Guide](https://aicure.github.io/open_dbm/docs/advance)
--   [API Documentation](https://aicure.github.io/open_dbm/docs/category/api)
+-   [Introduction to OpenDBM](https://aicure.github.io/open_dbm/docs/getting-started)
+-   [Digital Biomarker Variables](https://aicure.github.io/open_dbm/docs/biomaker-variables)
+-   [API Documentation](https://aicure.github.io/open_dbm/api/api-doc)
+-   [Contribution Guide](https://aicure.github.io/open_dbm/extras/extras)
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
 
 # ⭐️ More resources
--   [Our wiki](https://github.com/AiCure/open_dbm/wiki)
--   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1O6OUSY9FHFCZfpIWu3Kgg0Q_dyp073xjjQ2K3viEffU/edit#heading=h.rxr2y5t62mwa)
+-   [OpenDBM Github Pages]([https://github.com/AiCure/open_dbm/wiki](https://aicure.github.io/open_dbm/))
+-   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1zek5fBvOZ_OwPYpsD6pso4u1N4K-ZuTO7j9ycHJSB-s/edit?usp=sharing)
 -   [AiCure page](https://aicure.com/opendbm/)
 
 <div align="right">
@@ -144,12 +145,11 @@ OpenDBM is published under the GNU AGPL 3.0 license.
 
 
 # ⭐️ People
-OpenDBM was developed by Anzar Abbas and Vijay Yadav, alongside Vidya Koesmahargyo and Isaac Galatzer-Levy, from within the Research and Development department at AiCure––a health tech startup in New York. It was made open source in October 2020. You can contact us at opendbm@aicure.com.
+OpenDBM is maintained by the Clinical Data Science Team (including Andre Paredes, Director of OpenDBM) at AiCure. Current development and maintenance build on the efforts of Anzar Abbas and Vijay Yadav, alongside Vidya Koesmahargyo and Isaac Galatzer-Levy.  OpenDBM was made open source in October 2020. Email the community at opendbm@aicure.com.
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
-
 
 
 
