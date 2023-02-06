@@ -5,6 +5,7 @@ Please visit [openDBM](https://aicure.com/opendbm/) page if you have not seen it
 ## What you should know
 
 - Read [code of conduct](https://github.com/AiCure/open_dbm/blob/master/CODE_OF_CONDUCT.md).
+- Read [issues](https://github.com/AiCure/open_dbm/blob/master/ISSUES.md).
 - Read [License](https://github.com/AiCure/open_dbm/blob/master/license.txt).
 - Agree to contribute code under openDBM(GPL v3.0).
 - Before adding new feature/algorithmn make sure it's not patented.
