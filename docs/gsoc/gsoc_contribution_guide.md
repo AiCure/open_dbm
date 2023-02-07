@@ -95,14 +95,13 @@ Ask questions directly on in the public opendbm@aicure.com listserve. If convers
 
 #### Communicate with Community
 Google intends this to be a way for new contributors to join the world of open source. The contributors most likely to be selected are those who are engaged with the community and hoping to continue their involvement for more than just a few months. It's more important to be a good community member than it is to be a good coder.
-i
 
 #### Have learning mindset
 Listen and use feedback from others. We value communication and will reject contributors who don't listen to mentors. If selected, we will place special oversight to ensure mentors and contributors are listening to eachother and having fruitful discussion. Remember: the mentors are using their interactions with you to figure out if it's worth their volunteer time to work with you. No one wants to have an intern who doesn't listen, and contributors who don't listen also don't produce code that the open source project can use, so contributors who don't listen don't get hired. Nor do contributors who are arrogant jerks, or who violate the Code of Conduct. Be professional and show that you will take the mentoring relationship seriously.
 
-### What should I do if No won answers my question
+### What should I do if no one will answers my question
 
-1. Be a patient. 
+1. Be a ptient. 
 2. Make sure you're asking in the best place
 3. Try giving more information
 4. If you're really having trouble getting in touch with your mentors, talk to the python or admins by emailing gsoc-admins@python.org.
