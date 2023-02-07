@@ -28,7 +28,7 @@ OpenDBM is a software package that allows for calculation of digital
 biomarkers of health and functioning from video or audio of an individual’s 
 behavior. It integrates existing tools for behavioral measurements such as
 facial activity, voice, speech, and movement into a single package for measurement 
-of overall behavior.  Checkout the OpenDBM [**digital biomarker variables**](https://aicure.github.io/open_dbm/docs/biomaker-variables).
+of overall behavior.  Checkout the OpenDBM [**digital biomarker variables**](https://aicure.github.io/open_dbm/docs/biomaker-variables) and [list of scientific publications](https://docs.google.com/spreadsheets/d/1p22VDBA6A7md5335oqAtzSV3NUs0fFb7aufQH2cqhyQ/edit#gid=0)
 
 # More About OpenDBM
 
@@ -122,18 +122,21 @@ landmark.to_dataframe() # convert results as pandas dataframe
 
 For more in-depth tutorials about OpenDBM, you can check out:
 
--   [Introduction to OpenDBM](https://aicure.github.io/open_dbm/docs/intro)
--   [Advance Guide](https://aicure.github.io/open_dbm/docs/advance)
--   [API Documentation](https://aicure.github.io/open_dbm/docs/category/api)
+-   [Introduction to OpenDBM](https://aicure.github.io/open_dbm/docs/getting-started)
+-   [Digital Biomarker Variables](https://aicure.github.io/open_dbm/docs/biomaker-variables)
+-   [API Documentation](https://aicure.github.io/open_dbm/api/api-doc)
+-   [Contribution Guide](https://aicure.github.io/open_dbm/extras/extras)
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
 
 # ⭐️ More resources
--   [Our wiki](https://github.com/AiCure/open_dbm/wiki)
--   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1O6OUSY9FHFCZfpIWu3Kgg0Q_dyp073xjjQ2K3viEffU/edit#heading=h.rxr2y5t62mwa)
+-   [OpenDBM Github Pages](https://aicure.github.io/open_dbm/)
+-   [OpenDBM 2.0 Documentation](https://docs.google.com/document/d/1zek5fBvOZ_OwPYpsD6pso4u1N4K-ZuTO7j9ycHJSB-s/edit?usp=sharing)
 -   [AiCure page](https://aicure.com/opendbm/)
+-   [Submit to the list of publications](https://docs.google.com/forms/d/e/1FAIpQLScVDFF8Kkl_C4iq6N6-T6m4JwwPmFIt-Wwa70DgL4L4eGLaeA/viewform?vc=0&c=0&w=1&flr=0)
+-   [Sign up to join the list serve](https://docs.google.com/forms/d/e/1FAIpQLScKUCdYdK9UTd569IuF3O8Q2A9fXuMJ5z9wXbX4r5yzcwfphQ/viewform?fbzx=-1747756377554914236&pli=1)
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
@@ -144,12 +147,11 @@ OpenDBM is published under the GNU AGPL 3.0 license.
 
 
 # ⭐️ People
-OpenDBM was developed by Anzar Abbas and Vijay Yadav, alongside Vidya Koesmahargyo and Isaac Galatzer-Levy, from within the Research and Development department at AiCure––a health tech startup in New York. It was made open source in October 2020. You can contact us at opendbm@aicure.com.
+OpenDBM is maintained by the Clinical Data Science Team (including Andre Paredes, Director of OpenDBM) at AiCure. Current development and maintenance build on the efforts of Anzar Abbas and Vijay Yadav, alongside Vidya Koesmahargyo and Isaac Galatzer-Levy.  OpenDBM was made open source in October 2020. Email the community at opendbm@aicure.com.
 
 <div align="right">
 <a href="#table-of-contents">Back to TOC ☝️</a>
 </div>
-
 
 
 
