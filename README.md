@@ -7,6 +7,7 @@ OpenDBM
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/opendbm?style=plastic)](https://pypi.org/project/opendbm/)
 [![Anaconda Latest Release](https://img.shields.io/badge/Anaconda.org-1.4.3-blue.svg?style=plastic)](https://anaconda.org/r/r-odbc)
+![Python Version](https://img.shields.io/badge/python-3.8-blue)
 [![PyPI - License](https://img.shields.io/pypi/l/odbm?style=plastic)](https://github.com/AiCure/open_dbm/blob/master/license.txt)
 [![Test](https://raw.githubusercontent.com/AiCure/open_dbm/master/images/badges/test_status.svg)](https://github.com/AiCure/open_dbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
 [![Coverage](https://raw.githubusercontent.com/AiCure/open_dbm/master/images/badges/code_coverage.svg)](https://github.com/AiCure/open_dbm/actions/workflows/open_dbm-code-checking.yml?query=branch%3Amaster++)
